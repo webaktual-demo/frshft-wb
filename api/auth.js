@@ -27,12 +27,24 @@ export default async function handler(req, res) {
     const data = await r.json();
     if (data.error) return res.status(400).send(data.error_description);
     const token = data.access_token;
+    const payload = JSON.stringify({
+      token: token,
+      provider: 'github'
+    });
+    const message = 'authorization:github:success:' + payload;
+
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Cache-Control', 'no-store');
     res.send(`<!DOCTYPE html><html><body><script>
-      window.opener&&window.opener.postMessage(
-        'authorization:github:success:'+JSON.stringify({token:${JSON.stringify(token)},provider:'github'}),
-        'https://www.freshfit.sk'
-      );window.close();<\/script></body></html>`);
+      (function() {
+        var msg = ${JSON.stringify(message)};
+        if (window.opener) {
+          window.opener.postMessage(msg, '*');
+          setTimeout(function(){ window.close(); }, 500);
+        } else {
+          document.body.innerText = 'Prihlásenie úspešné, zatvor toto okno.';
+        }
+      })();
+    <\/script></body></html>`);
   } catch(e) { res.status(500).send(e.message); }
 }
