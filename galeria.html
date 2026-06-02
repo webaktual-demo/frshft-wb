@@ -415,6 +415,10 @@ menu.querySelectorAll("a").forEach(a => {
     if (e.key === 'ArrowRight') nextPhoto();
   });
 
+  function escHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
   function renderAlbums(albums) {
     var container = document.getElementById('albumsContainer');
     if (!albums || !albums.length) {
@@ -431,20 +435,20 @@ menu.querySelectorAll("a").forEach(a => {
       card.setAttribute('role', 'button');
       card.setAttribute('aria-label', 'Otvoriť album: ' + album.title);
       var coverHtml = album.cover
-        ? '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" />'
+        ? '<img src="' + escHtml(album.cover) + '" alt="' + escHtml(album.title) + '" loading="lazy" />'
         : '<div class="album-cover-placeholder">🖼</div>';
       card.innerHTML =
         '<div class="album-cover-wrap">' +
           coverHtml +
           '<div class="album-overlay">' +
-            '<div class="album-overlay-title">' + album.title + '</div>' +
+            '<div class="album-overlay-title">' + escHtml(album.title) + '</div>' +
             '<div class="album-overlay-count">' + photos.length + ' fotiek</div>' +
           '</div>' +
         '</div>' +
         '<div class="album-info">' +
-          '<div class="album-title">' + album.title + '</div>' +
+          '<div class="album-title">' + escHtml(album.title) + '</div>' +
           '<div class="album-date">' + formatDate(album.date) + '</div>' +
-          (album.description ? '<div class="album-desc">' + album.description + '</div>' : '') +
+          (album.description ? '<div class="album-desc">' + escHtml(album.description) + '</div>' : '') +
         '</div>';
       card.addEventListener('click', function() {
         if (photos.length) {

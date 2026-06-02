@@ -14,10 +14,13 @@ export default async function handler(req, res) {
     const data = await r.json();
     if (data.error) return res.status(400).send(data.error_description);
     const token = data.access_token;
+    const msg = JSON.stringify('authorization:github:success:' + JSON.stringify({ token, provider: 'github' }))
+      .replace(/</g, '\\u003c');
     res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Cache-Control', 'no-store');
     res.send(`<!DOCTYPE html><html><body><script>
       window.opener&&window.opener.postMessage(
-        'authorization:github:success:'+JSON.stringify({token:'${token}',provider:'github'}),'*'
+        ${msg},'https://www.freshfit.sk'
       );window.close();<\/script></body></html>`);
   } catch(e) { res.status(500).send(e.message); }
 }
