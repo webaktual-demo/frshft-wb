@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>404 — Stránka nenájdená · Fresh Fit Prievidza</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-sections.css" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="theme-color" content="#1a5c1a" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:locale" content="sk_SK" />
+<meta name="twitter:card" content="summary_large_image" />
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo" aria-label="Fresh Fit"><img src="freshfit-logo.png" alt="Fresh Fit" class="logo-img logo-img-nav" /></a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html#why">Prečo my</a></li>
+      <li><a href="index.html#services">Služby</a></li>
+      <li><a href="index.html#pricing">Cenník</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn btn-primary btn-sm">Začni dnes</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="error-section">
+  <div class="error-inner">
+    <img src="freshfit-logo.png" alt="Fresh Fit" class="error-logo" />
+    <div class="error-code">404</div>
+    <h1 class="error-title">Stránka nenájdená</h1>
+    <p class="error-text">Táto stránka neexistuje alebo bola presunutá.</p>
+    <a href="index.html" class="btn btn-primary">Späť na hlavnú</a>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="index.html" class="logo"><img src="freshfit-logo.png" alt="Fresh Fit" class="logo-img logo-img-footer" /></a>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/fresh_fit_prievidza/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="https://www.facebook.com/profile.php?id=61559755617984" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="mailto:msmont@inmail.sk" aria-label="E-mail"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></a>
+    </div>
+    <div class="footer-copy">© 2026 Fresh Fit · Prievidza</div>
+    <div class="footer-credit">Web vytvoril <a href="https://webaktual.sk" target="_blank" rel="noopener">Webaktual</a> · <a href="ochrana-udajov.html">Ochrana osobných údajov</a></div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById("nav");
+  window.addEventListener("scroll", () => { nav.classList.toggle("scrolled", window.scrollY > 20); });
+  const toggle = document.getElementById("navToggle");
+  const menu = document.getElementById("navMenu");
+  toggle.addEventListener("click", () => { toggle.classList.toggle("open"); menu.classList.toggle("open"); });
+  menu.querySelectorAll("a:not(.nav-dropdown a)").forEach(a => a.addEventListener("click", () => {
+    toggle.classList.remove("open"); menu.classList.remove("open");
+  }));
+  document.querySelectorAll(".nav-dropdown > a").forEach(a => {
+    a.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        a.closest(".nav-dropdown").classList.toggle("open");
+      }
+    });
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => { backToTop.classList.toggle("visible", window.scrollY > 300); });
+  backToTop.addEventListener("click", () => { window.scrollTo({ top: 0, behavior: "smooth" }); });
+</script>
+</body>
+</html>

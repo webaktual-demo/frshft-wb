@@ -1,0 +1,12 @@
+{
+  "plans": [
+    {"name": "Jednorazový vstup", "price": 5.5, "description": "Jednorázový vstup do fitnescentra.", "featured": false},
+    {"name": "Študent / Senior", "price": 4.5, "description": "Jednorazový vstup so zľavou pre študentov a seniorov nad 63 rokov.", "featured": false},
+    {"name": "5-vstupová permanentka", "price": 24, "description": "5 vstupov, platnosť 30 dní.", "featured": false},
+    {"name": "10-vstupová permanentka", "price": 42, "description": "10 vstupov, platnosť 60 dní.", "featured": false},
+    {"name": "10-vstupová študentská", "price": 38, "description": "10 vstupov so zľavou pre študentov, platnosť 60 dní.", "featured": false},
+    {"name": "Mesačná permanentka", "price": 41, "description": "Neobmedzený vstup po dobu jedného mesiaca.", "featured": true},
+    {"name": "Mesačná študentská", "price": 36, "description": "Neobmedzený vstup pre študentov po dobu jedného mesiaca.", "featured": false},
+    {"name": "Ročná permanentka", "price": 435, "description": "Najvýhodnejšia ponuka — neobmedzený vstup na celý rok. Šetríte 57 €.", "featured": false}
+  ]
+}

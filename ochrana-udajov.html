@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ochrana osobných údajov — Fresh Fit Prievidza</title>
+<meta name="description" content="Ochrana osobných údajov a informácie o spracovaní cookies — Fresh Fit Prievidza." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-sections.css" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="theme-color" content="#0f0f0f" />
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied' });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-60BRLKL03H"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-60BRLKL03H');
+</script>
+<meta name="robots" content="noindex" />
+<style>
+/* ── Subpage hero ── */
+.subpage-hero {
+  background: var(--bg-dark);
+  padding: 140px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+.subpage-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(255,255,255,0.015) 4px, rgba(255,255,255,0.015) 5px);
+}
+.subpage-hero .container { position: relative; z-index: 1; }
+.subpage-back {
+  margin-bottom: 32px;
+}
+.subpage-hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.subpage-hero h1 .accent { color: var(--accent); }
+.subpage-hero .updated {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+}
+
+/* ── GDPR content body ── */
+.gdpr-body {
+  background: var(--bg-light);
+  padding: 80px 0 100px;
+}
+.gdpr-content {
+  max-width: 760px;
+}
+.gdpr-highlight {
+  background: linear-gradient(135deg, rgba(76,175,80,0.08) 0%, rgba(76,175,80,0.04) 100%);
+  border-left: 3px solid var(--accent);
+  padding: 20px 24px;
+  border-radius: 0 12px 12px 0;
+  margin: 0 0 48px;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.gdpr-section {
+  margin-bottom: 48px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--border);
+}
+.gdpr-section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+.gdpr-section-num {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.gdpr-section h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.25;
+}
+.gdpr-section p,
+.gdpr-section li {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+.gdpr-section ul {
+  padding-left: 20px;
+  margin: 8px 0 12px;
+}
+.gdpr-section li { margin-bottom: 6px; }
+.gdpr-section a { color: var(--accent); font-weight: 500; }
+.gdpr-section a:hover { text-decoration: underline; }
+.gdpr-section strong { color: var(--text); }
+
+.gdpr-section,
+.gdpr-highlight,
+.gdpr-content {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+.gdpr-placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* ── Cookies reset btn ── */
+.gdpr-cookie-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gdpr-cookie-reset:hover {
+  background: #e9ecef;
+  border-color: #ccc;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo" aria-label="Fresh Fit">
+      <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-nav" />
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html#why">Prečo my</a></li>
+      <li><a href="index.html#services">Služby</a></li>
+      <li><a href="index.html#pricing">Cenník</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn btn-primary btn-sm">Začni dnes</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="subpage-hero">
+  <div class="container">
+    <div class="subpage-back">
+      <a href="index.html" class="btn btn-outline btn-sm">← Späť na hlavnú</a>
+    </div>
+    <div class="section-eyebrow">Právne informácie</div>
+    <h1>Ochrana osobných <span class="accent">údajov.</span></h1>
+    <p class="updated">Platné od: január 2026</p>
+  </div>
+</section>
+
+<!-- ============ OBSAH ============ -->
+<section class="gdpr-body">
+  <div class="container">
+    <div class="gdpr-content">
+
+      <div class="gdpr-highlight">
+        Vaše súkromie je pre nás dôležité. Tento dokument vysvetľuje, aké údaje zbierame, na aký účel a ako ich spracúvame v súlade s nariadením GDPR.
+      </div>
+
+      <!-- 1. Prevádzkovateľ -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">01</div>
+        <h2>Prevádzkovateľ</h2>
+        <p>Prevádzkovateľom webovej stránky <strong>www.freshfit.sk</strong> je:</p>
+        <p>
+          Obchodné meno: <strong>M.S.-MONT, s.r.o.</strong><br />
+          Sídlo: <strong>A. Mišúta 23, 971 01 Prievidza</strong><br />
+          IČO: <strong>36648272</strong><br />
+          Kontakt: <a href="mailto:msmont@inmail.sk">msmont@inmail.sk</a> &nbsp;|&nbsp; <a href="tel:+421918240579">0918 240 579</a>
+        </p>
+      </div>
+
+      <!-- 2. Aké údaje zbierame -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">02</div>
+        <h2>Aké údaje zbierame</h2>
+        <p>
+          Táto webová stránka používa <strong>Google Analytics 4 (GA4)</strong> — nástroj na analýzu návštevnosti.
+          GA4 zbiera anonymizované údaje o správaní návštevníkov: navštívené stránky, čas strávený na stránke, typ zariadenia.
+          Tieto údaje <strong>neobsahujú osobne identifikovateľné informácie</strong>.
+        </p>
+        <p>
+          Dáta sa zbierajú <strong>iba po udelení súhlasu</strong> návštevníkom prostredníctvom cookie bannera.
+          V prípade odmietnutia analytických cookies beží GA4 v cookieless móde bez zberu osobných dát.
+        </p>
+      </div>
+
+      <!-- 3. Účel spracovania -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">03</div>
+        <h2>Účel spracovania</h2>
+        <p>Analýza návštevnosti za účelom zlepšenia obsahu a funkčnosti webovej stránky.</p>
+      </div>
+
+      <!-- 4. Doba uchovávania -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">04</div>
+        <h2>Doba uchovávania</h2>
+        <p>
+          Google Analytics uchováva dáta štandardne <strong>14 mesiacov</strong>.
+          Viac informácií nájdete v <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Zásadách ochrany súkromia Google</a>.
+        </p>
+      </div>
+
+      <!-- 5. Práva dotknutej osoby -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">05</div>
+        <h2>Práva dotknutej osoby</h2>
+        <p>Podľa nariadenia GDPR máte právo:</p>
+        <ul>
+          <li>Na prístup k údajom, ktoré o vás spracúvame</li>
+          <li>Na ich opravu alebo vymazanie</li>
+          <li>Na obmedzenie spracovania</li>
+          <li>Podať sťažnosť na <a href="https://www.dataprotection.gov.sk" target="_blank" rel="noopener">Úrad na ochranu osobných údajov SR</a></li>
+        </ul>
+        <p>Pre uplatnenie práv nás kontaktujte na <a href="mailto:msmont@inmail.sk">msmont@inmail.sk</a>.</p>
+      </div>
+
+      <!-- 6. Cookies -->
+      <div class="gdpr-section">
+        <div class="gdpr-section-num">06</div>
+        <h2>Cookies</h2>
+        <p>
+          Stránka používa analytické cookies od Google Analytics.
+          Svoj súhlas môžete kedykoľvek odvolať kliknutím na tlačidlo nižšie — alebo vymazaním cookies vo vašom prehliadači.
+        </p>
+        <button class="gdpr-cookie-reset" onclick="localStorage.removeItem('ff_cookie_consent'); window.location.href='index.html';">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          Zmeniť nastavenia cookies
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <a href="index.html" class="logo" aria-label="Fresh Fit — späť na hlavnú">
+        <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-footer" loading="lazy" />
+      </a>
+      <nav class="footer-nav" aria-label="Footer navigácia">
+        <ul>
+          <li><a href="index.html#why">Prečo my</a></li>
+          <li><a href="index.html#services">Služby</a></li>
+          <li><a href="index.html#pricing">Cenník</a></li>
+          <li><a href="index.html#contact">Kontakt</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/fresh_fit_prievidza/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61559755617984" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="mailto:msmont@inmail.sk" aria-label="E-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Fresh Fit · Prievidza</div>
+      <div class="footer-credit">
+        Web vytvoril <a href="https://webaktual.sk" target="_blank" rel="noopener">Webaktual</a>
+        · <a href="ochrana-udajov.html">Ochrana osobných údajov</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── Nav scroll + mobile toggle ────────────────────────────────
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 20);
+}, { passive: true });
+const toggle = document.getElementById("navToggle");
+const menu   = document.getElementById("navMenu");
+toggle.addEventListener("click", () => {
+  const isOpen = toggle.classList.toggle("open");
+  menu.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(isOpen));
+});
+menu.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    toggle.classList.remove("open");
+    menu.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  });
+});
+</script>
+
+<script>
+// Reveal on scroll
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+  .forEach(el => revealObs.observe(el));
+
+// Bezpečnostná poistka — po 1 sekunde ukáž všetko
+setTimeout(() => {
+  document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+    .forEach(el => el.classList.add('visible'));
+}, 1000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+backend:
+  name: github
+  repo: webaktual-sudo/freshfit-web
+  branch: main
+  base_url: https://www.freshfit.sk
+  auth_endpoint: /api/auth
+
+media_folder: "images/gallery"
+public_folder: "/images/gallery"
+
+collections:
+  - name: "settings"
+    label: "⚙️ Nastavenia webu"
+    files:
+      - name: "main"
+        label: "Hlavné nastavenia"
+        file: "data/settings.json"
+        format: json
+        fields:
+          - {label: "Hero – 1. riadok", name: hero_line1, widget: string}
+          - {label: "Hero – 2. riadok (zelený)", name: hero_line2, widget: string}
+          - {label: "Hero – podnadpis", name: hero_subtitle, widget: text}
+          - {label: "Hodiny Po–Pia", name: hours_weekday, widget: string}
+          - {label: "Hodiny So–Ne", name: hours_weekend, widget: string}
+          - {label: "Telefón", name: phone, widget: string}
+          - {label: "Email", name: email, widget: string}
+          - {label: "Adresa", name: address, widget: string}
+          - {label: "Google Maps URL", name: maps_url, widget: string}
+
+  - name: "pricing"
+    label: "💰 Cenník"
+    files:
+      - name: "plans"
+        label: "Permanentky"
+        file: "data/pricing.json"
+        format: json
+        fields:
+          - name: plans
+            label: Permanentky
+            widget: list
+            fields:
+              - {label: Názov, name: name, widget: string}
+              - {label: "Cena (€)", name: price, widget: number}
+              - {label: Popis, name: description, widget: string}
+              - {label: "Zvýraznená (odporúčaná)", name: featured,
+                 widget: boolean, default: false}
+
+  - name: "gallery"
+    label: "🖼️ Galéria – Albumy"
+    folder: "data/albums"
+    format: json
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - {label: "Názov albumu", name: title, widget: string}
+      - {label: Popis, name: description, widget: text, required: false}
+      - {label: Dátum, name: date, widget: datetime,
+         format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false}
+      - {label: "Titulná fotka", name: cover, widget: image, required: false}
+      - name: photos
+        label: Fotky
+        widget: list
+        fields:
+          - {label: Fotka, name: src, widget: image}
+          - {label: "Popis (voliteľný)", name: caption,
+             widget: string, required: false}

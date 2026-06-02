@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Galéria — Fresh Fit Prievidza</title>
+<meta name="description" content="Fotografie z nášho fitnescentra a akcií — Fresh Fit Prievidza." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles-sections.css" />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+<meta name="theme-color" content="#0f0f0f" />
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied' });
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-60BRLKL03H"></script>
+<script>
+  gtag('js', new Date());
+  gtag('config', 'G-60BRLKL03H');
+</script>
+<style>
+/* ── Subpage hero ── */
+.subpage-hero {
+  background: var(--bg-dark);
+  padding: 140px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+.subpage-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(-45deg, transparent, transparent 4px, rgba(255,255,255,0.015) 4px, rgba(255,255,255,0.015) 5px);
+}
+.subpage-hero .container { position: relative; z-index: 1; }
+.subpage-back { margin-bottom: 32px; }
+.subpage-hero h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.subpage-hero h1 .accent { color: var(--accent); }
+.subpage-hero p {
+  font-size: 17px;
+  color: rgba(255,255,255,0.6);
+  margin: 0;
+}
+
+/* ── Gallery section ── */
+.gallery-section {
+  background: var(--bg-light);
+  padding: 80px 0 100px;
+}
+.gallery-loading {
+  text-align: center;
+  padding: 64px 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+.gallery-loading-spinner {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(76,175,80,0.2);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.gallery-empty {
+  text-align: center;
+  padding: 64px 0;
+  color: var(--text-muted);
+  font-size: 15px;
+}
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 900px) { .albums-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .albums-grid { grid-template-columns: 1fr; } }
+
+.album-card {
+  background: var(--card-bg, #fff);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.album-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.12); }
+.album-cover-wrap {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+.album-cover-wrap img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.album-card:hover .album-cover-wrap img { transform: scale(1.04); }
+.album-cover-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+.album-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, transparent 50%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.album-card:hover .album-overlay { opacity: 1; }
+.album-overlay-title {
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+.album-overlay-count {
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+}
+.album-info {
+  padding: 16px 20px 20px;
+}
+.album-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--heading, #111);
+  margin-bottom: 4px;
+}
+.album-date {
+  font-size: 13px;
+  color: var(--text-muted, #888);
+  margin-bottom: 6px;
+}
+.album-desc {
+  font-size: 14px;
+  color: var(--text, #444);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ── Gallery lightbox ── */
+.gallery-lightbox {
+  position: fixed; inset: 0; z-index: 9000;
+  background: rgba(0,0,0,0.95);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.gallery-lightbox.open { opacity: 1; pointer-events: all; }
+.gallery-lightbox-inner {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex; flex-direction: column; align-items: center;
+}
+.gallery-lightbox img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 4px;
+  display: block;
+}
+.gallery-lightbox-caption {
+  color: rgba(255,255,255,0.7);
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+}
+.gallery-lightbox-counter {
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+  margin-top: 6px;
+}
+.gallery-lb-close {
+  position: fixed; top: 24px; right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: none; border-radius: 50%;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff;
+  transition: background 0.2s;
+}
+.gallery-lb-close:hover { background: rgba(255,255,255,0.2); }
+.gallery-lb-prev,
+.gallery-lb-next {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none; border-radius: 50%;
+  width: 48px; height: 48px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: #fff;
+  transition: background 0.2s;
+}
+.gallery-lb-prev { left: 20px; }
+.gallery-lb-next { right: 20px; }
+.gallery-lb-prev:hover,
+.gallery-lb-next:hover { background: rgba(255,255,255,0.2); }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="index.html" class="logo" aria-label="Fresh Fit">
+      <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-nav" />
+    </a>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="index.html#why">Prečo my</a></li>
+      <li><a href="index.html#services">Služby</a></li>
+      <li><a href="index.html#pricing">Cenník</a></li>
+      <li><a href="index.html#priestory">Priestory</a></li>
+      <li><a href="galeria.html" class="active">Galéria</a></li>
+      <li><a href="index.html#contact">Kontakt</a></li>
+    </ul>
+    <a href="index.html#contact" class="btn btn-primary btn-sm">Začnite dnes</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section class="subpage-hero">
+  <div class="container">
+    <div class="subpage-back">
+      <a href="index.html" class="btn btn-outline btn-sm">← Späť na hlavnú</a>
+    </div>
+    <h1>Galéria<span class="accent">.</span></h1>
+    <p>Fotky z nášho fitnescentra a akcií.</p>
+  </div>
+</section>
+
+<!-- ============ ALBUMY ============ -->
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <div id="albumsContainer">
+      <div class="gallery-loading">
+        <div class="gallery-loading-spinner"></div>
+        Načítavam albumy…
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALLERY LIGHTBOX ============ -->
+<div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-label="Galéria fotografií">
+  <button class="gallery-lb-close" id="galleryLbClose" aria-label="Zavrieť">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button class="gallery-lb-prev" id="galleryLbPrev" aria-label="Predchádzajúca fotografia">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <div class="gallery-lightbox-inner">
+    <img id="galleryLbImg" src="" alt="" />
+    <div class="gallery-lightbox-caption" id="galleryLbCaption"></div>
+    <div class="gallery-lightbox-counter" id="galleryLbCounter"></div>
+  </div>
+  <button class="gallery-lb-next" id="galleryLbNext" aria-label="Ďalšia fotografia">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-top">
+      <a href="index.html#top" class="logo" aria-label="Fresh Fit — späť na začiatok">
+        <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-footer" loading="lazy" />
+      </a>
+      <nav class="footer-nav" aria-label="Footer navigácia">
+        <ul>
+          <li><a href="index.html#why">Prečo my</a></li>
+          <li><a href="index.html#services">Služby</a></li>
+          <li><a href="index.html#pricing">Cenník</a></li>
+          <li><a href="index.html#priestory">Priestory</a></li>
+          <li><a href="galeria.html">Galéria</a></li>
+          <li><a href="index.html#contact">Kontakt</a></li>
+          <li style="display:none"><a href="ochrana-udajov.html">Ochrana údajov</a></li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/fresh_fit_prievidza/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61559755617984" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="mailto:msmont@inmail.sk" aria-label="E-mail">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Fresh Fit · Prievidza</div>
+      <div class="footer-credit">
+        Web vytvoril <a href="https://webaktual.sk" target="_blank" rel="noopener">Webaktual</a>
+        · <a href="ochrana-udajov.html">Ochrana osobných údajov</a>
+        · <button onclick="cookieCustomOpen()" class="footer-cookie-btn">Nastavenia cookies</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ SKRIPTY ============ -->
+<script>
+// ── Nav scroll + mobile toggle ────────────────────────────────
+const nav = document.getElementById("nav");
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 20);
+}, { passive: true });
+
+const toggle = document.getElementById("navToggle");
+const menu   = document.getElementById("navMenu");
+toggle.addEventListener("click", () => {
+  const isOpen = toggle.classList.toggle("open");
+  menu.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", String(isOpen));
+});
+menu.querySelectorAll("a").forEach(a => {
+  a.addEventListener("click", () => {
+    toggle.classList.remove("open");
+    menu.classList.remove("open");
+    toggle.setAttribute("aria-expanded", "false");
+  });
+});
+</script>
+
+<script>
+// ── Albums + Lightbox ────────────────────────────────────────
+(function () {
+  var lb         = document.getElementById('galleryLightbox');
+  var lbImg      = document.getElementById('galleryLbImg');
+  var lbCaption  = document.getElementById('galleryLbCaption');
+  var lbCounter  = document.getElementById('galleryLbCounter');
+  var lbClose    = document.getElementById('galleryLbClose');
+  var lbPrev     = document.getElementById('galleryLbPrev');
+  var lbNext     = document.getElementById('galleryLbNext');
+  var curPhotos  = [];
+  var curIndex   = 0;
+
+  function formatDate(dateStr) {
+    try {
+      var d = new Date(dateStr);
+      return d.toLocaleDateString('sk-SK', { day: 'numeric', month: 'long', year: 'numeric' });
+    } catch(e) { return dateStr; }
+  }
+
+  function openLightbox(photos, index) {
+    if (!photos || !photos.length) return;
+    curPhotos = photos;
+    curIndex  = index || 0;
+    showPhoto();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lbClose.focus();
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showPhoto() {
+    var p = curPhotos[curIndex];
+    lbImg.src = p.src || p;
+    lbImg.alt = p.caption || '';
+    lbCaption.textContent = p.caption || '';
+    lbCounter.textContent = (curIndex + 1) + ' / ' + curPhotos.length;
+  }
+
+  function prevPhoto() {
+    curIndex = (curIndex - 1 + curPhotos.length) % curPhotos.length;
+    showPhoto();
+  }
+
+  function nextPhoto() {
+    curIndex = (curIndex + 1) % curPhotos.length;
+    showPhoto();
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', prevPhoto);
+  lbNext.addEventListener('click', nextPhoto);
+  lb.addEventListener('click', function(e) { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closeLightbox();
+    if (e.key === 'ArrowLeft')  prevPhoto();
+    if (e.key === 'ArrowRight') nextPhoto();
+  });
+
+  function renderAlbums(albums) {
+    var container = document.getElementById('albumsContainer');
+    if (!albums || !albums.length) {
+      container.innerHTML = '<p class="gallery-empty">Zatiaľ žiadne albumy.</p>';
+      return;
+    }
+    var grid = document.createElement('div');
+    grid.className = 'albums-grid';
+    albums.forEach(function(album) {
+      var photos = album.photos || [];
+      var card = document.createElement('div');
+      card.className = 'album-card';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', 'Otvoriť album: ' + album.title);
+      var coverHtml = album.cover
+        ? '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" />'
+        : '<div class="album-cover-placeholder">🖼</div>';
+      card.innerHTML =
+        '<div class="album-cover-wrap">' +
+          coverHtml +
+          '<div class="album-overlay">' +
+            '<div class="album-overlay-title">' + album.title + '</div>' +
+            '<div class="album-overlay-count">' + photos.length + ' fotiek</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="album-info">' +
+          '<div class="album-title">' + album.title + '</div>' +
+          '<div class="album-date">' + formatDate(album.date) + '</div>' +
+          (album.description ? '<div class="album-desc">' + album.description + '</div>' : '') +
+        '</div>';
+      card.addEventListener('click', function() {
+        if (photos.length) {
+          openLightbox(photos, 0);
+        }
+      });
+      card.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+      });
+      grid.appendChild(card);
+    });
+    container.innerHTML = '';
+    container.appendChild(grid);
+  }
+
+  fetch('/api/albums')
+    .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+    .then(renderAlbums)
+    .catch(function() {
+      document.getElementById('albumsContainer').innerHTML =
+        '<p class="gallery-empty">Albumy sa nepodarilo načítať.</p>';
+    });
+})();
+</script>
+
+<!-- ============ COOKIE BANNER ============ -->
+<div id="cookieBanner" class="cookie-banner" role="dialog" aria-label="Nastavenia cookies" style="display:none;">
+  <div class="cookie-banner-inner">
+    <div class="cookie-banner-text">
+      <strong>Táto stránka používa cookies</strong>
+      <p>Používame cookies na zlepšenie vášho zážitku, analýzu návštevnosti a personalizáciu obsahu. Viac informácií nájdete v <a href="ochrana-udajov.html">Ochrane osobných údajov</a>.</p>
+    </div>
+    <div class="cookie-banner-btns">
+      <button class="btn btn-sm cookie-btn-decline" onclick="cookieDecline()">Odmietnuť</button>
+      <button class="btn btn-sm cookie-btn-custom" onclick="cookieCustomOpen()">Prispôsobiť</button>
+      <button class="btn btn-primary btn-sm" onclick="cookieAcceptAll()">Prijať všetky</button>
+    </div>
+  </div>
+</div>
+<div id="cookieModal" class="cookie-modal" style="display:none;" role="dialog" aria-modal="true" aria-label="Prispôsobiť cookies">
+  <div class="cookie-modal-box">
+    <div class="cookie-modal-header">
+      <h3>Nastavenia cookies</h3>
+      <button class="cookie-modal-close" onclick="cookieCustomClose()" aria-label="Zavrieť">✕</button>
+    </div>
+    <div class="cookie-modal-body">
+      <div class="cookie-row">
+        <div><div class="cookie-row-title">Nevyhnutné cookies</div><div class="cookie-row-desc">Zabezpečujú základné funkcie stránky. Nedajú sa vypnúť.</div></div>
+        <div class="cookie-toggle cookie-toggle-on" aria-disabled="true">ZAP</div>
+      </div>
+      <div class="cookie-row">
+        <div><div class="cookie-row-title">Analytické cookies</div><div class="cookie-row-desc">Pomáhajú nám pochopiť ako návštevníci používajú stránku (Google Analytics).</div></div>
+        <label class="cookie-toggle-wrap"><input type="checkbox" id="cookieAnalytics" checked /><span class="cookie-switch"></span></label>
+      </div>
+      <div class="cookie-row">
+        <div><div class="cookie-row-title">Marketingové cookies</div><div class="cookie-row-desc">Slúžia na zobrazovanie relevantnej reklamy na sociálnych sieťach.</div></div>
+        <label class="cookie-toggle-wrap"><input type="checkbox" id="cookieMarketing" /><span class="cookie-switch"></span></label>
+      </div>
+    </div>
+    <div class="cookie-modal-footer">
+      <button class="btn btn-outline btn-sm" onclick="cookieDecline()">Odmietnuť voliteľné</button>
+      <button class="btn btn-primary btn-sm" onclick="cookieSaveCustom()">Uložiť nastavenia</button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var c = localStorage.getItem('ff_cookie_consent');
+  if (c) {
+    try {
+      var saved = JSON.parse(c);
+      if (typeof gtag === 'function') {
+        gtag('consent', 'update', {
+          analytics_storage: saved.analytics ? 'granted' : 'denied',
+          ad_storage:        saved.marketing ? 'granted' : 'denied'
+        });
+      }
+    } catch(e) {}
+  } else {
+    setTimeout(function(){ document.getElementById('cookieBanner').style.display='block'; }, 800);
+  }
+})();
+function cookieAcceptAll() {
+  localStorage.setItem('ff_cookie_consent', JSON.stringify({necessary:true,analytics:true,marketing:true}));
+  if (typeof gtag === 'function') gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted'});
+  hideCookieBanner();
+}
+function cookieDecline() {
+  localStorage.setItem('ff_cookie_consent', JSON.stringify({necessary:true,analytics:false,marketing:false}));
+  if (typeof gtag === 'function') gtag('consent','update',{analytics_storage:'denied',ad_storage:'denied'});
+  hideCookieBanner(); hideCookieModal();
+}
+function cookieSaveCustom() {
+  var a = document.getElementById('cookieAnalytics').checked;
+  var m = document.getElementById('cookieMarketing').checked;
+  localStorage.setItem('ff_cookie_consent', JSON.stringify({necessary:true,analytics:a,marketing:m}));
+  if (typeof gtag === 'function') gtag('consent','update',{analytics_storage:a?'granted':'denied',ad_storage:m?'granted':'denied'});
+  hideCookieBanner(); hideCookieModal();
+}
+function cookieCustomOpen()  { document.getElementById('cookieModal').style.display='flex'; }
+function cookieCustomClose() { hideCookieModal(); }
+function hideCookieBanner() {
+  var b = document.getElementById('cookieBanner');
+  b.style.opacity = '0'; b.style.transition = 'opacity 0.3s ease';
+  setTimeout(function(){ b.style.display='none'; }, 300);
+}
+function hideCookieModal() { document.getElementById('cookieModal').style.display='none'; }
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCookieModal(); });
+</script>
+
+<script>
+(function(){
+  function run(){
+    var d=new Date(),day=d.getDay(),m=d.getHours()*60+d.getMinutes();
+    var o=(day>=1&&day<=5)?7*60:8*60, c=(day>=1&&day<=5)?20*60:18*60;
+    var open=m>=o&&m<c;
+    document.querySelectorAll('.open-badge').forEach(function(el){
+      el.className='open-badge '+(open?'is-open':'is-closed');
+      el.querySelector('.open-label').textContent=open?'Teraz otvorené':'Teraz zatvorené';
+    });
+  }
+  run(); setInterval(run, 60000);
+})();
+</script>
+</body>
+</html>
