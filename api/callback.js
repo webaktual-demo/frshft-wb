@@ -14,16 +14,21 @@ module.exports = async function handler(req, res) {
     const data = await r.json();
     if (data.error) return res.status(400).send(data.error);
     const token = data.access_token;
-    const msg = 'authorization:github:success:' +
-                JSON.stringify({ token, provider: 'github' });
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Cache-Control', 'no-store');
-    res.send(`<!DOCTYPE html><html><body>
-<script>
-(function(){
-  var m=${JSON.stringify(msg).replace(/</g,'\\u003c').replace(/>/g,'\\u003e')};
-  if(window.opener){window.opener.postMessage(m,'*');setTimeout(function(){window.close();},500);}
-  else{document.body.innerText='Hotovo, zatvor okno.';}
+    res.send(`<!DOCTYPE html><html><body><script>
+(function() {
+  function receiveMessage(e) {
+    window.opener.postMessage(
+      'authorization:github:success:' + JSON.stringify({
+        token: ${JSON.stringify(token)},
+        provider: 'github'
+      }),
+      e.origin
+    );
+  }
+  window.addEventListener("message", receiveMessage, false);
+  window.opener.postMessage("authorizing:github", "*");
 })();
 <\/script></body></html>`);
   } catch(e) { res.status(500).send(e.message); }
