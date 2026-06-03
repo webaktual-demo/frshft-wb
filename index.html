@@ -1004,7 +1004,8 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
     if(em&&s.email){em.textContent=s.email;em.href='mailto:'+s.email;}
   }).catch(function(){});
 
-  // Cenník
+  // Cenník — CMS loader vypnutý, cenník je hardcoded v HTML
+  /*
   fetch('/data/pricing.json').then(function(r){return r.ok?r.json():null;})
   .then(function(d){
     if(!d||!d.plans||d.plans.every(function(p){return!p.price;}))return;
@@ -1019,6 +1020,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
         '<div class="pricing-desc">'+p.description+'</div></div>';
     }).join('');
   }).catch(function(){});
+  */
 })();
 </script>
 
