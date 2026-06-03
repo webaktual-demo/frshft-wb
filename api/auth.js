@@ -4,7 +4,7 @@ module.exports = async function handler(req, res) {
   if (!code) {
     const params = new URLSearchParams({
       client_id: process.env.GITHUB_CLIENT_ID,
-      scope: 'repo',
+      scope: 'repo user',
       redirect_uri: 'https://www.freshfit.sk/api/auth'
     });
     return res.redirect(
