@@ -30,15 +30,21 @@ module.exports = async function handler(req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Cache-Control', 'no-store');
     res.send(`<!DOCTYPE html><html><body>
-<p style="font-family:sans-serif;padding:20px;color:#888">Prihlasujem...</p>
+<div id="s" style="font-family:sans-serif;padding:20px">Spracovávam...</div>
 <script>
 (function(){
   var msg = ${JSON.stringify(msg)};
+  var el = document.getElementById('s');
   if(window.opener){
-    window.opener.postMessage(msg,'*');
-    setTimeout(function(){window.close();},800);
-  } else {
-    document.body.innerHTML='<p style="font-family:sans-serif;padding:20px">Prihlásenie úspešné. Zatvor toto okno.</p>';
+    try{
+      window.opener.postMessage(msg,'*');
+      el.innerHTML='<b style="color:green">✅ Token odoslaný — čakaj na zatvorenie okna</b>';
+      setTimeout(function(){window.close();},3000);
+    }catch(e){
+      el.innerHTML='<b style="color:red">❌ postMessage chyba: '+e.message+'</b>';
+    }
+  }else{
+    el.innerHTML='<b style="color:red">❌ window.opener je NULL</b>';
   }
 })();
 <\/script>
