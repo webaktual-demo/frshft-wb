@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
     res.send(`<!DOCTYPE html><html><body>
 <script>
 (function(){
-  var m=${JSON.stringify(msg)};
+  var m=${JSON.stringify(msg).replace(/</g,'\\u003c').replace(/>/g,'\\u003e')};
   if(window.opener){window.opener.postMessage(m,'*');setTimeout(function(){window.close();},500);}
   else{document.body.innerText='Hotovo, zatvor okno.';}
 })();
