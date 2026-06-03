@@ -1,7 +1,6 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   const { code } = req.query;
 
-  // Krok 1: Ak nie je code → presmeruj na GitHub OAuth
   if (!code) {
     const params = new URLSearchParams({
       client_id: process.env.GITHUB_CLIENT_ID,
@@ -13,7 +12,6 @@ export default async function handler(req, res) {
     );
   }
 
-  // Krok 2: Vymeni code za token
   try {
     const r = await fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
@@ -25,26 +23,27 @@ export default async function handler(req, res) {
       })
     });
     const data = await r.json();
-    if (data.error) return res.status(400).send(data.error_description);
+    if (data.error) return res.status(400).send(data.error || 'Auth error');
     const token = data.access_token;
-    const payload = JSON.stringify({
-      token: token,
-      provider: 'github'
-    });
-    const message = 'authorization:github:success:' + payload;
-
+    const msg = 'authorization:github:success:' +
+                JSON.stringify({ token: token, provider: 'github' });
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('Cache-Control', 'no-store');
-    res.send(`<!DOCTYPE html><html><body><script>
-      (function() {
-        var msg = ${JSON.stringify(message)};
-        if (window.opener) {
-          window.opener.postMessage(msg, '*');
-          setTimeout(function(){ window.close(); }, 500);
-        } else {
-          document.body.innerText = 'Prihlásenie úspešné, zatvor toto okno.';
-        }
-      })();
-    <\/script></body></html>`);
-  } catch(e) { res.status(500).send(e.message); }
-}
+    res.send(`<!DOCTYPE html><html><body>
+<p style="font-family:sans-serif;padding:20px;color:#888">Prihlasujem...</p>
+<script>
+(function(){
+  var msg = ${JSON.stringify(msg)};
+  if(window.opener){
+    window.opener.postMessage(msg,'*');
+    setTimeout(function(){window.close();},800);
+  } else {
+    document.body.innerHTML='<p style="font-family:sans-serif;padding:20px">Prihlásenie úspešné. Zatvor toto okno.</p>';
+  }
+})();
+<\/script>
+</body></html>`);
+  } catch(e) {
+    res.status(500).send('Chyba: ' + e.message);
+  }
+};
