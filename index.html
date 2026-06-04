@@ -1100,5 +1100,43 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   run();setInterval(run,60000);
 })();
 </script>
+
+<script>
+(function(){
+  var bg = document.querySelector('.hero-bg');
+  if(!bg) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  window.addEventListener('scroll', function(){
+    var y = window.scrollY;
+    if(y < window.innerHeight * 1.2)
+      bg.style.transform = 'translateY(' + (y * 0.22) + 'px)';
+  }, {passive:true});
+})();
+</script>
+
+<div id="cglow" style="position:fixed;pointer-events:none;
+z-index:9998;width:400px;height:400px;border-radius:50%;
+background:radial-gradient(circle,rgba(76,175,80,0.07) 0%,transparent 65%);
+transform:translate(-50%,-50%);transition:opacity 0.4s;opacity:0;
+left:-999px;top:-999px"></div>
+<script>
+(function(){
+  var g=document.getElementById('cglow');
+  var hero=document.querySelector('.hero');
+  if(!g||!hero) return;
+  var raf;
+  hero.addEventListener('mousemove',function(e){
+    cancelAnimationFrame(raf);
+    raf=requestAnimationFrame(function(){
+      g.style.opacity='1';
+      g.style.left=e.clientX+'px';
+      g.style.top=e.clientY+'px';
+    });
+  });
+  hero.addEventListener('mouseleave',function(){
+    g.style.opacity='0';
+  });
+})();
+</script>
 </body>
 </html>
