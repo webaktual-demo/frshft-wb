@@ -79,7 +79,7 @@
       <li><a href="#pricing">Cenník</a></li>
       <li><a href="#priestory">Priestory</a></li>
       <li><a href="#oznam" id="nav-oznam" style="display:none">Aktuality</a></li>
-      <li><a href="galeria.html">Galéria</a></li>
+      <li><a href="/galeria">Galéria</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
     <a href="#contact" class="btn btn-primary btn-sm">Začnite dnes</a>
@@ -356,6 +356,26 @@
       <small>Solárium a vibračná plošina dostupné priamo v priestoroch fitnescentra.</small><br/>
       <small>Cenník platný od 1.12.2025 · Senior — nad 63 rokov · Študent — vyžaduje sa potvrdenie o návšteve školy</small>
     </p>
+  </div>
+</section>
+
+<!-- ============ OZNAM ============ -->
+<section class="oznam-section" id="oznam" style="display:none">
+  <div class="container">
+    <div class="oznam-card" id="oznam-card">
+      <div class="oznam-card__img" id="oznam-img-wrap" style="display:none">
+        <img id="oznam-img" src="" alt="" loading="lazy" />
+      </div>
+      <div class="oznam-card__body">
+        <div class="oznam-tag">
+          <span class="oznam-dot"></span>
+          <span>Aktuality</span>
+        </div>
+        <time class="oznam-date" id="oznam-date"></time>
+        <h2 class="oznam-title" id="oznam-title"></h2>
+        <p class="oznam-text" id="oznam-text"></p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -640,21 +660,6 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         Sledovať na Instagrame
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ============ OZNAM ============ -->
-<section class="oznam-section" id="oznam" style="display:none">
-  <div class="container">
-    <div class="oznam-inner">
-      <div class="oznam-tag">
-        <span class="oznam-dot"></span>
-        <span>Aktuálne</span>
-      </div>
-      <time class="oznam-date" id="oznam-date"></time>
-      <h2 class="oznam-title" id="oznam-title"></h2>
-      <p class="oznam-text" id="oznam-text"></p>
     </div>
   </div>
 </section>
@@ -1052,17 +1057,27 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   fetch('/data/oznam.json')
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
-      if(!d||!d.visible||!d.title)return;
-      var s=document.getElementById('oznam');
-      if(s)s.style.display='';
-      var navLink=document.getElementById('nav-oznam');
-      if(navLink)navLink.style.display='';
-      var t=document.getElementById('oznam-title');
-      var x=document.getElementById('oznam-text');
-      var dt=document.getElementById('oznam-date');
-      if(t)t.textContent=d.title;
-      if(x)x.textContent=d.text||'';
-      if(dt)dt.textContent=d.date||'';
+      if(!d||!d.visible||!d.title) return;
+      var s   = document.getElementById('oznam');
+      var card= document.getElementById('oznam-card');
+      var t   = document.getElementById('oznam-title');
+      var x   = document.getElementById('oznam-text');
+      var dt  = document.getElementById('oznam-date');
+      var imgW= document.getElementById('oznam-img-wrap');
+      var img = document.getElementById('oznam-img');
+      var nav = document.getElementById('nav-oznam');
+      if(t)  t.textContent  = d.title;
+      if(x)  x.textContent  = d.text  || '';
+      if(dt) dt.textContent = d.date  || '';
+      if(d.image && img && imgW){
+        img.src = d.image;
+        img.alt = d.title;
+        imgW.style.display = '';
+      } else if(card){
+        card.classList.add('oznam-card--no-img');
+      }
+      if(s)   s.style.display = '';
+      if(nav) nav.style.display = '';
     }).catch(function(){});
 })();
 </script>
