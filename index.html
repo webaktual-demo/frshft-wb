@@ -647,14 +647,19 @@
 <!-- ============ OZNAM ============ -->
 <section class="oznam-section" id="oznam" style="display:none">
   <div class="container">
-    <div class="oznam-inner">
-      <div class="oznam-tag">
-        <span class="oznam-dot"></span>
-        <span>Aktuálne</span>
+    <div class="oznam-card" id="oznam-card">
+      <div class="oznam-card__img" id="oznam-img-wrap" style="display:none">
+        <img id="oznam-img" src="" alt="" loading="lazy" />
       </div>
-      <time class="oznam-date" id="oznam-date"></time>
-      <h2 class="oznam-title" id="oznam-title"></h2>
-      <p class="oznam-text" id="oznam-text"></p>
+      <div class="oznam-card__body">
+        <div class="oznam-tag">
+          <span class="oznam-dot"></span>
+          <span>Aktuality</span>
+        </div>
+        <time class="oznam-date" id="oznam-date"></time>
+        <h2 class="oznam-title" id="oznam-title"></h2>
+        <p class="oznam-text" id="oznam-text"></p>
+      </div>
     </div>
   </div>
 </section>
@@ -1052,17 +1057,27 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   fetch('/data/oznam.json')
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
-      if(!d||!d.visible||!d.title)return;
-      var s=document.getElementById('oznam');
-      if(s)s.style.display='';
-      var navLink=document.getElementById('nav-oznam');
-      if(navLink)navLink.style.display='';
-      var t=document.getElementById('oznam-title');
-      var x=document.getElementById('oznam-text');
-      var dt=document.getElementById('oznam-date');
-      if(t)t.textContent=d.title;
-      if(x)x.textContent=d.text||'';
-      if(dt)dt.textContent=d.date||'';
+      if(!d||!d.visible||!d.title) return;
+      var s   = document.getElementById('oznam');
+      var card= document.getElementById('oznam-card');
+      var t   = document.getElementById('oznam-title');
+      var x   = document.getElementById('oznam-text');
+      var dt  = document.getElementById('oznam-date');
+      var imgW= document.getElementById('oznam-img-wrap');
+      var img = document.getElementById('oznam-img');
+      var nav = document.getElementById('nav-oznam');
+      if(t)  t.textContent  = d.title;
+      if(x)  x.textContent  = d.text  || '';
+      if(dt) dt.textContent = d.date  || '';
+      if(d.image && img && imgW){
+        img.src = d.image;
+        img.alt = d.title;
+        imgW.style.display = '';
+      } else if(card){
+        card.classList.add('oznam-card--no-img');
+      }
+      if(s)   s.style.display = '';
+      if(nav) nav.style.display = '';
     }).catch(function(){});
 })();
 </script>
