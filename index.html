@@ -78,7 +78,7 @@
       <li><a href="#services">Služby</a></li>
       <li><a href="#pricing">Cenník</a></li>
       <li><a href="#priestory">Priestory</a></li>
-      <li><a href="#novinky">Novinky</a></li>
+      <li><a href="#oznam" id="nav-oznam" style="display:none">Aktuality</a></li>
       <li><a href="galeria.html">Galéria</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
@@ -554,6 +554,32 @@
   </div>
 </section>
 
+<!-- ============ SOLÁRIUM ============ -->
+<section class="solarium-scroll" id="solarium">
+  <div class="solarium-sticky">
+
+    <img src="images/solarium/sol-off.webp"
+         class="sol-img" id="sol-off" alt="Solárium FreshFit" />
+    <img src="images/solarium/sol-green.webp"
+         class="sol-img" id="sol-green" alt="Solárium zapnuté"
+         style="opacity:0" />
+
+    <div class="sol-overlay" id="sol-overlay">
+      <div class="sol-content">
+        <span class="sol-tag">Solárium</span>
+        <h2 class="sol-heading">Doprajte si<br><em>dokonalé opálenie</em></h2>
+        <p class="sol-sub">Standing solárium GardenSun priamo v priestoroch FreshFit.<br>Rezervujte si čas ešte dnes.</p>
+        <a href="#contact" class="sol-cta">Rezervovať čas</a>
+      </div>
+    </div>
+
+    <div class="sol-progress">
+      <div class="sol-progress-bar" id="sol-bar"></div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="faq dark-section" id="faq">
   <div class="container">
@@ -644,48 +670,18 @@
   </div>
 </section>
 
-<!-- ============ NOVINKY ============ -->
-<section class="news-feature" id="novinky">
-  <div class="news-feature__inner">
-
-    <!-- ĽAVÁ — obrázok -->
-    <div class="news-feature__visual">
-      <div class="news-feature__img-wrap">
-        <img
-          id="news-img"
-          src=""
-          alt=""
-          class="news-feature__img"
-          loading="lazy"
-        />
-        <div class="news-feature__img-placeholder">
-          <span>FreshFit</span>
-        </div>
+<!-- ============ OZNAM ============ -->
+<section class="oznam-section" id="oznam" style="display:none">
+  <div class="container">
+    <div class="oznam-inner">
+      <div class="oznam-tag">
+        <span class="oznam-dot"></span>
+        <span>Aktuálne</span>
       </div>
-      <div class="news-feature__clip-mask"></div>
+      <time class="oznam-date" id="oznam-date"></time>
+      <h2 class="oznam-title" id="oznam-title"></h2>
+      <p class="oznam-text" id="oznam-text"></p>
     </div>
-
-    <!-- PRAVÁ — text -->
-    <div class="news-feature__content">
-      <div class="news-feature__tag-line">
-        <span class="news-feature__line"></span>
-        <span class="news-feature__label">Novinky</span>
-      </div>
-      <time class="news-feature__date" id="news-date"></time>
-      <h2 class="news-feature__title" id="news-title">
-        Načítavam...
-      </h2>
-      <p class="news-feature__excerpt" id="news-excerpt"></p>
-      <a href="novinky.html" class="news-feature__cta btn-primary">
-        <span>Všetky novinky</span>
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-          <path d="M3 8h10M9 4l4 4-4 4"
-            stroke="currentColor" stroke-width="1.5"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-    </div>
-
   </div>
 </section>
 
@@ -1076,68 +1072,54 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 })();
 </script>
 
-<!-- ============ NOVINKY LOADER + ANIMÁCIE ============ -->
+<!-- ============ OZNAM LOADER ============ -->
 <script>
-// ── Novinky loader + animations ──────────────────────
 (function(){
-  // Formátuj dátum slovensky
-  function formatDate(iso){
-    if(!iso)return '';
-    var d=new Date(iso+'T00:00:00');
-    var months=['januára','februára','marca','apríla','mája','júna',
-                'júla','augusta','septembra','októbra','novembra','decembra'];
-    return d.getDate()+'. '+months[d.getMonth()]+' '+d.getFullYear();
-  }
+  fetch('/data/oznam.json')
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){
+      if(!d||!d.visible||!d.title)return;
+      var s=document.getElementById('oznam');
+      if(s)s.style.display='';
+      var navLink=document.getElementById('nav-oznam');
+      if(navLink)navLink.style.display='';
+      var t=document.getElementById('oznam-title');
+      var x=document.getElementById('oznam-text');
+      var dt=document.getElementById('oznam-date');
+      if(t)t.textContent=d.title;
+      if(x)x.textContent=d.text||'';
+      if(dt)dt.textContent=d.date||'';
+    }).catch(function(){});
+})();
+</script>
 
-  // Načítaj poslednú novinku
-  fetch('/api/novinky')
-    .then(function(r){return r.ok?r.json():[];})
-    .then(function(items){
-      var post=items.filter(function(i){return i.published!==false;})[0];
-      if(!post)return;
-      var title=document.getElementById('news-title');
-      var excerpt=document.getElementById('news-excerpt');
-      var date=document.getElementById('news-date');
-      var img=document.getElementById('news-img');
-      if(title)title.textContent=post.title||'';
-      if(excerpt)excerpt.textContent=post.excerpt||'';
-      if(date){
-        date.textContent=formatDate(post.date);
-        date.setAttribute('datetime',post.date||'');
-      }
-      if(img&&post.image){
-        img.src=post.image;
-        img.alt=post.title||'';
-      }
-    })
-    .catch(function(){});
+<!-- ============ SOLÁRIUM SCROLL ============ -->
+<script>
+(function(){
+  var section = document.querySelector('.solarium-scroll');
+  var off   = document.getElementById('sol-off');
+  var green = document.getElementById('sol-green');
+  var overlay = document.getElementById('sol-overlay');
+  var bar   = document.getElementById('sol-bar');
+  if(!section||!off||!green) return;
 
-  // Scroll reveal — IntersectionObserver
-  var visual=document.querySelector('.news-feature__visual');
-  var imgWrap=document.querySelector('.news-feature__img-wrap');
-  var content=document.querySelector('.news-feature__content');
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
 
-  if(!visual||!imgWrap||!content)return;
+  window.addEventListener('scroll', function(){
+    var rect = section.getBoundingClientRect();
+    var totalH = section.clientHeight - window.innerHeight;
+    var progress = Math.min(Math.max(-rect.top / totalH, 0), 1);
 
-  // Rešpektuj prefers-reduced-motion
-  var noMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-  if(noMotion){
-    imgWrap.classList.add('revealed');
-    content.classList.add('visible');
-    return;
-  }
+    green.style.opacity = progress;
 
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e){
-      if(e.isIntersecting){
-        imgWrap.classList.add('revealed');
-        content.classList.add('visible');
-        obs.unobserve(e.target);
-      }
-    });
-  },{threshold:0.2});
+    if(bar) bar.style.width = (progress * 100) + '%';
 
-  obs.observe(visual);
+    if(progress > 0.3) {
+      overlay.classList.add('visible');
+    } else {
+      overlay.classList.remove('visible');
+    }
+  }, {passive: true});
 })();
 </script>
 
