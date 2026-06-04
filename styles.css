@@ -873,6 +873,14 @@ section { padding: 110px 0; position: relative; }
   border: 1px solid rgba(74,205,80,0.15);
   animation: pulse-ring 4s ease-in-out infinite;
 }
+#contact-logo {
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+@media (max-width: 768px) {
+  #contact-logo { max-width: 180px; }
+}
 .contact-logo-main {
   width: 240px;
   height: 240px;

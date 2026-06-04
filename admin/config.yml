@@ -36,7 +36,11 @@ collections:
           - {label: "Nadpis", name: title, widget: string, required: false}
           - {label: "Text", name: text, widget: text, required: false}
           - {label: "Dátum", name: date, widget: string, required: false, hint: "napr. 15. júna 2026"}
-          - {label: "Obrázok (voliteľný)", name: image, widget: image, required: false}
+          - label: "Obrázok (voliteľný)"
+            name: image
+            widget: image
+            required: false
+            hint: "Voliteľné — ak nevyplníte, zobrazí sa predvolené pozadie FreshFit. Odporúčame .webp, šírka min. 1200px."
 
   - name: "pricing"
     label: "💰 Cenník"
