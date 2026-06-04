@@ -1110,14 +1110,20 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   function update(){
     var rect  = section.getBoundingClientRect();
     var total = section.clientHeight - window.innerHeight;
-    var p     = Math.min(Math.max(-rect.top / total, 0), 1);
+    if(total <= 0) return;
+    var p = Math.min(Math.max(-rect.top / total, 0), 1);
 
-    var greenOpacity = Math.min(p / 0.8, 1);
-    green.style.opacity = greenOpacity;
+    green.style.opacity = Math.min(p / 0.6, 1);
 
     if(overlay){
-      if(p > 0.15) overlay.classList.add('visible');
-      else          overlay.classList.remove('visible');
+      if(p > 0.2 && p < 0.85){
+        overlay.classList.add('visible');
+        var exitP = Math.max((p - 0.75) / 0.1, 0);
+        overlay.style.opacity = 1 - exitP;
+      } else {
+        overlay.classList.remove('visible');
+        overlay.style.opacity = '';
+      }
     }
 
     if(bar) bar.style.width = (p * 100) + '%';

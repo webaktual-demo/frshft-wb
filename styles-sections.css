@@ -1086,7 +1086,7 @@
    SOLÁRIUM scroll sekcia
 ═══════════════════════════════ */
 .solarium-scroll {
-  height: 180vh;
+  height: 130vh;
   position: relative;
 }
 .solarium-sticky {
@@ -1095,6 +1095,16 @@
   height: 100vh;
   overflow: hidden;
   background: #000;
+}
+/* Gradient prechod do ďalšej sekcie */
+.solarium-sticky::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 120px;
+  background: linear-gradient(to bottom, transparent, #0f0f0f);
+  pointer-events: none;
+  z-index: 10;
 }
 .sol-img {
   position: absolute;
