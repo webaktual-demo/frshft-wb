@@ -48,6 +48,10 @@
   --dots: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
 }
 
+section[id] { scroll-margin-top: 80px; }
+
+#pricing { background: #f5f4f0; }
+
 /* Navbar scroll offset pre všetky sekcie */
 section[id] {
   scroll-margin-top: 80px;
