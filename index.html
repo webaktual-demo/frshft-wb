@@ -555,28 +555,25 @@
 </section>
 
 <!-- ============ SOLÁRIUM ============ -->
-<section class="solarium-scroll" id="solarium">
-  <div class="solarium-sticky">
-
-    <img src="images/solarium/sol-off.webp"
-         class="sol-img" id="sol-off" alt="Solárium FreshFit" />
-    <img src="images/solarium/sol-green.webp"
-         class="sol-img" id="sol-green" alt="Solárium zapnuté"
-         style="opacity:0" />
-
-    <div class="sol-overlay" id="sol-overlay">
-      <div class="sol-content">
-        <span class="sol-tag">Solárium</span>
-        <h2 class="sol-heading">Doprajte si<br><em>dokonalé opálenie</em></h2>
-        <p class="sol-sub">Standing solárium GardenSun priamo v priestoroch FreshFit.<br>Rezervujte si čas ešte dnes.</p>
-        <a href="#contact" class="sol-cta">Rezervovať čas</a>
-      </div>
-    </div>
-
-    <div class="sol-progress">
-      <div class="sol-progress-bar" id="sol-bar"></div>
-    </div>
-
+<section class="solarium-reveal" id="solarium">
+  <div class="sol-r__media">
+    <img class="sol-r__img sol-r__off"
+         src="images/solarium/sol-off.webp"
+         alt="Solárium FreshFit" />
+    <img class="sol-r__img sol-r__green"
+         src="images/solarium/sol-green.webp"
+         alt="Solárium zapnuté" aria-hidden="true" />
+  </div>
+  <div class="sol-r__content">
+    <span class="sol-r__tag">Solárium</span>
+    <h2 class="sol-r__title">Doprajte si<br>
+      <em>dokonalé opálenie.</em>
+    </h2>
+    <p class="sol-r__desc">
+      Standing solárium GardenSun priamo v priestoroch FreshFit.<br>
+      Vyskúšajte ešte dnes — spýtajte sa na recepcii.
+    </p>
+    <a href="#contact" class="sol-r__btn">Spýtajte sa →</a>
   </div>
 </section>
 
@@ -1093,43 +1090,25 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 })();
 </script>
 
-<!-- ============ SOLÁRIUM SCROLL ============ -->
+<!-- ============ SOLÁRIUM REVEAL ============ -->
 <script>
 (function(){
-  var section = document.querySelector('.solarium-scroll');
-  var off     = document.getElementById('sol-off');
-  var green   = document.getElementById('sol-green');
-  var overlay = document.getElementById('sol-overlay');
-  var bar     = document.getElementById('sol-bar');
-  if(!section||!off||!green) return;
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
-    green.style.opacity='1'; off.style.opacity='0';
-    if(overlay) overlay.classList.add('visible'); return;
-  }
+  var section = document.querySelector('.solarium-reveal');
+  if(!section) return;
 
-  function update(){
-    var rect  = section.getBoundingClientRect();
-    var total = section.clientHeight - window.innerHeight;
-    if(total <= 0) return;
-    var p = Math.min(Math.max(-rect.top / total, 0), 1);
-
-    // Cross-fade: zelená sa objaví rýchlo od 0% do 35%
-    green.style.opacity = Math.min(p / 0.35, 1);
-
-    if(overlay){
-      if(p > 0.15){
-        overlay.classList.add('visible');
-        overlay.style.opacity = '';
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        section.classList.add('is-lit');
       } else {
-        overlay.classList.remove('visible');
+        section.classList.remove('is-lit');
       }
-    }
+    });
+  }, {
+    threshold: 0.35
+  });
 
-    if(bar) bar.style.width = (p * 100) + '%';
-  }
-
-  window.addEventListener('scroll', update, {passive:true});
-  update();
+  observer.observe(section);
 })();
 </script>
 
