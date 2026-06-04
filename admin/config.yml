@@ -27,6 +27,16 @@ collections:
           - {label: "Adresa", name: address, widget: string}
           - {label: "Google Maps URL", name: maps_url, widget: string}
 
+      - name: "oznam"
+        label: "📢 Aktuálny oznam"
+        file: "data/oznam.json"
+        format: json
+        fields:
+          - {label: "Zobraziť oznam", name: visible, widget: boolean, default: false}
+          - {label: "Nadpis", name: title, widget: string, required: false}
+          - {label: "Text", name: text, widget: text, required: false}
+          - {label: "Dátum", name: date, widget: string, required: false, hint: "napr. 15. júna 2026"}
+
   - name: "pricing"
     label: "💰 Cenník"
     files:
@@ -45,21 +55,6 @@ collections:
               - {label: "Odznak (napr. Zľava, Výhodná, Šetríte 57 €)", name: badge, widget: string, required: false}
               - {label: "Zvýraznená (BESTSELLER)", name: featured,
                  widget: boolean, default: false}
-
-  - name: "novinky"
-    label: "📰 Novinky"
-    folder: "data/novinky"
-    format: json
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    identifier_field: title
-    fields:
-      - {label: "Nadpis", name: title, widget: string}
-      - {label: "Krátky popis (na homepage)", name: excerpt, widget: text}
-      - {label: "Obrázok", name: image, widget: image, required: false}
-      - {label: "Dátum", name: date, widget: datetime,
-         format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false}
-      - {label: "Zverejniť", name: published, widget: boolean, default: true}
 
   - name: "gallery"
     label: "🖼️ Galéria – Albumy"
