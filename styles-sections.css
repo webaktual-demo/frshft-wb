@@ -1041,84 +1041,90 @@
 
 
 /* ═══════════════════════════════
-   OZNAM — editorial
+   OZNAMY — split reveal
 ═══════════════════════════════ */
 .oznam-section {
+  margin: 0;
+  padding: 0;
   background: var(--bg-dark);
-}
-.oznam-editorial {
-  position: relative;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
   overflow: hidden;
 }
-/* Pozadie — gradient default + vlastný obrázok */
-.oznam-editorial__bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  background: linear-gradient(
-    135deg,
-    #091409 0%,
-    #112011 45%,
-    #0f0f0f 100%
-  );
+.oznam-split {
+  display: grid;
+  grid-template-columns: 52% 48%;
+  min-height: 440px;
 }
-/* Logo watermark — viditeľné keď nie je vlastný obrázok */
-.oznam-editorial__bg::after {
+
+/* Obrázková strana */
+.oznam-split__img {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg,#0a1a0a 0%,#162616 50%,#0f0f0f 100%);
+}
+/* Logo watermark — predvolené pozadie */
+.oznam-split__img::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: url('/freshfit-logo.webp') center/220px no-repeat;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 200px; height: 200px;
+  background: url('/freshfit-logo.webp') center/contain no-repeat;
   opacity: 0.07;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
 }
-/* Vlastný obrázok zakryje gradient + logo */
-.oznam-editorial__bg img {
+.oznam-split__img-inner {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path 1.1s cubic-bezier(0.77,0,0.175,1);
+}
+.oznam-split__img-inner img {
+  width: 100%; height: 100%;
   object-fit: cover;
-  z-index: 1;
-  transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.oznam-editorial:hover .oznam-editorial__bg img {
-  transform: scale(1.03);
-}
-/* Gradient — na zakrytie fotky pre text */
-.oznam-editorial__veil {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      to right,
-      rgba(10,10,10,0.15) 0%,
-      rgba(10,10,10,0.6) 50%,
-      rgba(10,10,10,0.92) 100%
-    ),
-    linear-gradient(
-      to bottom,
-      transparent 30%,
-      rgba(10,10,10,0.5) 100%
-    );
-}
-/* Obsah */
-.oznam-editorial__inner {
   position: relative;
-  z-index: 2;
-  width: 100%;
-  padding-top: 64px;
-  padding-bottom: 64px;
+  z-index: 1;
+  transform: scale(1.06);
+  transition: transform 1.4s ease;
+}
+/* Textová strana */
+.oznam-split__body {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px 64px;
+  background: var(--bg-dark-mid, #1a1a1a);
+  border-left: 1px solid rgba(255,255,255,0.05);
 }
-.oznam-editorial__content {
-  max-width: 520px;
-  width: 100%;
+/* Animácie textu */
+.oznam-tag,
+.oznam-date,
+.oznam-title,
+.oznam-text {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
+/* Triggrovanie cez .is-visible */
+.oznam-split.is-visible .oznam-split__img-inner {
+  clip-path: inset(0 0% 0 0);
+}
+.oznam-split.is-visible .oznam-split__img-inner img {
+  transform: scale(1);
+}
+.oznam-split.is-visible .oznam-tag {
+  opacity:1; transform:none; transition-delay:0.25s;
+}
+.oznam-split.is-visible .oznam-date {
+  opacity:1; transform:none; transition-delay:0.4s;
+}
+.oznam-split.is-visible .oznam-title {
+  opacity:1; transform:none; transition-delay:0.52s;
+}
+.oznam-split.is-visible .oznam-text {
+  opacity:1; transform:none; transition-delay:0.65s;
+}
+/* Styles pre tagy */
 .oznam-tag {
   display: inline-flex;
   align-items: center;
@@ -1138,59 +1144,50 @@
   animation: pulse-dot 2s infinite;
 }
 @keyframes pulse-dot {
-  0%,100% { opacity:1; transform:scale(1); }
-  50%      { opacity:0.5; transform:scale(1.4); }
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.5;transform:scale(1.4);}
 }
 .oznam-date {
   display: block;
   font-size: 12px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.35);
   margin-bottom: 14px;
   letter-spacing: 0.06em;
 }
 .oznam-title {
-  font-size: clamp(26px, 3vw, 44px);
+  font-size: clamp(24px,2.8vw,40px);
   font-weight: 800;
   color: #fff;
   letter-spacing: -0.025em;
   line-height: 1.1;
   margin-bottom: 16px;
-  text-shadow: 0 2px 20px rgba(0,0,0,0.4);
 }
 .oznam-text {
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.75;
-  color: rgba(255,255,255,0.7);
-  max-width: 440px;
+  color: rgba(255,255,255,0.55);
+  max-width: 400px;
 }
-/* Bez obrázku — jednoduchý tmavý banner */
-.oznam-editorial.no-img {
-  min-height: auto;
-  background: var(--bg-dark-mid);
-  padding: 56px 0;
-}
-.oznam-editorial.no-img .oznam-editorial__bg { display:none; }
-.oznam-editorial.no-img .oznam-editorial__inner {
-  justify-content: flex-start;
-  padding-top: 0; padding-bottom: 0;
-}
-.oznam-editorial.no-img .oznam-title,
-.oznam-editorial.no-img .oznam-text { text-shadow: none; }
+/* Mobil */
 @media (max-width: 768px) {
-  .oznam-editorial { min-height: 420px; }
-  .oznam-editorial__inner { justify-content: flex-start; }
-  .oznam-editorial__veil {
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.2) 0%,
-      rgba(0,0,0,0.85) 55%,
-      rgba(0,0,0,0.95) 100%
-    );
+  .oznam-split { grid-template-columns: 1fr; }
+  .oznam-split__img { height: 260px; }
+  .oznam-split__img-inner {
+    clip-path: inset(0 0 100% 0);
   }
-  .oznam-editorial__content { max-width: 100%; }
-  .oznam-editorial__inner {
-    align-items: flex-end;
-    padding-bottom: 40px;
+  .oznam-split.is-visible .oznam-split__img-inner {
+    clip-path: inset(0 0 0% 0);
+  }
+  .oznam-split__body {
+    padding: 40px 28px;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .oznam-split__img-inner { clip-path: none !important; }
+  .oznam-tag,.oznam-date,.oznam-title,.oznam-text {
+    opacity:1 !important; transform:none !important;
   }
 }
 
@@ -1530,14 +1527,18 @@ a.news-card { color: inherit; text-decoration: none; }
   padding: 13px 0;
   user-select: none;
 }
-.marquee-track {
-  display: inline-flex;
-  white-space: nowrap;
-  animation: marqueeScroll 30s linear infinite;
-  will-change: transform;
+.marquee-inner {
+  display: flex;
+  width: max-content;
+  animation: marqueeScroll 32s linear infinite;
 }
-.marquee-strip:hover .marquee-track {
+.marquee-strip:hover .marquee-inner {
   animation-play-state: paused;
+}
+.marquee-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 @keyframes marqueeScroll {
   from { transform: translateX(0); }
@@ -1549,17 +1550,14 @@ a.news-card { color: inherit; text-decoration: none; }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.35);
-  padding: 0 20px;
-  display: inline-flex;
-  align-items: center;
-  gap: 20px;
+  padding: 0 16px;
+  white-space: nowrap;
 }
 .mi em {
   color: var(--accent);
   font-style: normal;
-  font-size: 14px;
-  line-height: 1;
+  padding-left: 16px;
 }
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
+  .marquee-inner { animation: none; }
 }

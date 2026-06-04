@@ -134,42 +134,48 @@
 
 <!-- ============ MARQUEE ============ -->
 <div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-track">
-    <span class="mi">Solárium <em>·</em></span>
-    <span class="mi">Vibračná plošina <em>·</em></span>
-    <span class="mi">Skupinové lekcie <em>·</em></span>
-    <span class="mi">Silový tréning <em>·</em></span>
-    <span class="mi">Kardio zóna <em>·</em></span>
-    <span class="mi">Multisport <em>·</em></span>
-    <span class="mi">Prievidza <em>·</em></span>
-    <span class="mi">Solárium <em>·</em></span>
-    <span class="mi">Vibračná plošina <em>·</em></span>
-    <span class="mi">Skupinové lekcie <em>·</em></span>
-    <span class="mi">Silový tréning <em>·</em></span>
-    <span class="mi">Kardio zóna <em>·</em></span>
-    <span class="mi">Multisport <em>·</em></span>
-    <span class="mi">Prievidza <em>·</em></span>
+  <div class="marquee-inner">
+    <div class="marquee-group">
+      <span class="mi">Solárium<em> · </em></span>
+      <span class="mi">Vibračná plošina<em> · </em></span>
+      <span class="mi">Skupinové lekcie<em> · </em></span>
+      <span class="mi">Silový tréning<em> · </em></span>
+      <span class="mi">Kardio zóna<em> · </em></span>
+      <span class="mi">Multisport<em> · </em></span>
+      <span class="mi">Prievidza<em> · </em></span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span class="mi">Solárium<em> · </em></span>
+      <span class="mi">Vibračná plošina<em> · </em></span>
+      <span class="mi">Skupinové lekcie<em> · </em></span>
+      <span class="mi">Silový tréning<em> · </em></span>
+      <span class="mi">Kardio zóna<em> · </em></span>
+      <span class="mi">Multisport<em> · </em></span>
+      <span class="mi">Prievidza<em> · </em></span>
+    </div>
   </div>
 </div>
 
 <!-- ============ OZNAM ============ -->
 <section class="oznam-section" id="oznam" style="display:none">
-  <div class="oznam-editorial" id="oznam-card">
-    <div class="oznam-editorial__bg">
-      <img id="oznam-img" src="" alt="" loading="lazy" />
-      <div class="oznam-editorial__veil"></div>
-    </div>
-    <div class="oznam-editorial__inner container">
-      <div class="oznam-editorial__content">
-        <div class="oznam-tag">
-          <span class="oznam-dot"></span>
-          <span>Oznamy</span>
-        </div>
-        <time class="oznam-date" id="oznam-date"></time>
-        <h2 class="oznam-title" id="oznam-title"></h2>
-        <p class="oznam-text" id="oznam-text"></p>
+  <div class="oznam-split">
+
+    <div class="oznam-split__img">
+      <div class="oznam-split__img-inner">
+        <img id="oznam-img" src="" alt="" loading="lazy" />
       </div>
     </div>
+
+    <div class="oznam-split__body">
+      <div class="oznam-tag">
+        <span class="oznam-dot"></span>
+        <span>Oznamy</span>
+      </div>
+      <time class="oznam-date" id="oznam-date"></time>
+      <h2 class="oznam-title" id="oznam-title"></h2>
+      <p class="oznam-text" id="oznam-text"></p>
+    </div>
+
   </div>
 </section>
 
@@ -1080,25 +1086,35 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
     .then(function(d){
       if(!d||!d.visible||!d.title) return;
       var s   = document.getElementById('oznam');
-      var card= document.getElementById('oznam-card');
       var t   = document.getElementById('oznam-title');
       var x   = document.getElementById('oznam-text');
       var dt  = document.getElementById('oznam-date');
-      var imgW= document.getElementById('oznam-img-wrap');
       var img = document.getElementById('oznam-img');
       if(t)  t.textContent  = d.title;
       if(x)  x.textContent  = d.text  || '';
       if(dt) dt.textContent = d.date  || '';
       if(img) {
         if(d.image) {
-          img.src   = d.image;
-          img.alt   = d.title || '';
-          img.style.display = '';
+          img.src = d.image;
+          img.alt = d.title || '';
         } else {
           img.style.display = 'none';
         }
       }
-      if(s)   s.style.display = '';
+      if(s) s.style.display = '';
+      // Reveal animácia
+      var split = document.querySelector('.oznam-split');
+      if(split){
+        var obs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){
+              split.classList.add('is-visible');
+              obs.unobserve(e.target);
+            }
+          });
+        },{threshold:0.2});
+        obs.observe(split);
+      }
     }).catch(function(){});
 })();
 </script>

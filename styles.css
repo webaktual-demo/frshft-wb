@@ -882,8 +882,9 @@ section { padding: 110px 0; position: relative; }
   #contact-logo { max-width: 180px; }
 }
 .contact-logo-main {
-  width: 240px;
-  height: 240px;
+  width: 240px !important;
+  height: auto !important;
+  max-width: 240px !important;
   object-fit: contain;
   opacity: 0.9;
   animation: float-logo 6s ease-in-out infinite;
@@ -987,6 +988,10 @@ section { padding: 110px 0; position: relative; }
 }
 @media (max-width: 768px) {
   .contact-visual { display: none; }
+  .contact-logo-main {
+    width: 160px !important;
+    max-width: 160px !important;
+  }
 }
 
 /* ============ MOBILE PERFORMANCE — touch zariadenia ============ */
