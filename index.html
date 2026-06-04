@@ -554,29 +554,6 @@
   </div>
 </section>
 
-<!-- ============ SOLÁRIUM ============ -->
-<section class="solarium-reveal" id="solarium">
-  <div class="sol-r__media">
-    <img class="sol-r__img sol-r__off"
-         src="images/solarium/sol-off.webp"
-         alt="Solárium FreshFit" />
-    <img class="sol-r__img sol-r__green"
-         src="images/solarium/sol-green.webp"
-         alt="Solárium zapnuté" aria-hidden="true" />
-  </div>
-  <div class="sol-r__content">
-    <span class="sol-r__tag">Solárium</span>
-    <h2 class="sol-r__title">Doprajte si<br>
-      <em>dokonalé opálenie.</em>
-    </h2>
-    <p class="sol-r__desc">
-      Standing solárium GardenSun priamo v priestoroch FreshFit.<br>
-      Vyskúšajte ešte dnes — spýtajte sa na recepcii.
-    </p>
-    <a href="#contact" class="sol-r__btn">Spýtajte sa →</a>
-  </div>
-</section>
-
 <!-- ============ FAQ ============ -->
 <section class="faq dark-section" id="faq">
   <div class="container">
@@ -1090,27 +1067,6 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 })();
 </script>
 
-<!-- ============ SOLÁRIUM REVEAL ============ -->
-<script>
-(function(){
-  var section = document.querySelector('.solarium-reveal');
-  if(!section) return;
-
-  var observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        section.classList.add('is-lit');
-      } else {
-        section.classList.remove('is-lit');
-      }
-    });
-  }, {
-    threshold: 0.35
-  });
-
-  observer.observe(section);
-})();
-</script>
 
 <!-- ============ ODZNAK OTVORENÉ/ZATVORENÉ ============ -->
 <script>
