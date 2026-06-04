@@ -48,6 +48,11 @@
   --dots: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
 }
 
+/* Navbar scroll offset pre všetky sekcie */
+section[id] {
+  scroll-margin-top: 80px;
+}
+
 /* ============ RESET & BASE ============ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
