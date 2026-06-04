@@ -161,6 +161,8 @@
   <div class="oznam-split">
 
     <div class="oznam-split__img">
+      <img class="oznam-logo-default"
+           src="/freshfit-logo.webp" alt="FreshFit" />
       <div class="oznam-split__img-inner">
         <img id="oznam-img" src="" alt="" loading="lazy" />
       </div>
@@ -1093,10 +1095,12 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       if(t)  t.textContent  = d.title;
       if(x)  x.textContent  = d.text  || '';
       if(dt) dt.textContent = d.date  || '';
+      var defLogo = document.querySelector('.oznam-logo-default');
       if(img) {
         if(d.image) {
           img.src = d.image;
           img.alt = d.title || '';
+          if(defLogo) defLogo.style.display = 'none';
         } else {
           img.style.display = 'none';
         }
@@ -1173,6 +1177,15 @@ left:-999px;top:-999px"></div>
   hero.addEventListener('mouseleave',function(){
     g.style.opacity='0';
   });
+})();
+</script>
+
+<script>
+(function(){
+  var g1 = document.querySelector('.marquee-group');
+  if(!g1) return;
+  var g2 = document.querySelectorAll('.marquee-group')[1];
+  if(g2) g2.innerHTML = g1.innerHTML;
 })();
 </script>
 </body>

@@ -848,8 +848,8 @@ section { padding: 110px 0; position: relative; }
 }
 .contact-logo-ring {
   position: relative;
-  width: 320px;
-  height: 320px;
+  width: 320px !important;
+  height: 320px !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -857,6 +857,8 @@ section { padding: 110px 0; position: relative; }
 .contact-logo-glow-outer {
   position: absolute;
   inset: 0;
+  width: 320px !important;
+  height: 320px !important;
   border-radius: 50%;
   background: radial-gradient(
     circle,
@@ -869,6 +871,8 @@ section { padding: 110px 0; position: relative; }
 .contact-logo-glow-inner {
   position: absolute;
   inset: 40px;
+  width: 240px !important;
+  height: 240px !important;
   border-radius: 50%;
   border: 1px solid rgba(74,205,80,0.15);
   animation: pulse-ring 4s ease-in-out infinite;
@@ -878,13 +882,10 @@ section { padding: 110px 0; position: relative; }
   width: 100%;
   height: auto;
 }
-@media (max-width: 768px) {
-  #contact-logo { max-width: 180px; }
-}
 .contact-logo-main {
-  width: 240px !important;
+  width: 260px !important;
   height: auto !important;
-  max-width: 240px !important;
+  max-width: 260px !important;
   object-fit: contain;
   opacity: 0.9;
   animation: float-logo 6s ease-in-out infinite;
@@ -988,10 +989,10 @@ section { padding: 110px 0; position: relative; }
 }
 @media (max-width: 768px) {
   .contact-visual { display: none; }
-  .contact-logo-main {
-    width: 160px !important;
-    max-width: 160px !important;
-  }
+  .contact-logo-ring,
+  .contact-logo-glow-outer { width: 200px !important; height: 200px !important; }
+  .contact-logo-glow-inner { width: 160px !important; height: 160px !important; }
+  .contact-logo-main { width: 160px !important; max-width: 160px !important; }
 }
 
 /* ============ MOBILE PERFORMANCE — touch zariadenia ============ */
