@@ -1086,7 +1086,7 @@
    SOLÁRIUM scroll sekcia
 ═══════════════════════════════ */
 .solarium-scroll {
-  height: 250vh;
+  height: 180vh;
   position: relative;
 }
 .solarium-sticky {
@@ -1103,7 +1103,7 @@
   height: 100%;
   object-fit: cover;
   will-change: opacity;
-  transition: opacity 0.08s linear;
+  transition: opacity 0.15s ease;
 }
 .sol-overlay {
   position: absolute;

@@ -1097,29 +1097,34 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 <script>
 (function(){
   var section = document.querySelector('.solarium-scroll');
-  var off   = document.getElementById('sol-off');
-  var green = document.getElementById('sol-green');
+  var off     = document.getElementById('sol-off');
+  var green   = document.getElementById('sol-green');
   var overlay = document.getElementById('sol-overlay');
-  var bar   = document.getElementById('sol-bar');
+  var bar     = document.getElementById('sol-bar');
   if(!section||!off||!green) return;
+  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
+    green.style.opacity='1'; off.style.opacity='0';
+    if(overlay) overlay.classList.add('visible'); return;
+  }
 
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  function update(){
+    var rect  = section.getBoundingClientRect();
+    var total = section.clientHeight - window.innerHeight;
+    var p     = Math.min(Math.max(-rect.top / total, 0), 1);
 
-  window.addEventListener('scroll', function(){
-    var rect = section.getBoundingClientRect();
-    var totalH = section.clientHeight - window.innerHeight;
-    var progress = Math.min(Math.max(-rect.top / totalH, 0), 1);
+    var greenOpacity = Math.min(p / 0.8, 1);
+    green.style.opacity = greenOpacity;
 
-    green.style.opacity = progress;
-
-    if(bar) bar.style.width = (progress * 100) + '%';
-
-    if(progress > 0.3) {
-      overlay.classList.add('visible');
-    } else {
-      overlay.classList.remove('visible');
+    if(overlay){
+      if(p > 0.15) overlay.classList.add('visible');
+      else          overlay.classList.remove('visible');
     }
-  }, {passive: true});
+
+    if(bar) bar.style.width = (p * 100) + '%';
+  }
+
+  window.addEventListener('scroll', update, {passive:true});
+  update();
 })();
 </script>
 
