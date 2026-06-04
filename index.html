@@ -74,11 +74,11 @@
       <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-nav" />
     </a>
     <ul class="nav-menu" id="navMenu">
+      <li><a href="#oznam" id="nav-oznam">Novinky</a></li>
       <li><a href="#why">Prečo my</a></li>
       <li><a href="#services">Služby</a></li>
       <li><a href="#pricing">Cenník</a></li>
       <li><a href="#priestory">Priestory</a></li>
-      <li><a href="#oznam" id="nav-oznam" style="display:none">Aktuality</a></li>
       <li><a href="/galeria">Galéria</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
@@ -1066,7 +1066,6 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       var dt  = document.getElementById('oznam-date');
       var imgW= document.getElementById('oznam-img-wrap');
       var img = document.getElementById('oznam-img');
-      var nav = document.getElementById('nav-oznam');
       if(t)  t.textContent  = d.title;
       if(x)  x.textContent  = d.text  || '';
       if(dt) dt.textContent = d.date  || '';
@@ -1079,7 +1078,6 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       }
       if(imgW) imgW.style.display = '';
       if(s)   s.style.display = '';
-      if(nav) nav.style.display = '';
     }).catch(function(){});
 })();
 </script>
