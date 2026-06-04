@@ -78,6 +78,7 @@
       <li><a href="#services">Služby</a></li>
       <li><a href="#pricing">Cenník</a></li>
       <li><a href="#priestory">Priestory</a></li>
+      <li><a href="#novinky">Novinky</a></li>
       <li><a href="galeria.html">Galéria</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
@@ -643,6 +644,51 @@
   </div>
 </section>
 
+<!-- ============ NOVINKY ============ -->
+<section class="news-feature" id="novinky">
+  <div class="news-feature__inner">
+
+    <!-- ĽAVÁ — obrázok -->
+    <div class="news-feature__visual">
+      <div class="news-feature__img-wrap">
+        <img
+          id="news-img"
+          src=""
+          alt=""
+          class="news-feature__img"
+          loading="lazy"
+        />
+        <div class="news-feature__img-placeholder">
+          <span>FreshFit</span>
+        </div>
+      </div>
+      <div class="news-feature__clip-mask"></div>
+    </div>
+
+    <!-- PRAVÁ — text -->
+    <div class="news-feature__content">
+      <div class="news-feature__tag-line">
+        <span class="news-feature__line"></span>
+        <span class="news-feature__label">Novinky</span>
+      </div>
+      <time class="news-feature__date" id="news-date"></time>
+      <h2 class="news-feature__title" id="news-title">
+        Načítavam...
+      </h2>
+      <p class="news-feature__excerpt" id="news-excerpt"></p>
+      <a href="novinky.html" class="news-feature__cta btn-primary">
+        <span>Všetky novinky</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4"
+            stroke="currentColor" stroke-width="1.5"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============ KONTAKT ============ -->
 <section class="contact dark-section" id="contact">
   <div class="container">
@@ -1004,23 +1050,94 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
     if(em&&s.email){em.textContent=s.email;em.href='mailto:'+s.email;}
   }).catch(function(){});
 
-  // Cenník — CMS loader vypnutý, cenník je hardcoded v HTML
-  /*
+  // Cenník
   fetch('/data/pricing.json').then(function(r){return r.ok?r.json():null;})
   .then(function(d){
-    if(!d||!d.plans||d.plans.every(function(p){return!p.price;}))return;
+    if(!d||!d.plans||!d.plans.length)return;
     var g=document.getElementById('cms-pricing-grid');
     if(!g)return;
+    function fmt(p){
+      var s=(+p).toFixed(2);
+      if(s.slice(-3)==='.00')return s.slice(0,-3)+' €';
+      var pts=s.split('.');
+      return pts[0]+'<span>,</span>'+pts[1]+' €';
+    }
     g.innerHTML=d.plans.map(function(p){
-      return'<div class="pricing-card'+(p.featured?' featured':'')+'">'+
-        (p.featured?'<div class="pricing-badge">Odporúčame</div>':'')+
-        '<div class="pricing-name">'+p.name+'</div>'+
-        '<div class="pricing-price"><span class="price-amount">'+p.price+
-        '</span><span class="price-currency"> €/mes</span></div>'+
-        '<div class="pricing-desc">'+p.description+'</div></div>';
+      var badge=p.badge||'';
+      var bdg=badge?'<div class="price-badge '+(p.featured?'bestseller':'outline')+'">'+badge+'</div>':'<div></div>';
+      var sub=p.description?'<small>'+p.description+'</small>':'';
+      return'<div class="price-row'+(p.featured?' featured':'')+'">'+
+        '<div class="price-name">'+p.name+sub+'</div>'+
+        bdg+
+        '<div class="price-value">'+fmt(p.price)+'</div>'+
+        '</div>';
     }).join('');
   }).catch(function(){});
-  */
+})();
+</script>
+
+<!-- ============ NOVINKY LOADER + ANIMÁCIE ============ -->
+<script>
+// ── Novinky loader + animations ──────────────────────
+(function(){
+  // Formátuj dátum slovensky
+  function formatDate(iso){
+    if(!iso)return '';
+    var d=new Date(iso+'T00:00:00');
+    var months=['januára','februára','marca','apríla','mája','júna',
+                'júla','augusta','septembra','októbra','novembra','decembra'];
+    return d.getDate()+'. '+months[d.getMonth()]+' '+d.getFullYear();
+  }
+
+  // Načítaj poslednú novinku
+  fetch('/api/novinky')
+    .then(function(r){return r.ok?r.json():[];})
+    .then(function(items){
+      var post=items.filter(function(i){return i.published!==false;})[0];
+      if(!post)return;
+      var title=document.getElementById('news-title');
+      var excerpt=document.getElementById('news-excerpt');
+      var date=document.getElementById('news-date');
+      var img=document.getElementById('news-img');
+      if(title)title.textContent=post.title||'';
+      if(excerpt)excerpt.textContent=post.excerpt||'';
+      if(date){
+        date.textContent=formatDate(post.date);
+        date.setAttribute('datetime',post.date||'');
+      }
+      if(img&&post.image){
+        img.src=post.image;
+        img.alt=post.title||'';
+      }
+    })
+    .catch(function(){});
+
+  // Scroll reveal — IntersectionObserver
+  var visual=document.querySelector('.news-feature__visual');
+  var imgWrap=document.querySelector('.news-feature__img-wrap');
+  var content=document.querySelector('.news-feature__content');
+
+  if(!visual||!imgWrap||!content)return;
+
+  // Rešpektuj prefers-reduced-motion
+  var noMotion=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  if(noMotion){
+    imgWrap.classList.add('revealed');
+    content.classList.add('visible');
+    return;
+  }
+
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        imgWrap.classList.add('revealed');
+        content.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:0.2});
+
+  obs.observe(visual);
 })();
 </script>
 

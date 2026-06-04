@@ -41,9 +41,25 @@ collections:
             fields:
               - {label: Názov, name: name, widget: string}
               - {label: "Cena (€)", name: price, widget: number}
-              - {label: Popis, name: description, widget: string}
-              - {label: "Zvýraznená (odporúčaná)", name: featured,
+              - {label: "Popis (krátky subtitle)", name: description, widget: string, required: false}
+              - {label: "Odznak (napr. Zľava, Výhodná, Šetríte 57 €)", name: badge, widget: string, required: false}
+              - {label: "Zvýraznená (BESTSELLER)", name: featured,
                  widget: boolean, default: false}
+
+  - name: "novinky"
+    label: "📰 Novinky"
+    folder: "data/novinky"
+    format: json
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    identifier_field: title
+    fields:
+      - {label: "Nadpis", name: title, widget: string}
+      - {label: "Krátky popis (na homepage)", name: excerpt, widget: text}
+      - {label: "Obrázok", name: image, widget: image, required: false}
+      - {label: "Dátum", name: date, widget: datetime,
+         format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false}
+      - {label: "Zverejniť", name: published, widget: boolean, default: true}
 
   - name: "gallery"
     label: "🖼️ Galéria – Albumy"
