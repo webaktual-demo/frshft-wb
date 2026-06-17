@@ -1,3 +1,20 @@
 {
-  "treneri": []
+  "treneri": [
+    {
+      "foto": "/images/gallery/img_1942.jpeg",
+      "meno": "Marek Kohút",
+      "rola": "Osobný tréner",
+      "telefon": "+421 XXX XXX",
+      "instagram": "@XXXXXX",
+      "popis": "Špecialista."
+    },
+    {
+      "meno": "Natália Buchová",
+      "rola": "Osobná tréner",
+      "foto": "/images/gallery/img_1945.jpeg",
+      "popis": "Špecialistka.",
+      "telefon": "+421 XXX XXX XXX",
+      "instagram": "#XXXXXX"
+    }
+  ]
 }
