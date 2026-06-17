@@ -1586,12 +1586,12 @@ a.news-card { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion:reduce) { .poukazka-card-inner { transition:none !important; } }
 
 /* ============ TRÉNERI / NÁŠ TÍM ============ */
-.treneri-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:28px; }
+.treneri-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(290px, 1fr)); gap:28px; }
 .trener-card { perspective:1100px; }
 .trener-card-inner {
-  position:relative; height:100%; display:flex; flex-direction:column; align-items:center; text-align:center;
+  position:relative; height:100%; display:flex; flex-direction:column; align-items:stretch; text-align:center;
   background:linear-gradient(160deg,#212121,#141414);
-  border:1px solid rgba(255,255,255,0.07); border-radius:20px; padding:28px 26px;
+  border:1px solid rgba(255,255,255,0.07); border-radius:20px; padding:0;
   transform-style:preserve-3d;
   transition:transform 0.5s cubic-bezier(.22,.61,.36,1), box-shadow 0.5s ease, border-color 0.5s ease;
   box-shadow:0 18px 44px rgba(0,0,0,0.45); overflow:hidden; will-change:transform;
@@ -1609,12 +1609,17 @@ a.news-card { color: inherit; text-decoration: none; }
 .trener-card:hover .trener-card-inner::after { animation:pc-sheen 0.9s ease; }
 .trener-card:hover .trener-card-inner { box-shadow:0 30px 60px rgba(0,0,0,0.5); border-color:rgba(76,175,80,0.25); }
 .trener-foto {
-  width:100%; max-width:200px; aspect-ratio:4/5; object-fit:cover; object-position:center top;
-  border-radius:16px; display:block; margin-bottom:18px; position:relative; z-index:1;
+  width:100%; max-width:none; aspect-ratio:4/5; object-fit:cover; object-position:top;
+  display:block; margin:0; position:relative; z-index:1;
   background:rgba(255,255,255,0.04);
 }
 .trener-foto--empty { background:linear-gradient(160deg,#2a2a2a,#1a1a1a); }
-.trener-meno { font-family:'Poppins',sans-serif; font-size:19px; font-weight:700; color:#fff; letter-spacing:-0.01em; position:relative; z-index:1; }
+.trener-body {
+  position:relative; z-index:1;
+  display:flex; flex-direction:column; align-items:center; text-align:center;
+  padding:22px 24px 26px;
+}
+.trener-meno { font-family:'Poppins',sans-serif; font-size:22px; font-weight:800; color:#fff; letter-spacing:-0.01em; position:relative; z-index:1; }
 .trener-rola {
   display:inline-block; margin-top:9px; font-size:11px; font-weight:600; letter-spacing:0.04em;
   color:#9be29e; border:1px solid rgba(76,175,80,0.4); padding:5px 11px; border-radius:999px;
@@ -1629,7 +1634,7 @@ a.news-card { color: inherit; text-decoration: none; }
 .trener-contact-link:hover { color:#9be29e; }
 .trener-contact-ic { width:15px; height:15px; flex-shrink:0; }
 @media (prefers-reduced-motion:reduce) { .trener-contact-link { transition:none; } }
-@media (max-width:560px) { .treneri-grid { grid-template-columns:1fr; max-width:360px; margin-left:auto; margin-right:auto; } }
+@media (max-width:560px) { .treneri-grid { grid-template-columns:1fr; max-width:420px; margin-left:auto; margin-right:auto; } }
 @media (prefers-reduced-motion:reduce) { .trener-card-inner { transition:none !important; } }
 
 /* ============ SCROLL PROGRESS BAR ============ */

@@ -819,6 +819,52 @@ section { padding: 110px 0; position: relative; }
   .stat-card.stat-large { min-height: 140px; }
 }
 
+/* ── Prečo my — čistý rad 3 rovnocenných štatistík ── */
+.why-stats {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: center;
+}
+.why-statitem {
+  text-align: center;
+  padding: 8px 24px;
+  position: relative;
+}
+.why-statitem + .why-statitem::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 1px; height: 66px;
+  background: rgba(255,255,255,0.12);
+}
+.why-statnum {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #4CAF50;
+}
+.why-statunit { font-size: 0.5em; font-weight: 700; }
+.why-statlabel {
+  margin-top: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.45;
+}
+@media (max-width: 760px) {
+  .why-stats { grid-template-columns: 1fr; }
+  .why-statitem { padding: 22px 12px; }
+  .why-statitem + .why-statitem::before {
+    left: 50%; top: 0;
+    transform: translateX(-50%);
+    width: 66px; height: 1px;
+  }
+}
+
 /* ============ CONTACT — 2-stĺpcový layout ============ */
 .contact-two-col {
   display: grid;
@@ -845,8 +891,8 @@ section { padding: 110px 0; position: relative; }
 }
 .contact-logo-ring {
   position: relative;
-  width: 320px !important;
-  height: 320px !important;
+  width: clamp(320px, 35vw, 480px) !important;
+  height: clamp(320px, 35vw, 480px) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -854,35 +900,35 @@ section { padding: 110px 0; position: relative; }
 .contact-logo-glow-outer {
   position: absolute;
   inset: 0;
-  width: 320px !important;
-  height: 320px !important;
+  width: 100% !important;
+  height: 100% !important;
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(74,205,80,0.12) 0%,
-    rgba(74,205,80,0.05) 40%,
-    transparent 70%
+    rgba(74,205,80,0.16) 0%,
+    rgba(74,205,80,0.06) 48%,
+    transparent 78%
   );
   animation: pulse-glow 4s ease-in-out infinite;
 }
 .contact-logo-glow-inner {
   position: absolute;
-  inset: 40px;
-  width: 240px !important;
-  height: 240px !important;
+  inset: 10px;
+  width: auto !important;
+  height: auto !important;
   border-radius: 50%;
   border: 1px solid rgba(74,205,80,0.15);
   animation: pulse-ring 4s ease-in-out infinite;
 }
 #contact-logo {
-  max-width: 260px;
+  max-width: 460px;
   width: 100%;
   height: auto;
 }
 .contact-logo-main {
-  width: 260px !important;
+  width: clamp(300px, 34vw, 460px) !important;
   height: auto !important;
-  max-width: 260px !important;
+  max-width: 460px !important;
   object-fit: contain;
   opacity: 0.9;
   animation: float-logo 6s ease-in-out infinite;
@@ -1021,6 +1067,13 @@ section { padding: 110px 0; position: relative; }
     transform: translateX(26px);
     transition: opacity 0.45s ease, transform 0.45s ease;
   }
+}
+
+/* ── Hero na mobile: text vždy plne viditeľný a statický (žiadny scroll
+      parallax/fade — dynamická adresná lišta inak robí lag a miznutie) ── */
+@media (max-width: 768px) {
+  .hero .hero-text,
+  .hero h1 { opacity: 1 !important; transform: none !important; }
 }
 
 /* ── Odznak otvorené/zatvorené ───────────────────────────────── */
