@@ -107,7 +107,7 @@
         Pre začiatočníkov aj profesionálov.
       </p>
       <div class="hero-ctas">
-        <a href="#pricing" class="btn btn-primary">Začnite cvičiť dnes</a>
+        <a href="#pricing" class="btn btn-primary">Začať cvičiť dnes →</a>
         <a href="#contact" class="btn btn-outline-white">
           Ako sa k nám dostať
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
@@ -116,7 +116,7 @@
       <div class="hero-stats">
         <div class="hero-stat">
           <div class="stat-num">07<span>:00</span></div>
-          <div class="stat-label">Otváracia hodina</div>
+          <div class="stat-label">Otvárame</div>
         </div>
         <div class="hero-stat">
           <div class="stat-num"><span class="hcount" data-count="20">0</span><span>+</span></div>
@@ -138,9 +138,9 @@
   </div>
 </header>
 
-<!-- ============ MARQUEE ============ -->
-<div class="marquee-strip" aria-hidden="true">
-  <div class="marquee-inner">
+<!-- ============ MARQUEE (horný pás — render z CMS) ============ -->
+<div class="marquee-strip" data-marquee="marquee1" aria-hidden="true">
+  <div class="marquee-inner" data-dir="left">
     <div class="marquee-group">
       <span class="mi">Solárium<em> · </em></span>
       <span class="mi">Vibračná plošina<em> · </em></span>
@@ -187,6 +187,28 @@
   </div>
 </section>
 
+<!-- ============ MARQUEE 2 (pás pod oznamami — render z CMS) ============ -->
+<div class="marquee-strip" data-marquee="marquee2" aria-hidden="true">
+  <div class="marquee-inner" data-dir="right">
+    <div class="marquee-group">
+      <span class="mi">400+ ČLENOV<em> · </em></span>
+      <span class="mi">15 ROKOV SKÚSENOSTÍ<em> · </em></span>
+      <span class="mi">800 m² PRIESTORU<em> · </em></span>
+      <span class="mi">OTVORENÉ 365 DNÍ V ROKU<em> · </em></span>
+      <span class="mi">MODERNÉ VYBAVENIE<em> · </em></span>
+      <span class="mi">PRÍJEMNÁ ATMOSFÉRA<em> · </em></span>
+    </div>
+    <div class="marquee-group" aria-hidden="true">
+      <span class="mi">400+ ČLENOV<em> · </em></span>
+      <span class="mi">15 ROKOV SKÚSENOSTÍ<em> · </em></span>
+      <span class="mi">800 m² PRIESTORU<em> · </em></span>
+      <span class="mi">OTVORENÉ 365 DNÍ V ROKU<em> · </em></span>
+      <span class="mi">MODERNÉ VYBAVENIE<em> · </em></span>
+      <span class="mi">PRÍJEMNÁ ATMOSFÉRA<em> · </em></span>
+    </div>
+  </div>
+</div>
+
 <!-- ============ PREČO MY ============ -->
 <section class="why dark-section" id="why" style="position:relative; overflow:hidden;">
   <img src="freshfit-logo.webp" alt="" aria-hidden="true" class="why-logo-stamp">
@@ -194,17 +216,17 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Prečo my</div>
-        <h2 class="section-title">Štyri dôvody <span class="accent">trénovať tu.</span></h2>
+        <h2 class="section-title">Viac než len <span class="accent">fitko.</span></h2>
       </div>
       <p class="section-subtitle">
-        Všetko, čo potrebujete pre kvalitný tréning — na jednom mieste,
-        v príjemnom prostredí a za férovú cenu.
+        Fresh Fit je miesto, kde sa môžete sústrediť na seba. Bez zbytočného
+        stresu, bez preplnených priestorov a bez nepríjemnej atmosféry.
       </p>
     </div>
     <div class="stats-grid">
       <div class="stat-card stat-large reveal-left">
         <span class="stat-number" data-count="400" data-suffix="+">0+</span>
-        <span class="stat-label-card">spokojných členov</span>
+        <span class="stat-label-card">členov, ktorí nám dôverujú</span>
         <div class="stat-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.5" width="40" height="40" aria-hidden="true">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -226,7 +248,7 @@
       </div>
       <div class="stat-card reveal-right" style="transition-delay:0.1s">
         <span class="stat-number" data-count="4" data-suffix="">0</span>
-        <span class="stat-label-card">profesionálni tréneri</span>
+        <span class="stat-label-card">skúsení tréneri</span>
         <div class="stat-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.5" width="40" height="40" aria-hidden="true">
             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -236,7 +258,7 @@
       </div>
       <div class="stat-card reveal-right" style="transition-delay:0.15s">
         <div class="stat-number">800 <span class="stat-unit">m²</span></div>
-        <span class="stat-label-card">tréningovej plochy</span>
+        <span class="stat-label-card">priestoru pre váš tréning</span>
         <div class="stat-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="#4CAF50" stroke-width="1.5" width="40" height="40" aria-hidden="true">
             <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
@@ -254,11 +276,11 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Služby</div>
-        <h2 class="section-title">Tréning <span class="accent">na mieru.</span></h2>
+        <h2 class="section-title">Trénujte tak, ako vám to <span class="accent">vyhovuje.</span></h2>
       </div>
       <p class="section-subtitle">
-        Od klasickej kardio zóny cez silový tréning až po skupinové
-        cvičenia — vyberte si svoj štýl.
+        Či si prídete zacvičiť po práci, zlepšiť kondíciu alebo si jednoducho
+        vyčistiť hlavu, u nás nájdete všetko pod jednou strechou.
       </p>
     </div>
     <div class="services-grid">
@@ -269,7 +291,7 @@
           </svg>
         </div>
         <h3>Kardio zóna</h3>
-        <p>Bežiace pásy, eliptické trenažéry a rotopedy s monitoringom srdcového tepu.</p>
+        <p>Moderné pásy, bicykle a eliptické trenažéry pre lepšiu kondíciu a spaľovanie kalórií.</p>
       </div>
       <div class="service reveal" style="--i:2" data-num="02">
         <div class="service-icon">
@@ -278,7 +300,7 @@
           </svg>
         </div>
         <h3>Silový tréning</h3>
-        <p>Kompletná zóna s činkami, multifunkčnými strojmi a voľnými váhami.</p>
+        <p>Kompletné vybavenie pre začiatočníkov aj pokročilých.</p>
       </div>
       <div class="service reveal" style="--i:3" data-num="03">
         <div class="service-icon">
@@ -288,7 +310,7 @@
           </svg>
         </div>
         <h3>Skupinové cvičenia</h3>
-        <p>Lekcie pod vedením skúsených inštruktorov — energia skupiny vás potiahne.</p>
+        <p>Energia skupiny a vedenie skúsených trénerov.</p>
       </div>
       <div class="service reveal" style="--i:4" data-num="04">
         <div class="service-icon">
@@ -301,7 +323,7 @@
           </svg>
         </div>
         <h3>Solárium</h3>
-        <p>Relaxácia a opálenie priamo v priestoroch fitnescentra. Ideálne po tréningu.</p>
+        <p>Oddych a príjemné opálenie po tréningu.</p>
       </div>
       <div class="service reveal" style="--i:5" data-num="05">
         <div class="service-icon">
@@ -311,7 +333,7 @@
           </svg>
         </div>
         <h3>Vibračná plošina</h3>
-        <p>Efektívna regenerácia svalov za zlomok času. Ideálne po každom tréningu.</p>
+        <p>Regenerácia svalov a podpora krvného obehu.</p>
       </div>
       <div class="service reveal" style="--i:6" data-num="06">
         <div class="service-icon">
@@ -320,7 +342,7 @@
           </svg>
         </div>
         <h3>Sebaobrana</h3>
-        <p>Praktické techniky sebaobrany pre každého — pod vedením certifikovaných trénerov.</p>
+        <p>Praktické tréningy pod vedením skúsených inštruktorov.</p>
       </div>
     </div>
   </div>
@@ -332,11 +354,12 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Cenník</div>
-        <h2 class="section-title">Férové ceny, <span class="accent">jasné podmienky.</span></h2>
+        <h2 class="section-title">Férové ceny. <span class="accent">Žiadne záväzky.</span></h2>
       </div>
       <p class="section-subtitle">
-        Vyberte si vstup, ktorý vám sedí. Bez skrytých poplatkov,
-        bez záväzkov, bez papierovačky.
+        Príďte si zacvičiť tak, ako vám to vyhovuje. Jednorazovo alebo
+        s permanentkou. Akceptujeme MultiSport kartu a platiť môžete
+        kartou aj v hotovosti.
       </p>
     </div>
     <div class="pricing-table reveal" id="cms-pricing-grid">
@@ -420,19 +443,19 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Pre blízkych</div>
-        <h2 class="section-title">Darček, ktorý <span class="accent">posilní.</span></h2>
+        <h2 class="section-title">Darček, ktorý poteší viac než <span class="accent">ďalšia vec do poličky.</span></h2>
       </div>
       <p class="section-subtitle">
-        Na narodeniny, Vianoce alebo len tak pre radosť. Poukážkou Fresh Fit
-        potešíte každého, kto chce začať alebo zostať vo forme. Sumu vyberiete
-        vy — ako ju využije, je na ňom.
+        Darčeková poukážka Fresh Fit je vhodná pre každého, kto chce začať
+        cvičiť, urobiť niečo pre svoje zdravie alebo si jednoducho dopriať
+        viac pohybu. Poukážku vám pripravíme na počkanie.
       </p>
     </div>
 
     <div class="poukazky-grid" id="poukazkyGrid"></div>
 
     <div class="poukazky-cta reveal" style="transition-delay:0.2s">
-      <a href="#contact" class="btn btn-primary">Mám záujem o poukaz</a>
+      <a href="#contact" class="btn btn-primary">Mám záujem o poukaz →</a>
       <p class="poukazky-note">Poukaz vystavíme na počkanie — stačí prísť alebo zavolať.</p>
     </div>
   </div>
@@ -445,9 +468,13 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Benefity</div>
-        <h2 class="section-title reveal">Vibračná <span class="accent">plošina.</span></h2>
+        <h2 class="section-title reveal">Regenerácia, ktorú <span class="accent">pocítite.</span></h2>
       </div>
-      <p class="section-subtitle">Regenerácia, ktorá funguje.</p>
+      <p class="section-subtitle">
+        Po náročnom tréningu alebo dlhom dni si telo zaslúži oddych. Vibračná
+        plošina podporuje krvný obeh, regeneráciu svalov a celkovú flexibilitu.
+        Vyskúšajte ju pri najbližšej návšteve.
+      </p>
     </div>
     <div class="vibracna-showcase reveal" id="vibShowcase">
       <div class="vib-feat">
@@ -486,11 +513,11 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Výživa</div>
-        <h2 class="section-title">Doplnky <span class="accent">výživy.</span></h2>
+        <h2 class="section-title">Všetko pre lepší výkon <span class="accent">na jednom mieste.</span></h2>
       </div>
       <p class="section-subtitle">
-        Na recepcii nájdete starostlivo vybrané proteíny,
-        vitamíny a športové doplnky.
+        Na recepcii nájdete kvalitné proteíny, vitamíny a športové doplnky,
+        ktoré podporia váš tréning aj regeneráciu.
       </p>
     </div>
     <div class="suplementy-grid">
@@ -535,10 +562,10 @@
       <img src="images/multisport-logo.png" alt="MultiSport karta" style="width:300px; border-radius:16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);" loading="lazy" />
     </div>
     <div class="multisport-text reveal" style="--i:2">
-      <h2 class="section-title" style="color:#fff">Akceptujeme <span style="color:rgba(255,255,255,0.85);text-decoration:underline;text-decoration-color:rgba(255,255,255,0.35)">MultiSport</span></h2>
+      <h2 class="section-title" style="color:#fff">Akceptujeme <span style="color:rgba(255,255,255,0.85);text-decoration:underline;text-decoration-color:rgba(255,255,255,0.35)">MultiSport</span> kartu.</h2>
       <p class="multisport-desc">
-        Tréningy u nás môžete hradiť MultiSport kartou.
-        Príďte a začnite cvičiť ešte dnes.
+        Príďte si zacvičiť bez zbytočných komplikácií. MultiSport kartu
+        u nás bez problémov využijete.
       </p>
       <a href="#contact" class="btn btn-white">Príďte k nám</a>
     </div>
@@ -553,9 +580,10 @@
         <img src="freshfit-logo.webp" alt="" class="priestory-logo-img">
       </div>
       <div class="priestory-header-right">
-        <h2>Naše <span class="accent">priestory.</span></h2>
+        <h2>Pozrite sa k nám ešte <span class="accent">pred prvou návštevou.</span></h2>
         <p class="priestory-subtext">
-          Pozrite sa k nám ešte pred prvou návštevou.
+          Príjemné prostredie, dostatok priestoru a vybavenie, ktoré vám
+          umožní trénovať naplno.
         </p>
       </div>
     </div>
@@ -620,15 +648,33 @@
   </div>
 </section>
 
+<!-- ============ TRÉNERI / NÁŠ TÍM — render z CMS ============ -->
+<section class="treneri dark-section" id="treneri" style="display:none">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Náš tím</div>
+        <h2 class="section-title">Tréneri, ktorí vás <span class="accent">posunú.</span></h2>
+      </div>
+      <p class="section-subtitle">
+        Skúsení profesionáli, ktorí vám pomôžu nastaviť tréning na mieru
+        a držať sa cieľa — od prvého vstupu až po výsledok.
+      </p>
+    </div>
+
+    <div class="treneri-grid" id="treneriGrid"></div>
+  </div>
+</section>
+
 <!-- ============ FAQ ============ -->
 <section class="faq dark-section" id="faq">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="section-eyebrow">FAQ</div>
-        <h2 class="section-title" style="color:#fff">Časté <span class="accent">otázky.</span></h2>
+        <h2 class="section-title" style="color:#fff">Prvýkrát <span class="accent">u nás?</span></h2>
       </div>
-      <p class="section-subtitle" style="color:rgba(255,255,255,0.6)">Odpovede na to, čo vás zaujíma pred prvou návštevou.</p>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.6)">Nemusíte mať obavy. Odpovede na najčastejšie otázky nájdete nižšie. A ak budete potrebovať poradiť, radi vám pomôžeme priamo na recepcii.</p>
     </div>
     <div class="faq-list">
       <div class="faq-item reveal" style="--i:1">
@@ -718,11 +764,14 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Kontakt</div>
-        <h2 class="section-title" style="color:#fff">Prídite <span class="accent">kedykoľvek.</span></h2>
+        <h2 class="section-title" style="color:#fff">Zastavte sa. <span class="accent">Radi vás privítame.</span></h2>
       </div>
       <p class="section-subtitle" style="color:rgba(255,255,255,0.6)">
-        Nájdete nás na A. Mišúta 23. Volajte, napíšte, alebo
-        rovno prídite — radi vás privítame.
+        Fresh Fit je miesto pre každého, kto chce urobiť niečo pre svoje
+        zdravie, kondíciu a lepší pocit zo seba.
+      </p>
+      <p class="section-subtitle" style="color:rgba(255,255,255,0.85); font-weight:600; margin-top:14px;">
+        Tešíme sa na vašu návštevu.
       </p>
     </div>
     <div class="contact-card-wrap reveal">
@@ -1192,12 +1241,75 @@ left:-999px;top:-999px"></div>
 })();
 </script>
 
+<!-- ============ MARQUEE — render z CMS + konštantná rýchlosť ============ -->
 <script>
 (function(){
-  var g1 = document.querySelector('.marquee-group');
-  if(!g1) return;
-  var g2 = document.querySelectorAll('.marquee-group')[1];
-  if(g2) g2.innerHTML = g1.innerHTML;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SEP = '<em> · </em>';
+  var PXPS = 60; // konštantná rýchlosť: 60 px/s bez ohľadu na počet fráz
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  // normalizuj pole — zvládne string aj prípadný objekt {text:"..."}
+  function norm(arr){
+    if (!Array.isArray(arr)) return null;
+    var out = arr.map(function(x){
+      if (typeof x === 'string') return x;
+      if (x && typeof x === 'object'){ for (var k in x){ if (typeof x[k] === 'string') return x[k]; } }
+      return '';
+    }).filter(function(s){ return s && s.trim(); });
+    return out.length ? out : null;
+  }
+  function buildGroup(phrases){
+    return phrases.map(function(p){ return '<span class="mi">' + esc(p) + SEP + '</span>'; }).join('');
+  }
+  var strips = [].slice.call(document.querySelectorAll('.marquee-strip[data-marquee]'));
+  if (!strips.length) return;
+
+  function applySpeed(strip){
+    if (reduce) return;
+    var inner = strip.querySelector('.marquee-inner');
+    var group = inner && inner.querySelector('.marquee-group');
+    if (!inner || !group) return;
+    var w = group.getBoundingClientRect().width; // šírka jednej kópie obsahu
+    if (!w) return;
+    inner.style.animationName = (inner.getAttribute('data-dir') === 'right') ? 'marqueeRight' : 'marqueeScroll';
+    inner.style.animationTimingFunction = 'linear';
+    inner.style.animationIterationCount = 'infinite';
+    inner.style.animationDuration = (w / PXPS).toFixed(2) + 's';
+  }
+  function measureAll(){
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ strips.forEach(applySpeed); }); });
+  }
+
+  // 1) rozbehni hneď na hardkódovanom (fallback) obsahu — beží aj keď fetch zlyhá
+  measureAll();
+
+  // 2) ťahaj frázy z CMS; ak pole chýba/prázdne → ponechá fallback
+  fetch('/data/marquee.json?v=' + Date.now(), { cache: 'no-store' })
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (!d) return;
+      strips.forEach(function(strip){
+        var phrases = norm(d[strip.getAttribute('data-marquee')]);
+        if (!phrases) return; // fallback ostáva
+        var html = buildGroup(phrases);
+        var inner = strip.querySelector('.marquee-inner');
+        var groups = inner.querySelectorAll('.marquee-group');
+        groups[0].innerHTML = html;
+        if (groups.length > 1) { groups[1].innerHTML = html; } // 2× kópia pre plynulý loop
+        else {
+          var dup = document.createElement('div');
+          dup.className = 'marquee-group'; dup.setAttribute('aria-hidden', 'true');
+          dup.innerHTML = html; inner.appendChild(dup);
+        }
+      });
+      measureAll();
+    })
+    .catch(function(){});
+
+  // 3) prepočítaj rýchlosť po resize a po načítaní fontov (uppercase šírka sa mení)
+  var rt;
+  window.addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(function(){ strips.forEach(applySpeed); }, 200); });
+  if (document.fonts && document.fonts.ready){ document.fonts.ready.then(function(){ strips.forEach(applySpeed); }); }
 })();
 </script>
 
@@ -1266,6 +1378,77 @@ left:-999px;top:-999px"></div>
 })();
 </script>
 
+<!-- ============ TRÉNERI — render z CMS + 3D tilt ============ -->
+<script>
+(function(){
+  var section = document.getElementById('treneri');
+  var grid = document.getElementById('treneriGrid');
+  if (!section || !grid) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+  function tiltCard(card){
+    if (reduce) return;
+    var inner = card.querySelector('.trener-card-inner');
+    if (!inner) return;
+    var mx = 0, my = 0, ticking = false;
+    function apply(){
+      ticking = false;
+      var r = card.getBoundingClientRect();
+      var px = (mx - r.left) / r.width, py = (my - r.top) / r.height;
+      inner.style.transform = 'rotateX(' + ((0.5-py)*9).toFixed(2) + 'deg) rotateY(' + ((px-0.5)*11).toFixed(2) + 'deg) translateY(-8px)';
+      inner.style.setProperty('--mx', (px*100).toFixed(1) + '%');
+      inner.style.setProperty('--my', (py*100).toFixed(1) + '%');
+    }
+    card.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; if(!ticking){ ticking = true; requestAnimationFrame(apply); } });
+    card.addEventListener('mouseleave', function(){ inner.style.transform = ''; });
+  }
+  function render(items){
+    grid.innerHTML = items.map(function(p, i){
+      var foto = p.foto ? '<img class="trener-foto" src="' + escAttr(p.foto) + '" alt="' + escAttr(p.meno) + '" loading="lazy" />' : '<div class="trener-foto trener-foto--empty" aria-hidden="true"></div>';
+      var popis = p.popis ? '<p class="trener-popis">' + esc(p.popis) + '</p>' : '';
+      var ICON_TEL = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+      var ICON_IG = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
+      var contactParts = [];
+      var telRaw = (p.telefon == null ? '' : String(p.telefon)).trim();
+      if (telRaw) {
+        var telHref = telRaw.replace(/\s+/g, '');
+        contactParts.push('<a class="trener-contact-link" href="tel:' + escAttr(telHref) + '">' + ICON_TEL + '<span>' + esc(telRaw) + '</span></a>');
+      }
+      var igRaw = (p.instagram == null ? '' : String(p.instagram)).trim();
+      if (igRaw) {
+        var igHandle = igRaw.replace(/^@+/, '');
+        if (igHandle) {
+          contactParts.push('<a class="trener-contact-link" href="https://instagram.com/' + escAttr(igHandle) + '" target="_blank" rel="noopener">' + ICON_IG + '<span>@' + esc(igHandle) + '</span></a>');
+        }
+      }
+      var contact = contactParts.length ? '<div class="trener-contact">' + contactParts.join('') + '</div>' : '';
+      return '<div class="trener-card reveal" style="transition-delay:' + (0.05 + i*0.08).toFixed(2) + 's">' +
+        '<div class="trener-card-inner">' +
+          foto +
+          '<h3 class="trener-meno">' + esc(p.meno) + '</h3>' +
+          '<span class="trener-rola">' + esc(p.rola) + '</span>' +
+          popis +
+          contact +
+        '</div></div>';
+    }).join('');
+    var cards = [].slice.call(grid.querySelectorAll('.trener-card'));
+    cards.forEach(tiltCard);
+    if (reduce) { cards.forEach(function(c){ c.classList.add('visible'); }); return; }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, {threshold: 0.1});
+    cards.forEach(function(c){ obs.observe(c); });
+    setTimeout(function(){ cards.forEach(function(c){ c.classList.add('visible'); }); }, 1200);
+  }
+  fetch('/data/treneri.json?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d && d.treneri && d.treneri.length) { section.style.display = ''; render(d.treneri); }
+    })
+    .catch(function(){});
+})();
+</script>
+
 <!-- ============ VIBRAČNÁ rotujúci showcase + DOPLNKY 3D tilt + SCROLL PROGRESS ============ -->
 <script>
 (function(){
@@ -1280,20 +1463,61 @@ left:-999px;top:-999px"></div>
   var showcase = document.getElementById('vibShowcase');
   if (showcase) {
     var items = [].slice.call(showcase.querySelectorAll('.vib-item'));
+    var N = items.length;
     var wrap = document.getElementById('vibFeatwrap');
     var elIc = document.getElementById('vibIc'), elTitle = document.getElementById('vibTitle'),
         elDesc = document.getElementById('vibDesc'), elProg = document.getElementById('vibProg'),
         elBig = document.getElementById('vibBignum');
-    var DUR = 4200, idx = 0, timer = null, paused = false;
-    function progress(){ elProg.style.transition='none'; elProg.style.width='0%'; void elProg.offsetWidth; if(reduce){ elProg.style.width='100%'; return; } elProg.style.transition='width '+DUR+'ms linear'; elProg.style.width='100%'; }
-    function paint(){ var it=items[idx]; elBig.textContent='0'+(idx+1); elIc.innerHTML=ICONS[it.getAttribute('data-icon')]||''; elTitle.textContent=it.getAttribute('data-title'); elDesc.textContent=it.getAttribute('data-desc'); wrap.style.opacity=1; wrap.style.transform='none'; items.forEach(function(c,i){ c.classList.toggle('active', i===idx); }); progress(); }
-    function render(instant){ if(instant||reduce){ paint(); return; } wrap.style.opacity=0; wrap.style.transform='translateY(10px)'; setTimeout(paint,200); }
-    function next(){ idx=(idx+1)%items.length; render(false); }
-    function restart(){ if(timer)clearInterval(timer); if(reduce)return; timer=setInterval(function(){ if(!paused)next(); }, DUR); }
-    items.forEach(function(it,i){ it.addEventListener('click', function(){ idx=i; render(true); restart(); }); });
-    showcase.addEventListener('mouseenter', function(){ paused=true; });
-    showcase.addEventListener('mouseleave', function(){ paused=false; });
-    render(true); restart();
+    // Lištu kreslí JS po snímkach — žiadny CSS transition/animation na #vibProg
+    elProg.style.transition = 'none';
+    elProg.style.animation = 'none';
+    var DURATION = 4200, idx = 0, elapsed = 0, lastTs = null, paused = false;
+    function paint(){
+      var it = items[idx];
+      elBig.textContent = '0' + (idx + 1);
+      elIc.innerHTML = ICONS[it.getAttribute('data-icon')] || '';
+      elTitle.textContent = it.getAttribute('data-title');
+      elDesc.textContent = it.getAttribute('data-desc');
+      wrap.style.opacity = 1; wrap.style.transform = 'none';
+      items.forEach(function(c, i){ c.classList.toggle('active', i === idx); });
+      elProg.style.width = '0%';
+    }
+    function render(instant){
+      if (instant || reduce) { paint(); return; }
+      wrap.style.opacity = 0; wrap.style.transform = 'translateY(10px)';
+      setTimeout(paint, 200);
+    }
+    function setItem(i, instant){
+      idx = (i + N) % N;
+      elapsed = 0; lastTs = null;
+      render(instant);
+    }
+    items.forEach(function(it, i){ it.addEventListener('click', function(){ setItem(i, true); }); });
+    // Pause-on-hover na CELOM showcase (karta aj menu); lastTs=null po odíde
+    // myši => čas v pauze sa nezapočíta a lišta plynule pokračuje z bodu.
+    // Len na zariadeniach so skutočným hoverom — na dotyku (hover:none) by
+    // syntetický hover po ťuknutí mohol showcase nechať zaseknutý v pauze.
+    if (!window.matchMedia || window.matchMedia('(hover: hover)').matches) {
+      showcase.addEventListener('mouseenter', function(){ paused = true; });
+      showcase.addEventListener('mouseleave', function(){ paused = false; lastTs = null; });
+    }
+    if (reduce) {
+      setItem(0, true);
+      elProg.style.width = '100%';
+    } else {
+      setItem(0, true);
+      var frame = function(ts){
+        if (lastTs === null) lastTs = ts;
+        var dt = ts - lastTs; lastTs = ts;
+        if (!paused) {
+          elapsed += dt;
+          if (elapsed >= DURATION) { setItem(idx + 1); }
+          else { elProg.style.width = (elapsed / DURATION * 100) + '%'; }
+        }
+        requestAnimationFrame(frame);
+      };
+      requestAnimationFrame(frame);
+    }
   }
   if (!reduce) {
     document.querySelectorAll('.suplementy-card').forEach(function(card){

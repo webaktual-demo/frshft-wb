@@ -79,6 +79,47 @@ collections:
               - {label: "Pre koho", name: for, widget: string, hint: "napr. Klasická · neobmedzený vstup"}
               - {label: "Bestseller (zvýraznená + Bestseller odznak)", name: best, widget: boolean, default: false}
 
+  - name: "treneri"
+    label: "🏋️ Tréneri"
+    files:
+      - name: "main"
+        label: "Tréneri"
+        file: "data/treneri.json"
+        format: json
+        fields:
+          - name: treneri
+            label: "Tréneri"
+            label_singular: "Tréner"
+            widget: list
+            fields:
+              - {label: "Meno", name: meno, widget: string}
+              - {label: "Rola", name: rola, widget: string, hint: "napr. Osobný tréner · Skupinové cvičenia"}
+              - {label: "Foto", name: foto, widget: image}
+              - {label: "Popis", name: popis, widget: text, required: false, hint: "Krátky popis špecializácie a prístupu."}
+              - {label: "Telefón", name: telefon, widget: string, required: false}
+              - {label: "Instagram (@)", name: instagram, widget: string, required: false, hint: "meno bez @, napr. freshfit.trener"}
+
+  - name: "marquee"
+    label: "🏃 Bežiaci pás (marquee)"
+    files:
+      - name: "main"
+        label: "Bežiaci pás (marquee)"
+        file: "data/marquee.json"
+        format: json
+        fields:
+          - name: marquee1
+            label: "Horný pás"
+            label_singular: "Fráza"
+            widget: list
+            required: false
+            hint: "Frázy horného bežiaceho pásu (nad oznamami). Prázdne = pôvodný text."
+          - name: marquee2
+            label: "Pás pod oznamami"
+            label_singular: "Fráza"
+            widget: list
+            required: false
+            hint: "Frázy spodného bežiaceho pásu (pod oznamami). Prázdne = pôvodný text."
+
   - name: "gallery"
     label: "🖼️ Galéria – Albumy"
     folder: "data/albums"
