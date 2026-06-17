@@ -327,7 +327,7 @@
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Cenník</div>
-        <h2 class="section-title">Férové ceny. <span class="accent">Žiadne záväzky.</span></h2>
+        <h2 class="section-title">Náš <span class="accent">cenník.</span></h2>
       </div>
       <p class="section-subtitle">
         Príďte si zacvičiť tak, ako vám to vyhovuje. Jednorazovo alebo
@@ -1527,37 +1527,29 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   }
   function countUp(el){ var t = +el.getAttribute('data-count'), d = 1400, s = null; function step(ts){ if(!s) s = ts; var p = Math.min((ts-s)/d, 1); var e = 1-Math.pow(1-p,3); el.textContent = Math.round(e*t); if(p<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
   document.querySelectorAll('.hcount').forEach(function(el){ if(reduce){ el.textContent = el.getAttribute('data-count'); } else { countUp(el); } });
-  var ht = document.querySelector('.hero .hero-text'), cue = document.querySelector('.scroll-cue');
-  var t3 = false, lastY = 0;
-  // Hero fade — krátky, svižný rozsah scrollu v px (ľahko laditeľné konštanty):
-  var HERO_FADE_START = 40;   // px – dovtedy je text plne viditeľný (opacity 1)
-  var HERO_FADE_RANGE = 180;  // px – za týchto ~180px scrollu prebehne celý fade 1 → 0
-  // Hero parallax/fade beží IBA na desktope (min-width:769px). Na mobile
-  // (≤768px) sa NEpripája — dynamická adresná lišta spúšťa scroll/resize a
-  // robí to lag + miznutie hero textu. Na mobile je hero text vždy statický.
-  var heroMQ = window.matchMedia('(min-width: 769px)');
-  function resetHero(){ if(ht){ ht.style.opacity = ''; ht.style.transform = ''; } if(cue){ cue.style.opacity = ''; } }
-  function applyHero(){
-    t3 = false;
-    if(!heroMQ.matches){ return; }
-    // Plne viditeľné prvých ~40px, potom RÝCHLY fade 1→0 do ~180px scrollu.
-    var p = Math.min(Math.max((lastY - HERO_FADE_START) / HERO_FADE_RANGE, 0), 1);
-    var e = p*p*(3-2*p); // smoothstep — príjemné dobehnutie (opacity aj translateY)
-    if(ht){ ht.style.opacity = (1-e).toFixed(3); ht.style.transform = 'translateY(' + (e*40).toFixed(1) + 'px)'; }
-    if(cue){ cue.style.opacity = (1-Math.min(lastY/180,1)).toFixed(3); }
-  }
-  function heroScroll(y){ lastY = (typeof y === 'number') ? y : (window.scrollY || document.documentElement.scrollTop || 0); if(!t3){ t3 = true; requestAnimationFrame(applyHero); } }
-  if (!reduce && heroMQ.matches) {
-    if (window.lenis && typeof window.lenis.on === 'function') { window.lenis.on('scroll', function(e){ heroScroll(e && typeof e.scroll === 'number' ? e.scroll : undefined); }); }
-    else { window.addEventListener('scroll', function(){ heroScroll(); }, {passive:true}); }
-    heroScroll();
-  } else {
-    resetHero(); // mobile / reduced-motion: hero text plne viditeľný a statický
-  }
-  // Ak sa šírka zmení na mobil, vynuluj inline štýly (parallax tam nebeží).
-  var onHeroMQ = function(e){ if(!e.matches) resetHero(); };
-  if (heroMQ.addEventListener) heroMQ.addEventListener('change', onHeroMQ);
-  else if (heroMQ.addListener) heroMQ.addListener(onHeroMQ);
+  // ===== HERO SCROLL FADE — desktop only; opacity PRESNE 1 navrchu, fade 60→320px =====
+  (function(){
+    var hero = document.querySelector('.hero');
+    var text = hero && hero.querySelector('.hero-text');
+    if(!hero || !text) return;
+    var mq = window.matchMedia('(min-width: 769px)');
+    var START = 60, RANGE = 260, ticking = false; // START/RANGE = laditeľné konštanty
+    function smooth(t){ return t*t*(3-2*t); }
+    function update(){
+      ticking = false;
+      var y = window.pageYOffset || 0;
+      var p = (y - START) / RANGE; p = p<0?0:(p>1?1:p);
+      var e = smooth(p);
+      text.style.opacity = String(1 - e);
+      text.style.transform = 'translateY(' + (e*40) + 'px)';
+    }
+    function onScroll(){ if(!ticking){ ticking=true; requestAnimationFrame(update); } }
+    function enable(){ window.addEventListener('scroll', onScroll, {passive:true}); update(); }
+    function disable(){ window.removeEventListener('scroll', onScroll); text.style.opacity=''; text.style.transform=''; }
+    function apply(){ mq.matches ? enable() : disable(); }
+    apply();
+    if(mq.addEventListener) mq.addEventListener('change', function(){ disable(); apply(); }); else mq.addListener(apply);
+  })();
 })();
 </script>
 </body>
