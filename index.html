@@ -1527,14 +1527,22 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   }
   function countUp(el){ var t = +el.getAttribute('data-count'), d = 1400, s = null; function step(ts){ if(!s) s = ts; var p = Math.min((ts-s)/d, 1); var e = 1-Math.pow(1-p,3); el.textContent = Math.round(e*t); if(p<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
   document.querySelectorAll('.hcount').forEach(function(el){ if(reduce){ el.textContent = el.getAttribute('data-count'); } else { countUp(el); } });
-  var ht = document.querySelector('.hero .hero-text'), cue = document.querySelector('.scroll-cue');
+  var ht = document.querySelector('.hero .hero-text'), cue = document.querySelector('.scroll-cue'), heroEl = document.querySelector('.hero');
   var t3 = false, lastY = 0;
   // Hero parallax/fade beží IBA na desktope (min-width:769px). Na mobile
   // (≤768px) sa NEpripája — dynamická adresná lišta spúšťa scroll/resize a
   // robí to lag + miznutie hero textu. Na mobile je hero text vždy statický.
   var heroMQ = window.matchMedia('(min-width: 769px)');
   function resetHero(){ if(ht){ ht.style.opacity = ''; ht.style.transform = ''; } if(cue){ cue.style.opacity = ''; } }
-  function applyHero(){ t3 = false; if(!heroMQ.matches){ return; } var t = Math.min(lastY/620, 1); if(ht){ ht.style.opacity = (1-t).toFixed(3); ht.style.transform = 'translateY(' + (lastY*0.22).toFixed(1) + 'px)'; } if(cue){ cue.style.opacity = (1-Math.min(lastY/180,1)).toFixed(3); } }
+  function applyHero(){
+    t3 = false;
+    if(!heroMQ.matches){ return; }
+    var h = (heroEl && heroEl.offsetHeight) || 620;
+    // Plne viditeľné do ~35 % výšky hero, potom plynulý fade 1→0 do ~85 %.
+    var p = Math.min(Math.max((lastY - 0.35*h) / (0.5*h), 0), 1);
+    if(ht){ ht.style.opacity = (1-p).toFixed(3); ht.style.transform = 'translateY(' + (p*36).toFixed(1) + 'px)'; }
+    if(cue){ cue.style.opacity = (1-Math.min(lastY/180,1)).toFixed(3); }
+  }
   function heroScroll(y){ lastY = (typeof y === 'number') ? y : (window.scrollY || document.documentElement.scrollTop || 0); if(!t3){ t3 = true; requestAnimationFrame(applyHero); } }
   if (!reduce && heroMQ.matches) {
     if (window.lenis && typeof window.lenis.on === 'function') { window.lenis.on('scroll', function(e){ heroScroll(e && typeof e.scroll === 'number' ? e.scroll : undefined); }); }
