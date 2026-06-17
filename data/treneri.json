@@ -1,11 +1,3 @@
 {
-  "treneri": [
-    {
-      "foto": "/images/gallery/img_1942.jpeg",
-      "rola": "Osobný tréner",
-      "meno": "Marek",
-      "popis": "123",
-      "telefon": "+421940404904"
-    }
-  ]
+  "treneri": []
 }
