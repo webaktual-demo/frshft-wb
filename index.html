@@ -13,6 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="styles-sections.css" />
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css" />
 <link rel="icon" type="image/x-icon" href="favicon.ico" />
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
@@ -66,6 +67,7 @@
 </script>
 </head>
 <body>
+<div class="scroll-progress"><span id="scrollProgressBar"></span></div>
 
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
@@ -92,13 +94,14 @@
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
   <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-text">
       <div class="open-badge" id="heroBadge">
         <span class="open-dot"></span>
         <span class="open-label"></span>
       </div>
-      <h1><span id="cms-hero-line1">Zdokonaľte</span><br /><span class="accent" id="cms-hero-line2">svoje telo.</span></h1>
+      <h1><span id="cms-hero-line1">Vaše telo bude</span><br /><span class="accent rot" id="rotWord">silnejšie</span></h1>
       <p class="lead" id="cms-hero-subtitle">
         Moderné fitnescentrum v srdci Prievidze.<br />
         Pre začiatočníkov aj profesionálov.
@@ -116,19 +119,22 @@
           <div class="stat-label">Otváracia hodina</div>
         </div>
         <div class="hero-stat">
-          <div class="stat-num">20<span>+</span></div>
+          <div class="stat-num"><span class="hcount" data-count="20">0</span><span>+</span></div>
           <div class="stat-label">Druhov tréningu</div>
         </div>
         <div class="hero-stat">
-          <div class="stat-num">400<span>+</span></div>
+          <div class="stat-num"><span class="hcount" data-count="400">0</span><span>+</span></div>
           <div class="stat-label">Spokojných členov</div>
         </div>
         <div class="hero-stat">
-          <div class="stat-num">365</div>
+          <div class="stat-num"><span class="hcount" data-count="365">0</span></div>
           <div class="stat-label">Dní v roku</div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="scroll-cue" aria-hidden="true">Skrolujte
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
   </div>
 </header>
 
@@ -408,53 +414,98 @@
   </div>
 </section>
 
+<!-- ============ DARČEKOVÁ POUKÁŽKA ============ -->
+<section class="poukazky dark-section" id="poukazky">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <div class="section-eyebrow">Pre blízkych</div>
+        <h2 class="section-title">Darček, ktorý <span class="accent">posilní.</span></h2>
+      </div>
+      <p class="section-subtitle">
+        Na narodeniny, Vianoce alebo len tak pre radosť. Poukážkou Fresh Fit
+        potešíte každého, kto chce začať alebo zostať vo forme. Sumu vyberiete
+        vy — ako ju využije, je na ňom.
+      </p>
+    </div>
+
+    <div class="poukazky-grid">
+      <div class="poukazka-card reveal" style="transition-delay:0.05s">
+        <div class="poukazka-card-inner">
+          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
+          <div class="pc-value">36<span>€</span></div>
+          <hr class="pc-perf" />
+          <div class="pc-benefit">Mesačná permanentka</div>
+          <span class="pc-for">Študent · ZŤP · senior</span>
+          <div class="pc-foot">Fresh Fit · Prievidza</div>
+        </div>
+      </div>
+
+      <div class="poukazka-card reveal" style="transition-delay:0.13s">
+        <div class="poukazka-card-inner">
+          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
+          <div class="pc-value">38<span>€</span></div>
+          <hr class="pc-perf" />
+          <div class="pc-benefit">10-vstupová permanentka</div>
+          <span class="pc-for">Študent · ZŤP · senior</span>
+          <div class="pc-foot">Fresh Fit · Prievidza</div>
+        </div>
+      </div>
+
+      <div class="poukazka-card is-best reveal" style="transition-delay:0.21s">
+        <div class="poukazka-card-inner">
+          <span class="poukazka-badge">Bestseller</span>
+          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
+          <div class="pc-value">41<span>€</span></div>
+          <hr class="pc-perf" />
+          <div class="pc-benefit">Mesačná permanentka</div>
+          <span class="pc-for">Klasická · neobmedzený vstup</span>
+          <div class="pc-foot">Fresh Fit · Prievidza</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="poukazky-cta reveal" style="transition-delay:0.2s">
+      <a href="#contact" class="btn btn-primary">Mám záujem o poukaz</a>
+      <p class="poukazky-note">Poukaz vystavíme na počkanie — stačí prísť alebo zavolať.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ============ VIBRAČNÁ PLOŠINA ============ -->
 <section class="vibracna dark-section" id="vibracna">
+  <img class="vibracna-logo-wm" src="freshfit-logo.webp" alt="" aria-hidden="true">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Benefity</div>
-        <h2 class="section-title reveal">Vibračná plošina.</h2>
+        <h2 class="section-title reveal">Vibračná <span class="accent">plošina.</span></h2>
       </div>
       <p class="section-subtitle">Regenerácia, ktorá funguje.</p>
     </div>
-    <div class="vibracna-grid">
-      <div class="vibracna-card reveal-left" style="transition-delay:0s">
-        <div class="vibracna-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="40" height="40" aria-hidden="true">
-            <path d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/>
-          </svg>
+    <div class="vibracna-showcase reveal" id="vibShowcase">
+      <div class="vib-feat">
+        <span class="vib-bignum" id="vibBignum">01</span>
+        <div class="vib-featwrap" id="vibFeatwrap">
+          <div class="vib-ic" id="vibIc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3 class="vib-title" id="vibTitle">Regenerácia svalov</h3>
+          <p class="vib-desc" id="vibDesc">Zrýchľuje zotavenie po tréningu.</p>
         </div>
-        <h3>Regenerácia svalov</h3>
-        <p>Zrýchľuje zotavenie po tréningu</p>
+        <div class="vib-prog"><span id="vibProg"></span></div>
       </div>
-      <div class="vibracna-card reveal-right" style="transition-delay:0.1s">
-        <div class="vibracna-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="40" height="40" aria-hidden="true">
-            <path d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.047 8.287 8.287 0 009 9.601a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z"/>
-            <path d="M12 18a3.75 3.75 0 00.495-7.467.999.999 0 01-.72-.585 3.75 3.75 0 00-3.055 5.9A3.75 3.75 0 0012 18z"/>
-          </svg>
-        </div>
-        <h3>Spaľovanie kalórií</h3>
-        <p>Aktivuje svaly bez námahy</p>
-      </div>
-      <div class="vibracna-card reveal-left" style="transition-delay:0.2s">
-        <div class="vibracna-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="40" height="40" aria-hidden="true">
-            <path d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/>
-          </svg>
-        </div>
-        <h3>Zlepšenie flexibility</h3>
-        <p>Uvoľňuje napätie a stuhnutosť</p>
-      </div>
-      <div class="vibracna-card reveal-right" style="transition-delay:0.3s">
-        <div class="vibracna-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="40" height="40" aria-hidden="true">
-            <path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/>
-          </svg>
-        </div>
-        <h3>Lepšia cirkulácia</h3>
-        <p>Podporuje krvný obeh</p>
+      <div class="vib-menu" id="vibMenu">
+        <button class="vib-item active" type="button" data-icon="zap" data-title="Regenerácia svalov" data-desc="Zrýchľuje zotavenie po tréningu.">
+          <span class="vib-mi-ic" data-i="zap"></span><span class="vib-name">Regenerácia svalov</span>
+        </button>
+        <button class="vib-item" type="button" data-icon="flame" data-title="Spaľovanie kalórií" data-desc="Aktivuje svaly bez námahy.">
+          <span class="vib-mi-ic" data-i="flame"></span><span class="vib-name">Spaľovanie kalórií</span>
+        </button>
+        <button class="vib-item" type="button" data-icon="spark" data-title="Zlepšenie flexibility" data-desc="Uvoľňuje napätie a stuhnutosť.">
+          <span class="vib-mi-ic" data-i="spark"></span><span class="vib-name">Zlepšenie flexibility</span>
+        </button>
+        <button class="vib-item" type="button" data-icon="heart" data-title="Lepšia cirkulácia" data-desc="Podporuje krvný obeh.">
+          <span class="vib-mi-ic" data-i="heart"></span><span class="vib-name">Lepšia cirkulácia</span>
+        </button>
       </div>
     </div>
     <div class="vibracna-cta reveal" style="--i:5">
@@ -464,14 +515,14 @@
 </section>
 
 <!-- ============ SUPLEMENTY ============ -->
-<section class="suplementy dark-section" id="suplementy">
+<section class="suplementy light-section" id="suplementy">
   <div class="container">
     <div class="section-head">
       <div>
         <div class="section-eyebrow">Výživa</div>
-        <h2 class="section-title" style="color:#fff">Doplnky <span class="accent">výživy.</span></h2>
+        <h2 class="section-title">Doplnky <span class="accent">výživy.</span></h2>
       </div>
-      <p class="section-subtitle" style="color:rgba(255,255,255,0.6)">
+      <p class="section-subtitle">
         Na recepcii nájdete starostlivo vybrané proteíny,
         vitamíny a športové doplnky.
       </p>
@@ -892,8 +943,8 @@ document.querySelectorAll(".why-stat[data-count], .stat-number[data-count]").for
 // ── Back to top ───────────────────────────────────────────────
 const btt = document.getElementById("backToTop");
 window.addEventListener("scroll", () => btt.classList.toggle("visible", window.scrollY > 400), { passive: true });
-btt.addEventListener("click",   () => window.scrollTo({ top: 0, behavior: "smooth" }));
-btt.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") window.scrollTo({ top: 0, behavior: "smooth" }); });
+btt.addEventListener("click",   () => (window.lenis ? window.lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" })));
+btt.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") (window.lenis ? window.lenis.scrollTo(0) : window.scrollTo({ top: 0, behavior: "smooth" })); });
 
 // ── FAQ Accordion ─────────────────────────────────────────────
 document.querySelectorAll(".faq-question").forEach(btn => {
@@ -1106,18 +1157,26 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
         }
       }
       if(s) s.style.display = '';
-      // Reveal animácia
+      // Reveal animácia — fix race condition:
+      // 1) vynútiť reflow v skrytom stave, 2) počkať 2 snímky nech sa
+      // skrytý stav vykreslí, 3) až potom pripnúť observer → CSS transition
+      // má korektný "from" stav a animácia sa spustí spoľahlivo.
       var split = document.querySelector('.oznam-split');
       if(split){
-        var obs = new IntersectionObserver(function(entries){
-          entries.forEach(function(e){
-            if(e.isIntersecting){
-              split.classList.add('is-visible');
-              obs.unobserve(e.target);
-            }
+        void split.offsetHeight; // reflow
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){
+            var obs = new IntersectionObserver(function(entries){
+              entries.forEach(function(e){
+                if(e.isIntersecting){
+                  split.classList.add('is-visible');
+                  obs.unobserve(e.target);
+                }
+              });
+            },{threshold:0.2});
+            obs.observe(split);
           });
-        },{threshold:0.2});
-        obs.observe(split);
+        });
       }
     }).catch(function(){});
 })();
@@ -1139,19 +1198,6 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
     });
   }
   run();setInterval(run,60000);
-})();
-</script>
-
-<script>
-(function(){
-  var bg = document.querySelector('.hero-bg');
-  if(!bg) return;
-  if(window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
-  window.addEventListener('scroll', function(){
-    var y = window.scrollY;
-    if(y < window.innerHeight * 1.2)
-      bg.style.transform = 'translateY(' + (y * 0.22) + 'px)';
-  }, {passive:true});
 })();
 </script>
 
@@ -1186,6 +1232,124 @@ left:-999px;top:-999px"></div>
   if(!g1) return;
   var g2 = document.querySelectorAll('.marquee-group')[1];
   if(g2) g2.innerHTML = g1.innerHTML;
+})();
+</script>
+
+<!-- ============ LENIS SMOOTH SCROLL ============ -->
+<script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (typeof Lenis === 'undefined') return;
+  var lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: true });
+  window.lenis = lenis;
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+})();
+</script>
+
+<!-- ============ POUKÁŽKY — 3D tilt ============ -->
+<script>
+(function(){
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.poukazka-card').forEach(function(card){
+    var inner = card.querySelector('.poukazka-card-inner');
+    if(!inner) return;
+    var mx = 0, my = 0, ticking = false;
+    function apply(){
+      ticking = false;
+      var r = card.getBoundingClientRect();
+      var px = (mx - r.left) / r.width, py = (my - r.top) / r.height;
+      inner.style.transform = 'rotateX(' + ((0.5-py)*9).toFixed(2) + 'deg) rotateY(' + ((px-0.5)*11).toFixed(2) + 'deg) translateY(-8px)';
+      inner.style.setProperty('--mx', (px*100).toFixed(1) + '%');
+      inner.style.setProperty('--my', (py*100).toFixed(1) + '%');
+    }
+    card.addEventListener('mousemove', function(e){
+      mx = e.clientX; my = e.clientY;
+      if(!ticking){ ticking = true; requestAnimationFrame(apply); }
+    });
+    card.addEventListener('mouseleave', function(){ inner.style.transform = ''; });
+  });
+})();
+</script>
+
+<!-- ============ VIBRAČNÁ rotujúci showcase + DOPLNKY 3D tilt + SCROLL PROGRESS ============ -->
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ICONS = {
+    zap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+    flame:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>',
+    spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.29 1.29L3 12l5.81 1.9a2 2 0 0 1 1.29 1.29L12 21l1.9-5.81a2 2 0 0 1 1.29-1.29L21 12l-5.81-1.9a2 2 0 0 1-1.29-1.29z"/></svg>',
+    heart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7z"/></svg>'
+  };
+  document.querySelectorAll('.vib-mi-ic').forEach(function(s){ s.innerHTML = ICONS[s.getAttribute('data-i')] || ''; });
+  var showcase = document.getElementById('vibShowcase');
+  if (showcase) {
+    var items = [].slice.call(showcase.querySelectorAll('.vib-item'));
+    var wrap = document.getElementById('vibFeatwrap');
+    var elIc = document.getElementById('vibIc'), elTitle = document.getElementById('vibTitle'),
+        elDesc = document.getElementById('vibDesc'), elProg = document.getElementById('vibProg'),
+        elBig = document.getElementById('vibBignum');
+    var DUR = 4200, idx = 0, timer = null, paused = false;
+    function progress(){ elProg.style.transition='none'; elProg.style.width='0%'; void elProg.offsetWidth; if(reduce){ elProg.style.width='100%'; return; } elProg.style.transition='width '+DUR+'ms linear'; elProg.style.width='100%'; }
+    function paint(){ var it=items[idx]; elBig.textContent='0'+(idx+1); elIc.innerHTML=ICONS[it.getAttribute('data-icon')]||''; elTitle.textContent=it.getAttribute('data-title'); elDesc.textContent=it.getAttribute('data-desc'); wrap.style.opacity=1; wrap.style.transform='none'; items.forEach(function(c,i){ c.classList.toggle('active', i===idx); }); progress(); }
+    function render(instant){ if(instant||reduce){ paint(); return; } wrap.style.opacity=0; wrap.style.transform='translateY(10px)'; setTimeout(paint,200); }
+    function next(){ idx=(idx+1)%items.length; render(false); }
+    function restart(){ if(timer)clearInterval(timer); if(reduce)return; timer=setInterval(function(){ if(!paused)next(); }, DUR); }
+    items.forEach(function(it,i){ it.addEventListener('click', function(){ idx=i; render(true); restart(); }); });
+    showcase.addEventListener('mouseenter', function(){ paused=true; });
+    showcase.addEventListener('mouseleave', function(){ paused=false; });
+    render(true); restart();
+  }
+  if (!reduce) {
+    document.querySelectorAll('.suplementy-card').forEach(function(card){
+      var mx=0, my=0, tick=false;
+      function apply(){ tick=false; var r=card.getBoundingClientRect(); var px=(mx-r.left)/r.width, py=(my-r.top)/r.height; card.style.transform='rotateX('+((0.5-py)*7).toFixed(2)+'deg) rotateY('+((px-0.5)*9).toFixed(2)+'deg) translateY(-6px)'; card.style.setProperty('--mx',(px*100).toFixed(1)+'%'); card.style.setProperty('--my',(py*100).toFixed(1)+'%'); }
+      card.addEventListener('mousemove', function(e){ mx=e.clientX; my=e.clientY; if(!tick){ tick=true; requestAnimationFrame(apply); } });
+      card.addEventListener('mouseleave', function(){ card.style.transform=''; });
+    });
+  }
+  var bar = document.getElementById('scrollProgressBar');
+  if (bar) {
+    var docH = 0, t2 = false;
+    function calcH(){ docH = document.documentElement.scrollHeight - window.innerHeight; }
+    function setBar(p){ bar.style.width = (Math.max(0,Math.min(p,1))*100).toFixed(2) + '%'; }
+    function fromY(){ var y = window.scrollY || document.documentElement.scrollTop || 0; setBar(docH>0 ? y/docH : 0); t2 = false; }
+    calcH();
+    if (window.lenis && typeof window.lenis.on === 'function') {
+      window.lenis.on('scroll', function(e){ if (e && typeof e.progress === 'number') setBar(e.progress); else if (!t2){ t2 = true; requestAnimationFrame(fromY); } });
+    } else {
+      window.addEventListener('scroll', function(){ if (!t2){ t2 = true; requestAnimationFrame(fromY); } }, {passive:true});
+    }
+    window.addEventListener('resize', calcH);
+  }
+})();
+</script>
+
+<!-- ============ HERO — rotujúce slovo + počítadlá + scroll ============ -->
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WORDS = ['silnejšie','zdravšie','pružnejšie','vo forme'];
+  var rot = document.getElementById('rotWord'), wi = 0;
+  if (rot && !reduce) {
+    setInterval(function(){
+      rot.style.opacity = '0'; rot.style.transform = 'translateY(10px)';
+      setTimeout(function(){ wi = (wi+1) % WORDS.length; rot.textContent = WORDS[wi]; rot.style.opacity = '1'; rot.style.transform = 'none'; }, 380);
+    }, 2300);
+  }
+  function countUp(el){ var t = +el.getAttribute('data-count'), d = 1400, s = null; function step(ts){ if(!s) s = ts; var p = Math.min((ts-s)/d, 1); var e = 1-Math.pow(1-p,3); el.textContent = Math.round(e*t); if(p<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
+  document.querySelectorAll('.hcount').forEach(function(el){ if(reduce){ el.textContent = el.getAttribute('data-count'); } else { countUp(el); } });
+  var ht = document.querySelector('.hero .hero-text'), cue = document.querySelector('.scroll-cue');
+  var t3 = false, lastY = 0;
+  function applyHero(){ t3 = false; var t = Math.min(lastY/620, 1); if(ht){ ht.style.opacity = (1-t).toFixed(3); ht.style.transform = 'translateY(' + (lastY*0.22).toFixed(1) + 'px)'; } if(cue){ cue.style.opacity = (1-Math.min(lastY/180,1)).toFixed(3); } }
+  function heroScroll(y){ lastY = (typeof y === 'number') ? y : (window.scrollY || document.documentElement.scrollTop || 0); if(!t3){ t3 = true; requestAnimationFrame(applyHero); } }
+  if (!reduce) {
+    if (window.lenis && typeof window.lenis.on === 'function') { window.lenis.on('scroll', function(e){ heroScroll(e && typeof e.scroll === 'number' ? e.scroll : undefined); }); }
+    else { window.addEventListener('scroll', function(){ heroScroll(); }, {passive:true}); }
+    heroScroll();
+  }
 })();
 </script>
 </body>
