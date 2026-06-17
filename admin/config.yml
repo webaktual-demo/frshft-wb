@@ -61,6 +61,24 @@ collections:
               - {label: "Zvýraznená (BESTSELLER)", name: featured,
                  widget: boolean, default: false}
 
+  - name: "poukazky"
+    label: "🎁 Darčekové poukážky"
+    files:
+      - name: "main"
+        label: "Poukážky"
+        file: "data/poukazky.json"
+        format: json
+        fields:
+          - name: items
+            label: "Poukážky"
+            label_singular: "Poukážka"
+            widget: list
+            fields:
+              - {label: "Suma (€)", name: value, widget: string}
+              - {label: "Čo to je", name: benefit, widget: string, hint: "napr. Mesačná permanentka"}
+              - {label: "Pre koho", name: for, widget: string, hint: "napr. Klasická · neobmedzený vstup"}
+              - {label: "Bestseller (zvýraznená + Bestseller odznak)", name: best, widget: boolean, default: false}
+
   - name: "gallery"
     label: "🖼️ Galéria – Albumy"
     folder: "data/albums"

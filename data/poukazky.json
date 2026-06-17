@@ -1,0 +1,7 @@
+{
+  "items": [
+    { "value": "36", "benefit": "Mesačná permanentka", "for": "Študent · ZŤP · senior", "best": false },
+    { "value": "38", "benefit": "10-vstupová permanentka", "for": "Študent · ZŤP · senior", "best": false },
+    { "value": "41", "benefit": "Mesačná permanentka", "for": "Klasická · neobmedzený vstup", "best": true }
+  ]
+}

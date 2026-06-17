@@ -429,41 +429,7 @@
       </p>
     </div>
 
-    <div class="poukazky-grid">
-      <div class="poukazka-card reveal" style="transition-delay:0.05s">
-        <div class="poukazka-card-inner">
-          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
-          <div class="pc-value">36<span>€</span></div>
-          <hr class="pc-perf" />
-          <div class="pc-benefit">Mesačná permanentka</div>
-          <span class="pc-for">Študent · ZŤP · senior</span>
-          <div class="pc-foot">Fresh Fit · Prievidza</div>
-        </div>
-      </div>
-
-      <div class="poukazka-card reveal" style="transition-delay:0.13s">
-        <div class="poukazka-card-inner">
-          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
-          <div class="pc-value">38<span>€</span></div>
-          <hr class="pc-perf" />
-          <div class="pc-benefit">10-vstupová permanentka</div>
-          <span class="pc-for">Študent · ZŤP · senior</span>
-          <div class="pc-foot">Fresh Fit · Prievidza</div>
-        </div>
-      </div>
-
-      <div class="poukazka-card is-best reveal" style="transition-delay:0.21s">
-        <div class="poukazka-card-inner">
-          <span class="poukazka-badge">Bestseller</span>
-          <div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>
-          <div class="pc-value">41<span>€</span></div>
-          <hr class="pc-perf" />
-          <div class="pc-benefit">Mesačná permanentka</div>
-          <span class="pc-for">Klasická · neobmedzený vstup</span>
-          <div class="pc-foot">Fresh Fit · Prievidza</div>
-        </div>
-      </div>
-    </div>
+    <div class="poukazky-grid" id="poukazkyGrid"></div>
 
     <div class="poukazky-cta reveal" style="transition-delay:0.2s">
       <a href="#contact" class="btn btn-primary">Mám záujem o poukaz</a>
@@ -1248,13 +1214,17 @@ left:-999px;top:-999px"></div>
 })();
 </script>
 
-<!-- ============ POUKÁŽKY — 3D tilt ============ -->
+<!-- ============ POUKÁŽKY — render z CMS + 3D tilt ============ -->
 <script>
 (function(){
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  document.querySelectorAll('.poukazka-card').forEach(function(card){
+  var grid = document.getElementById('poukazkyGrid');
+  if (!grid) return;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function tiltCard(card){
+    if (reduce) return;
     var inner = card.querySelector('.poukazka-card-inner');
-    if(!inner) return;
+    if (!inner) return;
     var mx = 0, my = 0, ticking = false;
     function apply(){
       ticking = false;
@@ -1264,12 +1234,35 @@ left:-999px;top:-999px"></div>
       inner.style.setProperty('--mx', (px*100).toFixed(1) + '%');
       inner.style.setProperty('--my', (py*100).toFixed(1) + '%');
     }
-    card.addEventListener('mousemove', function(e){
-      mx = e.clientX; my = e.clientY;
-      if(!ticking){ ticking = true; requestAnimationFrame(apply); }
-    });
+    card.addEventListener('mousemove', function(e){ mx = e.clientX; my = e.clientY; if(!ticking){ ticking = true; requestAnimationFrame(apply); } });
     card.addEventListener('mouseleave', function(){ inner.style.transform = ''; });
-  });
+  }
+  function render(items){
+    grid.innerHTML = items.map(function(p, i){
+      var best = !!p.best;
+      var badge = best ? '<span class="poukazka-badge">Bestseller</span>' : '';
+      return '<div class="poukazka-card' + (best ? ' is-best' : '') + ' reveal" style="transition-delay:' + (0.05 + i*0.08).toFixed(2) + 's">' +
+        '<div class="poukazka-card-inner">' + badge +
+          '<div class="pc-top"><img class="pc-logo" src="freshfit-logo.webp" alt="" loading="lazy" /><span class="pc-kicker">Darčeková poukážka</span></div>' +
+          '<div class="pc-value">' + esc(p.value) + '<span>€</span></div>' +
+          '<hr class="pc-perf" />' +
+          '<div class="pc-benefit">' + esc(p.benefit) + '</div>' +
+          '<span class="pc-for">' + esc(p.for) + '</span>' +
+          '<div class="pc-foot">Fresh Fit · Prievidza</div>' +
+        '</div></div>';
+    }).join('');
+    var cards = [].slice.call(grid.querySelectorAll('.poukazka-card'));
+    cards.forEach(tiltCard);
+    if (reduce) { cards.forEach(function(c){ c.classList.add('visible'); }); return; }
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+    }, {threshold: 0.1});
+    cards.forEach(function(c){ obs.observe(c); });
+    setTimeout(function(){ cards.forEach(function(c){ c.classList.add('visible'); }); }, 1200);
+  }
+  fetch('/data/poukazky.json').then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){ if (d && d.items && d.items.length) render(d.items); })
+    .catch(function(){});
 })();
 </script>
 
