@@ -309,14 +309,16 @@ img { max-width: 100%; display: block; }
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  /* obsah tesne pod fixnou navigáciou (76px) — žiadna diera hore */
+  /* obsah vertikálne vycentrované; padding-top = odstup od fixnej nav (76px) */
   padding-top: clamp(88px, 10vh, 108px);
+  padding-bottom: clamp(48px, 7vh, 84px);
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
   overflow: hidden;
 }
-/* Veľmi nízke obrazovky: nechaj obsah prirodzene pretiecť, neorezávaj ho */
-@media (max-height: 720px) {
+/* Nižšie obrazovky: výšku určuje obsah, nech sa štatistiky neorežú */
+@media (max-height: 800px) {
   .hero { min-height: auto; }
 }
 /* Pozadí hero — izolovaný div, žiadny transform/transition = koniec zoom na iOS */
@@ -396,11 +398,11 @@ img { max-width: 100%; display: block; }
 
 .hero h1 {
   font-family: 'Poppins', sans-serif;
-  font-size: clamp(2.6rem, 6.6vw, 6rem);
+  font-size: clamp(2.8rem, 8.5vw, 7rem);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.035em;
-  margin-bottom: clamp(12px, 2.2vh, 22px);
+  margin-bottom: clamp(10px, 1.8vh, 18px);
   color: #ffffff;
   text-shadow: 0 4px 40px rgba(0,0,0,0.4);
   animation: fadeUp 0.8s 0.1s ease both;
@@ -411,8 +413,8 @@ img { max-width: 100%; display: block; }
   font-size: clamp(17px, 1.6vw, 21px);
   color: rgba(255,255,255,0.88);
   max-width: 560px;
-  margin-bottom: clamp(16px, 2.8vh, 30px);
-  line-height: 1.6;
+  margin-bottom: clamp(12px, 2vh, 22px);
+  line-height: 1.55;
   text-shadow: 0 2px 16px rgba(0,0,0,0.3);
   animation: fadeUp 0.8s 0.2s ease both;
 }
@@ -424,12 +426,12 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-stats {
-  margin-top: clamp(26px, 4.5vh, 48px);
+  margin-top: clamp(18px, 3vh, 34px);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 32px;
   max-width: 680px;
-  padding-top: clamp(18px, 2.6vh, 28px);
+  padding-top: clamp(14px, 2vh, 22px);
   border-top: 1px solid rgba(255,255,255,0.18);
   animation: fadeUp 0.8s 0.4s ease both;
 }
