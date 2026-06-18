@@ -1333,8 +1333,11 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
     if(!path) return path;
     if(location.hostname==='localhost' || location.hostname==='127.0.0.1') return path;
     if(/^https?:\/\//i.test(path)) return path;
-    return '/_vercel/image?url=' + encodeURIComponent(path) + '&w=' + w + '&q=80';
+    var p = path.charAt(0)==='/' ? path : '/'+path; // normalizuj na cestu so '/'
+    return '/_vercel/image?url=' + encodeURIComponent(p) + '&w=' + w + '&q=80';
   }
+  // reálna hodnota? prázdne a zástupné "XXX"/"@XXXXXX" sa neberú
+  function realVal(s){ s = (s==null?'':String(s)).trim(); if(!s) return ''; if(/x{2,}/i.test(s)) return ''; return s; }
   function tiltCard(card){
     if (reduce) return;
     var inner = card.querySelector('.trener-card-inner');
@@ -1353,22 +1356,19 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   }
   function render(items){
     grid.innerHTML = items.map(function(p, i){
-      var foto = p.foto ? '<img class="trener-foto" src="' + escAttr(optImg(p.foto, 720)) + '" alt="' + escAttr(p.meno) + '" loading="lazy" decoding="async" />' : '<div class="trener-foto trener-foto--empty" aria-hidden="true"></div>';
+      var foto = p.foto ? '<img class="trener-foto" src="' + escAttr(optImg(p.foto, 720)) + '" data-fb="' + escAttr(p.foto) + '" alt="' + escAttr(p.meno) + '" loading="lazy" decoding="async" onerror="if(this.dataset.done)return;this.dataset.done=1;this.onerror=null;this.src=this.dataset.fb;" />' : '<div class="trener-foto trener-foto--empty" aria-hidden="true"></div>';
       var popis = p.popis ? '<p class="trener-popis">' + esc(p.popis) + '</p>' : '';
       var ICON_TEL = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
       var ICON_IG = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';
       var contactParts = [];
-      var telRaw = (p.telefon == null ? '' : String(p.telefon)).trim();
+      var telRaw = realVal(p.telefon);
       if (telRaw) {
         var telHref = telRaw.replace(/\s+/g, '');
         contactParts.push('<a class="trener-contact-link" href="tel:' + escAttr(telHref) + '">' + ICON_TEL + '<span>' + esc(telRaw) + '</span></a>');
       }
-      var igRaw = (p.instagram == null ? '' : String(p.instagram)).trim();
-      if (igRaw) {
-        var igHandle = igRaw.replace(/^@+/, '');
-        if (igHandle) {
-          contactParts.push('<a class="trener-contact-link" href="https://instagram.com/' + escAttr(igHandle) + '" target="_blank" rel="noopener">' + ICON_IG + '<span>@' + esc(igHandle) + '</span></a>');
-        }
+      var igHandle = realVal(p.instagram).replace(/^[@#]+/, '');
+      if (igHandle) {
+        contactParts.push('<a class="trener-contact-link" href="https://instagram.com/' + escAttr(igHandle) + '" target="_blank" rel="noopener">' + ICON_IG + '<span>@' + esc(igHandle) + '</span></a>');
       }
       var contact = contactParts.length ? '<div class="trener-contact">' + contactParts.join('') + '</div>' : '';
       return '<div class="trener-card reveal" style="transition-delay:' + (0.05 + i*0.08).toFixed(2) + 's">' +

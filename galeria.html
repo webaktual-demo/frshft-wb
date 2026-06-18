@@ -411,7 +411,10 @@ menu.querySelectorAll("a").forEach(a => {
 
   function showPhoto() {
     var p = curPhotos[curIndex];
-    lbImg.src = optImg(p.src || p, 1280);
+    var lbOrig = (p && p.src) || p;
+    lbImg.onerror = function(){ if(this.dataset.done) return; this.dataset.done='1'; this.onerror=null; this.src=lbOrig; };
+    lbImg.removeAttribute && lbImg.removeAttribute('data-done');
+    lbImg.src = optImg(lbOrig, 1280);
     lbImg.alt = p.caption || '';
     lbCaption.textContent = p.caption || '';
     lbCounter.textContent = (curIndex + 1) + ' / ' + curPhotos.length;
@@ -446,8 +449,11 @@ menu.querySelectorAll("a").forEach(a => {
     if(!path) return path;
     if(location.hostname==='localhost' || location.hostname==='127.0.0.1') return path;
     if(/^https?:\/\//i.test(path)) return path;
-    return '/_vercel/image?url=' + encodeURIComponent(path) + '&w=' + w + '&q=80';
+    var p = path.charAt(0)==='/' ? path : '/'+path; // normalizuj na cestu so '/'
+    return '/_vercel/image?url=' + encodeURIComponent(p) + '&w=' + w + '&q=80';
   }
+  // onerror fallback na originál (ak optimalizovaná URL zlyhá)
+  var IMG_FB = ' onerror="if(this.dataset.done)return;this.dataset.done=1;this.onerror=null;this.src=this.dataset.fb;"';
 
   function openAlbum(album) {
     var photos = album && album.photos;
@@ -476,7 +482,7 @@ menu.querySelectorAll("a").forEach(a => {
     var first = albums[0];
     var firstImg = first.cover
       ? '<img class="album-featured__img" src="'+optImg(first.cover, 960)+
-        '" alt="'+escHtml(first.title||'')+'" loading="lazy" decoding="async">'
+        '" data-fb="'+escHtml(first.cover)+'" alt="'+escHtml(first.title||'')+'" loading="lazy" decoding="async"'+IMG_FB+'>'
       : placeholder;
     var firstCount = (first.photos && first.photos.length > 0)
       ? first.photos.length + ' fotografií' : 'Album';
@@ -513,8 +519,8 @@ menu.querySelectorAll("a").forEach(a => {
           ? a.photos.length + ' fotografií' : 'Album';
         var imgHtml = a.cover
           ? '<img src="'+optImg(a.cover, 640)+
-            '" alt="'+escHtml(a.title||'')+
-            '" loading="lazy" decoding="async">'
+            '" data-fb="'+escHtml(a.cover)+'" alt="'+escHtml(a.title||'')+
+            '" loading="lazy" decoding="async"'+IMG_FB+'>'
           : placeholder;
 
         var card =
