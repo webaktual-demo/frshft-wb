@@ -1098,6 +1098,14 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 <!-- ============ OZNAM LOADER ============ -->
 <script>
 (function(){
+  // Vercel Image Optimization — resize + webp on-the-fly (len na nasadenom webe)
+  function optImg(path, w){
+    if(!path) return path;
+    if(location.hostname==='localhost' || location.hostname==='127.0.0.1') return path;
+    if(/^https?:\/\//i.test(path)) return path;
+    var p = path.charAt(0)==='/' ? path : '/'+path;
+    return '/_vercel/image?url=' + encodeURIComponent(p) + '&w=' + w + '&q=80';
+  }
   fetch('/data/oznam.json')
     .then(function(r){return r.ok?r.json():null;})
     .then(function(d){
@@ -1113,7 +1121,10 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       var defLogo = document.querySelector('.oznam-logo-default');
       if(img) {
         if(d.image) {
-          img.src = d.image;
+          img.src = optImg(d.image, 960);
+          img.setAttribute('decoding','async');
+          img.dataset.fb = d.image;
+          img.onerror = function(){ if(this.dataset.done) return; this.dataset.done=1; this.onerror=null; this.src=this.dataset.fb; };
           img.alt = d.title || '';
           if(defLogo) defLogo.style.display = 'none';
         } else {
