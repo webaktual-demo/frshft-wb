@@ -873,21 +873,14 @@ section { padding: 110px 0; position: relative; }
 }
 
 /* ============ CONTACT — 2-stĺpcový layout ============ */
-/* 2-stĺpec: info 2×2 vľavo, kompaktné logo vpravo */
+/* 2-stĺpec: info vľavo, veľká mapa vpravo (rovnaká výška) */
 .contact-grid-row {
   display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: clamp(28px, 4vw, 56px);
-  align-items: center;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(24px, 3vw, 44px);
+  align-items: stretch;
   max-width: 1100px;
   margin: 0 auto;
-}
-.contact-logo-col {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
 }
 .contact-logo-ring {
   position: relative;
@@ -1024,15 +1017,11 @@ section { padding: 110px 0; position: relative; }
 }
 
 @media (max-width: 760px) {
-  /* všetko pod sebou; logo nad info alebo pod ním — necháme pod info */
+  /* mobil: info nad mapou, obe na celú šírku */
   .contact-grid-row {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 22px;
   }
-  .contact-logo-col { order: 2; }
-}
-@media (max-width: 420px) {
-  .contact-info-grid { grid-template-columns: 1fr; }
 }
 
 /* ============ MOBILE PERFORMANCE — touch zariadenia ============ */

@@ -323,6 +323,7 @@
 
 <!-- ============ CENNÍK ============ -->
 <section class="pricing light-section" id="pricing">
+  <img src="freshfit-logo.webp" alt="" aria-hidden="true" class="logo-stamp logo-stamp--dark stamp-pricing">
   <div class="container">
     <div class="section-head">
       <div>
@@ -525,6 +526,7 @@
 
 <!-- ============ MULTISPORT ============ -->
 <section class="multisport green-section" id="multisport">
+  <img src="freshfit-logo.webp" alt="" aria-hidden="true" class="logo-stamp stamp-multisport">
   <div class="container multisport-inner">
     <div class="multisport-badge reveal">
       <img src="images/multisport-logo.png" alt="MultiSport karta" style="width:300px; border-radius:16px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);" loading="lazy" />
@@ -632,6 +634,7 @@
 
 <!-- ============ FAQ ============ -->
 <section class="faq dark-section" id="faq">
+  <img src="freshfit-logo.webp" alt="" aria-hidden="true" class="logo-stamp stamp-faq">
   <div class="container">
     <div class="section-head">
       <div>
@@ -730,7 +733,7 @@
       <p class="contact-lead">Fresh Fit je miesto pre každého, kto chce urobiť niečo pre svoje zdravie. Tešíme sa na vašu návštevu.</p>
     </div>
 
-    <!-- Info 2×2 + logo -->
+    <!-- Info vľavo + mapa vpravo -->
     <div class="contact-grid-row">
       <div class="contact-info-grid reveal">
         <div class="contact-info-card">
@@ -740,8 +743,10 @@
               <path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0z"/>
             </svg>
           </div>
-          <div class="ci-label">Adresa</div>
-          <div class="ci-value">A. Mišúta 23<br />971 01 Prievidza</div>
+          <div class="ci-text">
+            <div class="ci-label">Adresa</div>
+            <div class="ci-value">A. Mišúta 23<br />971 01 Prievidza</div>
+          </div>
         </div>
         <div class="contact-info-card">
           <div class="contact-icon">
@@ -749,8 +754,10 @@
               <path d="M2.25 6.338c0 0 .375-.75.75-.75h1.5a.75.75 0 0 1 .75.75l.75 3a.75.75 0 0 1-.168.67l-.844.844a12.034 12.034 0 0 0 5.25 5.25l.844-.844a.75.75 0 0 1 .67-.168l3 .75a.75.75 0 0 1 .75.75v1.5c0 .375-.375.75-.75.75C9.563 19.5 4.5 14.437 4.5 8.25c0-.375.375-.75.75-.75h1.5z"/>
             </svg>
           </div>
-          <div class="ci-label">Telefón</div>
-          <div class="ci-value"><a href="tel:+421918240579">0918 240 579</a></div>
+          <div class="ci-text">
+            <div class="ci-label">Telefón</div>
+            <div class="ci-value"><a href="tel:+421918240579">0918 240 579</a></div>
+          </div>
         </div>
         <div class="contact-info-card">
           <div class="contact-icon">
@@ -758,8 +765,10 @@
               <path d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
             </svg>
           </div>
-          <div class="ci-label">E-mail</div>
-          <div class="ci-value"><a href="mailto:msmont@inmail.sk">msmont@inmail.sk</a></div>
+          <div class="ci-text">
+            <div class="ci-label">E-mail</div>
+            <div class="ci-value"><a href="mailto:msmont@inmail.sk">msmont@inmail.sk</a></div>
+          </div>
         </div>
         <div class="contact-info-card">
           <div class="contact-icon">
@@ -767,27 +776,20 @@
               <path d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0z"/>
             </svg>
           </div>
-          <div class="ci-label">Otváracie hodiny</div>
-          <div class="ci-value"><span id="cms-hours-weekday">Po–Pia: 07:00–20:00</span><br /><span id="cms-hours-weekend">So–Ne: 08:00–18:00</span></div>
-          <div class="open-badge" id="contactBadge"><span class="open-dot"></span><span class="open-label"></span></div>
+          <div class="ci-text">
+            <div class="ci-label">Otváracie hodiny</div>
+            <div class="ci-value"><span id="cms-hours-weekday">Po–Pia: 07:00–20:00</span><br /><span id="cms-hours-weekend">So–Ne: 08:00–18:00</span></div>
+            <div class="open-badge" id="contactBadge"><span class="open-dot"></span><span class="open-label"></span></div>
+          </div>
         </div>
       </div>
-      <div class="contact-logo-col reveal">
-        <div class="contact-logo-ring">
-          <div class="contact-logo-glow-outer"></div>
-          <div class="contact-logo-glow-inner"></div>
-          <img src="freshfit-logo.webp" alt="Fresh Fit Prievidza" class="contact-logo-main" id="contact-logo" decoding="async">
-        </div>
-        <p class="contact-visual-text">Moderné fitnescentrum<br><strong>Prievidza</strong></p>
+      <div class="contact-map reveal">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2622.0!2d18.6294!3d48.7756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4714d3a3b3b3b3b3%3A0x0!2sA.+Mi%C5%A1%C3%BAta+23%2C+971+01+Prievidza!5e0!3m2!1ssk!2ssk!4v1700000000000"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Fresh Fit Prievidza — mapa">
+        </iframe>
       </div>
-    </div>
-    <!-- Mapa — celá šírka -->
-    <div class="contact-map reveal">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2622.0!2d18.6294!3d48.7756!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4714d3a3b3b3b3b3%3A0x0!2sA.+Mi%C5%A1%C3%BAta+23%2C+971+01+Prievidza!5e0!3m2!1ssk!2ssk!4v1700000000000"
-        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Fresh Fit Prievidza — mapa">
-      </iframe>
     </div>
   </div>
 </section>
@@ -1326,6 +1328,13 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function esc(s){ return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function escAttr(s){ return esc(s).replace(/"/g,'&quot;'); }
+  // Vercel Image Optimization — resize + webp on-the-fly (len na nasadenom webe)
+  function optImg(path, w){
+    if(!path) return path;
+    if(location.hostname==='localhost' || location.hostname==='127.0.0.1') return path;
+    if(/^https?:\/\//i.test(path)) return path;
+    return '/_vercel/image?url=' + encodeURIComponent(path) + '&w=' + w + '&q=80';
+  }
   function tiltCard(card){
     if (reduce) return;
     var inner = card.querySelector('.trener-card-inner');
@@ -1344,7 +1353,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   }
   function render(items){
     grid.innerHTML = items.map(function(p, i){
-      var foto = p.foto ? '<img class="trener-foto" src="' + escAttr(p.foto) + '" alt="' + escAttr(p.meno) + '" loading="lazy" decoding="async" />' : '<div class="trener-foto trener-foto--empty" aria-hidden="true"></div>';
+      var foto = p.foto ? '<img class="trener-foto" src="' + escAttr(optImg(p.foto, 720)) + '" alt="' + escAttr(p.meno) + '" loading="lazy" decoding="async" />' : '<div class="trener-foto trener-foto--empty" aria-hidden="true"></div>';
       var popis = p.popis ? '<p class="trener-popis">' + esc(p.popis) + '</p>' : '';
       var ICON_TEL = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
       var ICON_IG = '<svg class="trener-contact-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>';

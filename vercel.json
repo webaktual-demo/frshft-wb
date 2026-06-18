@@ -11,5 +11,11 @@
       "source": "/galeria",
       "destination": "/galeria.html"
     }
-  ]
+  ],
+  "images": {
+    "sizes": [320, 480, 640, 720, 800, 960, 1280],
+    "formats": ["image/webp"],
+    "minimumCacheTTL": 86400,
+    "localPatterns": [{ "pathname": "/images/**" }]
+  }
 }
