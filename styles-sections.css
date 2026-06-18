@@ -869,7 +869,18 @@
 /* ============ KONTAKT — Dark + diagonal pattern ============ */
 .contact {
   background-color: var(--bg-dark);
+  /* výšku určuje obsah — kompaktnejší, vyváženejší vertikálny rytmus */
+  padding: clamp(56px, 8vh, 92px) 0;
 }
+/* Kompaktnejší ľavý stĺpec: menšia medzera pod hlavičkou a menší nadpis */
+.contact .section-head { margin-bottom: clamp(20px, 3.2vh, 34px); }
+.contact .section-title { font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.12; margin-bottom: 14px; }
+.contact .contact-two-col { gap: clamp(36px, 4vw, 56px); }
+/* Tesnejšia kontaktná karta */
+.contact-card-wrap { margin-bottom: 0; }
+.contact-card { padding: clamp(28px, 3vw, 38px); gap: clamp(16px, 2.2vh, 22px); }
+/* Čistý odstup mapy pod dvojstĺpcom */
+.contact-map { margin-top: clamp(28px, 4vh, 44px); }
 
 /* Centrovaná karta s kontaktnými údajmi */
 .contact-card-wrap {

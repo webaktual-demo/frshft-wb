@@ -309,9 +309,10 @@ img { max-width: 100%; display: block; }
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding-top: 64px;
+  /* obsah tesne pod fixnou navigáciou (76px) — žiadna diera hore */
+  padding-top: clamp(88px, 10vh, 108px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   overflow: hidden;
 }
 /* Veľmi nízke obrazovky: nechaj obsah prirodzene pretiecť, neorezávaj ho */
@@ -359,7 +360,7 @@ img { max-width: 100%; display: block; }
 .hero-inner {
   position: relative;
   z-index: 2;
-  padding: clamp(40px, 6vh, 72px) 0 clamp(32px, 5vh, 56px);
+  padding: 0 0 clamp(32px, 5vh, 56px);
   width: 100%;
 }
 .hero-text { max-width: 720px; }
