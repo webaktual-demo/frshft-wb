@@ -873,33 +873,26 @@ section { padding: 110px 0; position: relative; }
 }
 
 /* ============ CONTACT — 2-stĺpcový layout ============ */
-.contact-two-col {
+/* 2-stĺpec: info 2×2 vľavo, kompaktné logo vpravo */
+.contact-grid-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 1.5fr 1fr;
+  gap: clamp(28px, 4vw, 56px);
   align-items: center;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
-.contact-left { display: flex; flex-direction: column; gap: 0; }
-.contact-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-/* ── Contact visual — pravý stĺpec ── */
-.contact-visual {
+.contact-logo-col {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  height: 100%;
+  gap: 14px;
 }
 .contact-logo-ring {
   position: relative;
-  width: clamp(320px, 35vw, 480px) !important;
-  height: clamp(320px, 35vw, 480px) !important;
+  width: clamp(190px, 22vw, 280px) !important;
+  height: clamp(190px, 22vw, 280px) !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -928,14 +921,14 @@ section { padding: 110px 0; position: relative; }
   animation: pulse-ring 4s ease-in-out infinite;
 }
 #contact-logo {
-  max-width: 460px;
+  max-width: 260px;
   width: 100%;
   height: auto;
 }
 .contact-logo-main {
-  width: clamp(300px, 34vw, 460px) !important;
+  width: clamp(170px, 20vw, 260px) !important;
   height: auto !important;
-  max-width: 460px !important;
+  max-width: 260px !important;
   object-fit: contain;
   opacity: 0.9;
   animation: float-logo 6s ease-in-out infinite;
@@ -1030,19 +1023,16 @@ section { padding: 110px 0; position: relative; }
   50%       { opacity: 0.7; transform: scale(1.1); }
 }
 
-@media (max-width: 900px) {
-  .contact-two-col {
+@media (max-width: 760px) {
+  /* všetko pod sebou; logo nad info alebo pod ním — necháme pod info */
+  .contact-grid-row {
     grid-template-columns: 1fr;
-    gap: 40px;
+    gap: 28px;
   }
-  .contact-right { display: none; }
+  .contact-logo-col { order: 2; }
 }
-@media (max-width: 768px) {
-  .contact-visual { display: none; }
-  .contact-logo-ring,
-  .contact-logo-glow-outer { width: 200px !important; height: 200px !important; }
-  .contact-logo-glow-inner { width: 160px !important; height: 160px !important; }
-  .contact-logo-main { width: 160px !important; max-width: 160px !important; }
+@media (max-width: 420px) {
+  .contact-info-grid { grid-template-columns: 1fr; }
 }
 
 /* ============ MOBILE PERFORMANCE — touch zariadenia ============ */

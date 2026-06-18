@@ -866,77 +866,61 @@
 }
 
 
-/* ============ KONTAKT — Dark + diagonal pattern ============ */
+/* ============ KONTAKT — kompaktný layout: hlavička → info 2×2 + logo → mapa ============ */
 .contact {
   background-color: var(--bg-dark);
-  /* výšku určuje obsah (žiadny min-height); rozumný padding */
-  padding: clamp(56px, 8vh, 92px) 0;
+  /* výšku určuje obsah (žiadny min-height); kompaktný padding */
+  padding: clamp(48px, 7vh, 80px) 0;
 }
-/* Nadpis a popis: PÔVODNÁ veľkosť (text sa nezmenšuje) — kompaktnosť rieši karta */
-.contact .section-head { margin-bottom: clamp(24px, 3.5vh, 40px); }
-.contact .contact-two-col { gap: clamp(36px, 4vw, 56px); }
-/* Tesnejšia, nižšia kontaktná karta: menší padding, menšie medzery a ikonky */
-.contact-card-wrap { margin-bottom: 0; }
-.contact-card { padding: clamp(22px, 2.4vw, 30px); gap: clamp(12px, 1.6vh, 16px); }
-.contact-card .contact-item { gap: 14px; align-items: center; }
-.contact-card .contact-icon { width: 38px; height: 38px; border-radius: 10px; }
-.contact-card .contact-icon svg { width: 18px; height: 18px; }
-.contact-card .ci-label { margin-bottom: 2px; }
-.contact-card .ci-value { line-height: 1.3; }
-/* Čistý odstup mapy pod dvojstĺpcom */
-.contact-map { margin-top: clamp(28px, 4vh, 44px); }
+/* Hlavička: primeraný nadpis + krátky popis */
+.contact-head { max-width: 720px; margin-bottom: clamp(26px, 4vh, 42px); }
+.contact-title { font-size: clamp(1.8rem, 3.4vw, 2.7rem); line-height: 1.12; margin-bottom: 14px; }
+.contact-lead { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.6); max-width: 560px; margin: 0; }
 
-/* Centrovaná karta s kontaktnými údajmi */
-.contact-card-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
+/* Info ako 2×2 mriežka kompaktných kariet */
+.contact-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
 }
-.contact-card {
-  max-width: 600px;
-  width: 100%;
-  padding: 48px;
+.contact-info-card {
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.contact-item {
-  display: flex; align-items: flex-start; gap: 18px;
+  border-radius: 16px;
+  padding: 18px 20px;
 }
 .contact-icon {
-  width: 46px; height: 46px; border-radius: 12px;
+  width: 38px; height: 38px; border-radius: 10px;
   background: rgba(76,175,80,0.14);
   display: grid; place-items: center;
-  color: var(--accent); flex-shrink: 0;
+  color: var(--accent); margin-bottom: 12px;
 }
-.contact-icon svg { width: 22px; height: 22px; }
-.contact-item .ci-label {
+.contact-icon svg { width: 18px; height: 18px; }
+.ci-label {
   font-size: 11px; font-weight: 700;
   letter-spacing: 0.16em; text-transform: uppercase;
   color: rgba(255,255,255,0.45); margin-bottom: 5px;
 }
-.contact-item .ci-value {
+.ci-value {
   font-family: 'Poppins', sans-serif;
-  font-size: 16px; font-weight: 600;
-  color: #fff; line-height: 1.5;
+  font-size: 15px; font-weight: 600;
+  color: #fff; line-height: 1.4;
 }
-.contact-item .ci-value a { transition: color 0.2s ease; }
-.contact-item .ci-value a:hover { color: var(--accent); }
+.ci-value a { transition: color 0.2s ease; }
+.ci-value a:hover { color: var(--accent); }
+.contact-info-card .open-badge { margin-top: 8px; font-size: 11px; padding: 4px 10px; }
 
-/* Mapa */
+/* Mapa — celá šírka pod 2-stĺpcom */
 .contact-map {
+  margin-top: clamp(28px, 4vh, 44px);
   border-radius: 16px;
   overflow: hidden;
-  height: 350px;
+  height: clamp(300px, 40vh, 360px);
   border: 1px solid rgba(255,255,255,0.08);
 }
 .contact-map iframe { width: 100%; height: 100%; border: 0; display: block; }
 
 @media (max-width: 640px) {
-  .contact-card { padding: 32px 24px; gap: 22px; }
   .contact-map { height: 280px; }
 }
 @media (max-width: 560px) {
