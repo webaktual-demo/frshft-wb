@@ -146,11 +146,12 @@
       <img src="freshfit-logo.webp" alt="Fresh Fit" class="logo-img logo-img-nav" />
     </a>
     <ul class="nav-menu" id="navMenu">
-      <li><a href="#oznam" id="nav-oznam">Oznamy</a></li>
+      <!-- Oznamy a Tréneri: skryté, kým CMS loader nepotvrdí obsah (sekcie sú defaultne display:none) -->
+      <li style="display:none"><a href="#oznam" id="nav-oznam">Oznamy</a></li>
       <li><a href="#why">Prečo my</a></li>
       <li><a href="#services">Služby</a></li>
       <li><a href="#pricing">Cenník</a></li>
-      <li><a href="#priestory">Priestory</a></li>
+      <li style="display:none"><a href="#treneri" id="nav-treneri">Tréneri</a></li>
       <li><a href="/galeria">Galéria</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
@@ -1202,6 +1203,8 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
         }
       }
       if(s) s.style.display = '';
+      var navOz = document.getElementById('nav-oznam');
+      if(navOz && navOz.parentElement) navOz.parentElement.style.display = '';
       // Reveal animácia — fix race condition:
       // 1) vynútiť reflow v skrytom stave, 2) počkať 2 snímky nech sa
       // skrytý stav vykreslí, 3) až potom pripnúť observer → CSS transition
@@ -1472,7 +1475,12 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
   }
   fetch('/data/treneri.json?v=' + Date.now(), { cache: 'no-store' }).then(function(r){ return r.ok ? r.json() : null; })
     .then(function(d){
-      if (d && d.treneri && d.treneri.length) { section.style.display = ''; render(d.treneri); }
+      if (d && d.treneri && d.treneri.length) {
+        section.style.display = '';
+        var navTr = document.getElementById('nav-treneri');
+        if (navTr && navTr.parentElement) navTr.parentElement.style.display = '';
+        render(d.treneri);
+      }
     })
     .catch(function(){});
 })();

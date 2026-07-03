@@ -62,6 +62,9 @@ section[id] {
 html {
   overflow-x: hidden;
   background-color: #0f0f0f; /* okamžite tmavé pozadie — bez bieleho prebliknutia */
+  /* rezervuj miesto pre scrollbar natrvalo — overflow:hidden počas intra inak mení šírku
+     viewportu (Windows) a obsah po odomknutí scrollu poskočí doľava */
+  scrollbar-gutter: stable;
 }
 body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
