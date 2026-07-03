@@ -1109,3 +1109,84 @@ section { padding: 110px 0; position: relative; }
   .hero-glow, .scroll-cue svg { animation: none; }
   .hero h1 .rot { transition: none; }
 }
+
+/* ============ INTRO — page-load curtain reveal (len index.html) ============ */
+/* Kritické pozicovanie overlayu je inline v <head> index.html. Animujú sa LEN transform a opacity. */
+#intro .intro-panel {
+  background-color: var(--bg-dark);
+  background-image: var(--noise); /* jemná textúra panelov pre hĺbku */
+  transition: transform 0.9s cubic-bezier(0.85, 0, 0.15, 1);
+  will-change: transform;
+}
+/* Seam — tenká zelená hairline na vnútorných hranách panelov, viditeľná až počas reveal */
+#intro .intro-panel::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+#intro .intro-panel--top::after { bottom: 0; }
+#intro .intro-panel--bottom::after { top: 0; }
+
+#intro .intro-center { transition: opacity 0.35s ease; }
+/* Zelený radiálny glow za logom */
+#intro .intro-center::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle min(105vw, 615px) at 50% calc(50% - 15px), var(--accent-glow), transparent 70%);
+  animation: introGlowIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* BUILD 0–0.9s: logo scale 0.92→1 + fade in */
+#intro .intro-logo {
+  position: relative;
+  animation: introLogoIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+/* Linka: rast od stredu 0.35–0.9s, potom jeden krátky beat ~1.05–1.45s (HOLD fáza) */
+#intro .intro-line {
+  position: relative;
+  /* logo asset má transparentný okraj — linku pritiahnem bližšie k viditeľnej grafike, škáluje sa s logom */
+  margin-top: max(-76px, -13vw);
+  background: var(--accent);
+  opacity: 0.85;
+  transform-origin: center;
+  animation:
+    introLineGrow 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both,
+    introLineBeat 0.4s ease-in-out 1.05s;
+}
+@keyframes introLogoIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes introGlowIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes introLineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes introLineBeat {
+  0%   { transform: scaleX(1) scaleY(1); opacity: 0.85; }
+  35%  { transform: scaleX(1) scaleY(2.5); opacity: 1; }
+  100% { transform: scaleX(1) scaleY(1); opacity: 0.85; }
+}
+/* REVEAL 1.6–2.5s: panely sa rozostúpia, stred sa rýchlo odfaduje, seam sa zvýrazní */
+#intro.intro--reveal .intro-panel--top { transform: translateY(-100%); }
+#intro.intro--reveal .intro-panel--bottom { transform: translateY(100%); }
+#intro.intro--reveal .intro-panel::after { opacity: 0.3; }
+#intro.intro--reveal .intro-center { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  /* Žiadny pohyb: statické logo + linka, overlay sa len odfaduje (trieda intro--fade z JS) */
+  #intro .intro-logo,
+  #intro .intro-line,
+  #intro .intro-center::before { animation: none; }
+  #intro .intro-panel { transition: none; }
+  #intro { transition: opacity 0.3s ease; }
+  #intro.intro--fade { opacity: 0; }
+}

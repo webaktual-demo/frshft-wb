@@ -8,6 +8,17 @@
 <title>Fresh Fit — Moderné fitnescentrum v Prievidzi</title>
 <meta name="description" content="Fresh Fit — moderné fitnescentrum v srdci Prievidze. Otvorené každý deň. Akceptujeme Multisport." />
 <link rel="preload" as="image" href="images/priestory/5.webp" fetchpriority="high">
+<link rel="preload" as="image" href="freshfit-logo-intro.webp" fetchpriority="high">
+<!-- INTRO — kritické CSS overlayu inline, aby prekryl obrazovku od prvého vykreslenia (žiadny FOUC). Animácie a prechody sú v styles.css. -->
+<style>
+  #intro{position:fixed;inset:0;z-index:99999;}
+  #intro .intro-panel{position:absolute;left:0;width:100%;height:50%;background:#0f0f0f;}
+  #intro .intro-panel--top{top:0;}
+  #intro .intro-panel--bottom{bottom:0;}
+  #intro .intro-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+  #intro .intro-logo{display:block;width:min(82vw,480px);height:auto;}
+  #intro .intro-line{display:block;width:min(70vw,400px);height:2px;}
+</style>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -67,6 +78,65 @@
 </script>
 </head>
 <body>
+<!-- ============ INTRO — loading curtain reveal (len index.html) ============ -->
+<div id="intro" aria-hidden="true">
+  <div class="intro-panel intro-panel--top"></div>
+  <div class="intro-panel intro-panel--bottom"></div>
+  <div class="intro-center">
+    <img src="freshfit-logo-intro.webp" alt="" class="intro-logo" width="960" height="960" fetchpriority="high" decoding="async">
+    <span class="intro-line"></span>
+  </div>
+</div>
+<script>
+/* INTRO — beží pri KAŽDOM načítaní index.html.
+   Prepnutie na „raz za session": stačí odkomentovať dva riadky označené [SESSION] nižšie. */
+(function () {
+  var intro = document.getElementById('intro');
+  if (!intro) return;
+  // [SESSION] if (sessionStorage.getItem('ffIntroSeen')) { intro.parentNode.removeChild(intro); return; }
+  // [SESSION] sessionStorage.setItem('ffIntroSeen', '1');
+  var docEl = document.documentElement;
+  window.scrollTo(0, 0);
+  docEl.style.overflow = 'hidden';
+  // overflow:hidden neblokuje programový scroll (Lenis prekladá koliesko na window.scrollTo),
+  // preto počas intra blokujeme scroll udalosti priamo — capture fáza beží pred Lenis handlermi
+  var SCROLL_KEYS = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+  function blockScroll(e) {
+    if (e.type === 'keydown' && SCROLL_KEYS.indexOf(e.key) === -1) return;
+    e.preventDefault();
+    e.stopPropagation();
+  }
+  ['wheel', 'touchmove', 'keydown'].forEach(function (ev) {
+    window.addEventListener(ev, blockScroll, { passive: false, capture: true });
+  });
+  var done = false;
+  function cleanup() {
+    if (done) return;
+    done = true;
+    docEl.style.overflow = '';
+    ['wheel', 'touchmove', 'keydown'].forEach(function (ev) {
+      window.removeEventListener(ev, blockScroll, { capture: true });
+    });
+    if (intro.parentNode) intro.parentNode.removeChild(intro);
+  }
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Bez pohybu: krátke statické logo, potom len odfadovanie overlayu
+    setTimeout(function () {
+      intro.classList.add('intro--fade');
+      setTimeout(cleanup, 320);
+    }, 500);
+  } else {
+    setTimeout(function () {
+      intro.classList.add('intro--reveal');
+      intro.querySelector('.intro-panel--top').addEventListener('transitionend', function (e) {
+        if (e.propertyName === 'transform') cleanup();
+      });
+    }, 1600);
+  }
+  setTimeout(cleanup, 3500); // safety — force-remove, keby transitionend nezbehol
+})();
+</script>
+
 <div class="scroll-progress"><span id="scrollProgressBar"></span></div>
 
 <!-- ============ NAV ============ -->
