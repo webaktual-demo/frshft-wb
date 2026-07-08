@@ -3,6 +3,51 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- ============ LEGACY FALLBACK — staré TV/prehliadače bez CSS var()/grid ============ -->
+<script>
+(function () {
+  var okVar = window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--x)');
+  var okGrid = window.CSS && window.CSS.supports && window.CSS.supports('display', 'grid');
+  if (!okVar || !okGrid) {
+    document.documentElement.classList.add('legacy-browser');
+  }
+})();
+</script>
+<style>
+.legacy-browser body > *:not(#ff-legacy) { display: none !important; }
+#ff-legacy {
+  display: none;
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  padding: 48px 24px;
+  background-color: #0f0f0f;
+  color: #f5f5f5;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.legacy-browser #ff-legacy { display: flex; }
+#ff-legacy img { width: 90px; height: 90px; border-radius: 12px; }
+#ff-legacy h1 { margin: 0; font-size: 30px; font-weight: bold; color: #f5f5f5; }
+#ff-legacy p { margin: 0; font-size: 16px; line-height: 1.5; color: #cfcfcf; max-width: 320px; }
+#ff-legacy a.ff-legacy-btn {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 14px 30px;
+  background-color: #4CAF50;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 8px;
+}
+#ff-legacy .ff-legacy-info { margin-top: 14px; font-size: 13px; line-height: 1.7; color: #9a9a9a; }
+#ff-legacy .ff-legacy-info a { color: #9a9a9a; }
+</style>
 <title>404 — Stránka nenájdená · Fresh Fit Prievidza</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -23,6 +68,17 @@
 <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
+<div id="ff-legacy" role="main">
+  <img src="freshfit-logo-legacy.png" alt="Fresh Fit" width="90" height="90">
+  <h1>Fresh Fit</h1>
+  <p>Moderné fitnescentrum v Prievidzi. Zavolajte nám alebo sa zastavte osobne.</p>
+  <a class="ff-legacy-btn" href="tel:+421918240579">+421 918 240 579</a>
+  <p class="ff-legacy-info">
+    A. Mišúta 23, 971 01 Prievidza<br>
+    Po–Pia: 07:00–20:00 · So–Ne: 08:00–18:00<br>
+    <a href="mailto:msmont@inmail.sk">msmont@inmail.sk</a>
+  </p>
+</div>
 
 <nav class="nav" id="nav">
   <div class="container nav-inner">
