@@ -2,8 +2,6 @@ backend:
   name: github
   repo: webaktual-sudo/freshfit-web
   branch: main
-  base_url: https://www.freshfit.sk
-  auth_endpoint: /api/auth
 
 media_folder: "images/gallery"
 public_folder: "/images/gallery"

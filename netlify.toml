@@ -1,0 +1,11 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+  included_files = ["data/albums/**"]
+
+[[redirects]]
+  from = "/api/albums"
+  to = "/.netlify/functions/albums"
+  status = 200
