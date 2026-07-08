@@ -5,7 +5,8 @@
   "cover": "/images/gallery/5.webp",
   "photos": [
     {
-      "src": "/images/gallery/1.webp"
+      "src": "/images/gallery/1.webp",
+      "caption": " "
     },
     {
       "src": "/images/gallery/2.webp"
