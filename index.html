@@ -298,7 +298,9 @@
       <img class="oznam-logo-default"
            src="/freshfit-logo.webp" alt="FreshFit" />
       <div class="oznam-split__img-inner">
-        <img id="oznam-img" src="" alt="" loading="lazy" />
+        <img id="oznam-img" src="" alt="" />
+        <!-- bez loading="lazy": obal je clip-path-om celý orezaný, lazy obrázok by sa nenačítal -->
+
       </div>
     </div>
 
@@ -1247,13 +1249,33 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       if(x)  x.textContent  = d.text  || '';
       if(dt) dt.textContent = d.date  || '';
       var defLogo = document.querySelector('.oznam-logo-default');
+      // Reveal sa spustí až keď je obrázok načítaný+dekódovaný A sekcia vo viewporte.
+      var imgReady = !(img && d.image), inView = false, split = document.querySelector('.oznam-split');
+      function reveal(){
+        if(!imgReady || !inView || !split || split.classList.contains('is-visible')) return;
+        void split.offsetHeight; // skrytý stav musí byť vykreslený pred transition
+        requestAnimationFrame(function(){ split.classList.add('is-visible'); });
+      }
+      function markReady(){ imgReady = true; reveal(); }
       if(img) {
         if(d.image) {
-          img.src = optImg(d.image, 960);
+          img.addEventListener('load', function(){
+            // decode() môže zlyhať — obrázok je aj tak použiteľný
+            (img.decode ? img.decode() : Promise.resolve()).then(markReady, markReady);
+          });
+          img.onerror = function(){
+            if(this.dataset.done){ // zlyhal aj záložný zdroj: neskrývať obsah navždy
+              this.style.display = 'none';
+              if(defLogo) defLogo.style.display = '';
+              markReady();
+              return;
+            }
+            this.dataset.done=1; this.src=this.dataset.fb;
+          };
           img.setAttribute('decoding','async');
           img.dataset.fb = d.image;
-          img.onerror = function(){ if(this.dataset.done) return; this.dataset.done=1; this.onerror=null; this.src=this.dataset.fb; };
           img.alt = d.title || '';
+          img.src = optImg(d.image, 960);
           if(defLogo) defLogo.style.display = 'none';
         } else {
           img.style.display = 'none';
@@ -1262,26 +1284,18 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
       if(s) s.style.display = '';
       var navOz = document.getElementById('nav-oznam');
       if(navOz && navOz.parentElement) navOz.parentElement.style.display = '';
-      // Reveal animácia — fix race condition:
-      // 1) vynútiť reflow v skrytom stave, 2) počkať 2 snímky nech sa
-      // skrytý stav vykreslí, 3) až potom pripnúť observer → CSS transition
-      // má korektný "from" stav a animácia sa spustí spoľahlivo.
-      var split = document.querySelector('.oznam-split');
       if(split){
-        void split.offsetHeight; // reflow
-        requestAnimationFrame(function(){
-          requestAnimationFrame(function(){
-            var obs = new IntersectionObserver(function(entries){
-              entries.forEach(function(e){
-                if(e.isIntersecting){
-                  split.classList.add('is-visible');
-                  obs.unobserve(e.target);
-                }
-              });
-            },{threshold:0.2});
-            obs.observe(split);
+        if(!('IntersectionObserver' in window)){ inView = true; reveal(); return; }
+        var obs = new IntersectionObserver(function(entries){
+          entries.forEach(function(e){
+            if(e.isIntersecting){
+              inView = true;
+              obs.unobserve(e.target);
+              reveal();
+            }
           });
-        });
+        },{threshold:0.2});
+        obs.observe(split);
       }
     }).catch(function(){});
 })();

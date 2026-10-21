@@ -1185,6 +1185,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .oznam-split__img-inner { clip-path: none !important; }
+  .oznam-split__img-inner img { transform: none !important; transition: none !important; }
   .oznam-tag,.oznam-date,.oznam-title,.oznam-text {
     opacity:1 !important; transform:none !important;
   }
