@@ -133,13 +133,13 @@
   gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied' });
 </script>
 <script>
-  /* GA sa načíta až po zobrazení stránky (nebrzdí prvé vykreslenie); volania gtag()
+  /* GA sa načíta pri prvej interakcii (najneskôr 8 s po načítaní) — nebrzdí štart; volania gtag()
      sa medzitým zbierajú v dataLayer, súhlas (consent) funguje rovnako */
   (function(){
     function load(){ if (window.__gaLoaded) return; window.__gaLoaded = 1;
       var s = document.createElement('script'); s.async = true;
       s.src = 'https://www.googletagmanager.com/gtag/js?id=G-60BRLKL03H'; document.head.appendChild(s); }
-    function later(){ setTimeout(function(){ (window.requestIdleCallback || setTimeout)(load); }, 2500); }
+    function later(){ setTimeout(function(){ (window.requestIdleCallback || setTimeout)(load); }, 8000); }
     if (document.readyState === 'complete') later(); else window.addEventListener('load', later);
     ['pointerdown', 'keydown', 'scroll'].forEach(function(e){ window.addEventListener(e, load, { once: true, passive: true }); });
   })();
