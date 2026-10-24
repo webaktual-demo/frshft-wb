@@ -1668,3 +1668,12 @@ a.news-card { color: inherit; text-decoration: none; }
 /* ============ SCROLL PROGRESS BAR ============ */
 .scroll-progress { position: fixed; top: 0; left: 0; width: 100%; height: 3px; background: transparent; z-index: 1100; pointer-events: none; }
 .scroll-progress span { display: block; height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 10px rgba(76,175,80,0.5); transition: width 0.1s linear; }
+
+/* ============ KONTRAST — zelený text na svetlom pozadí ============ */
+/* Jasná #4CAF50 ostáva na tmavých sekciách a tlačidlách; na bielej/krémovej
+   by text nebol dosť čitateľný, preto tmavší odtieň tej istej zelenej. */
+.light-section .section-eyebrow,
+.light-section .section-title .accent,
+.price-badge.outline,
+.pricing-note strong,
+.cookie-banner-text a { color: var(--accent-ink); }

@@ -3,6 +3,8 @@
   /* Colors */
   --accent: #4CAF50;
   --accent-dark: #388E3C;
+  /* tmavší odtieň značky pre text na svetlom pozadí (kontrast WCAG AA) */
+  --accent-ink: #2E7D32;
   --accent-light: rgba(76,175,80,0.12);
   --accent-glow: rgba(76,175,80,0.35);
 
@@ -141,7 +143,8 @@ img { max-width: 100%; display: block; }
 }
 .btn-primary {
   background: var(--accent);
-  color: #fff;
+  /* tmavý text na jasnej zelenej — čitateľnejší než biely (kontrast WCAG AA) */
+  color: #0f0f0f;
   border-color: var(--accent);
 }
 .btn-primary:hover {
