@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+  <script>
+    /* Ľahký režim pre vstavané prehliadače (Messenger, Instagram, Facebook, TikTok…):
+       sú slabšie a ich lišta pri scrolle mení výšku okna — bez Lenis a bez
+       nekonečných dekoratívnych animácií (styles.css, html[data-lite]). */
+    try { if (/FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger|musical_ly|TikTok|Snapchat|Pinterest|Line\//i.test(navigator.userAgent)) document.documentElement.dataset.lite = '1'; } catch (e) {}
+  </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <!-- ============ LEGACY FALLBACK — staré TV/prehliadače bez CSS var()/grid ============ -->
@@ -1442,6 +1448,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') hideCooki
 (function(){
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (typeof Lenis === 'undefined') return;
+  if (document.documentElement.dataset.lite) return;
   var lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: true });
   window.lenis = lenis;
   function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }

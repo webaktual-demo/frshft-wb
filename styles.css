@@ -1201,3 +1201,16 @@ section { padding: 110px 0; position: relative; }
   #intro { transition: opacity 0.3s ease; }
   #intro.intro--fade { opacity: 0; }
 }
+
+/* Ľahký režim — vstavané prehliadače sociálnych sietí (html[data-lite], inline
+   skript v <head>). Vzhľad ostáva, odpadnú nekonečné dekoratívne animácie a
+   rozmazanie pozadia. Bežiaci pás s textom ostáva. */
+html[data-lite] :is(.hero-glow, .scroll-cue svg, .contact-logo-main, .priestory-logo-img, .oznam-dot),
+html[data-lite] .poukazka-card.is-best::after {
+  animation: none !important;
+  will-change: auto !important;
+}
+html[data-lite] *, html[data-lite] *::before, html[data-lite] *::after {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}

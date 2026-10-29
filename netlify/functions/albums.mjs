@@ -23,11 +23,36 @@ function findAlbumsDir() {
   return null;
 }
 
+// Rate limiting: najviac 60 požiadaviek za minútu z jednej IP (v pamäti
+// inštancie funkcie). Hlavnú záťaž aj tak zachytí CDN cache nižšie — albumy
+// sa menia len novým nasadením, ktoré cache na Netlify vyprázdni.
+const WINDOW_MS = 60_000;
+const MAX_HITS = 60;
+const hits = new Map();
+function limited(ip) {
+  const now = Date.now();
+  const h = hits.get(ip);
+  if (!h || now - h.start > WINDOW_MS) {
+    hits.set(ip, { start: now, n: 1 });
+    if (hits.size > 5000) hits.clear();
+    return false;
+  }
+  return ++h.n > MAX_HITS;
+}
+
+const CACHE = {
+  'Cache-Control': 'public, max-age=60',
+  'Netlify-CDN-Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+};
+
 export default async (req, context) => {
+  if (limited(context?.ip || req.headers.get('x-nf-client-connection-ip') || 'unknown')) {
+    return Response.json({ error: 'Príliš veľa požiadaviek, skúste o chvíľu.' }, { status: 429, headers: { 'Retry-After': '60' } });
+  }
   try {
     const dir = findAlbumsDir();
     if (!dir) {
-      return Response.json([], { headers: { 'Cache-Control': 'no-store' } });
+      return Response.json([], { headers: CACHE });
     }
     const albums = fs.readdirSync(dir)
       .filter(f => f.endsWith('.json'))
@@ -36,8 +61,9 @@ export default async (req, context) => {
         slug: f.replace('.json', ''),
       }))
       .sort((a, b) => new Date(b.date) - new Date(a.date));
-    return Response.json(albums, { headers: { 'Cache-Control': 'no-store' } });
+    return Response.json(albums, { headers: CACHE });
   } catch (e) {
-    return Response.json({ error: e.message }, { status: 500 });
+    console.error(e);
+    return Response.json({ error: 'Albumy sa nepodarilo načítať.' }, { status: 500 });
   }
 };
