@@ -406,7 +406,7 @@ img { max-width: 100%; display: block; }
 }
 
 .hero h1 {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', 'Poppins Fallback', sans-serif;
   font-size: clamp(2.8rem, 8.5vw, 7rem);
   font-weight: 800;
   line-height: 1.02;
@@ -425,6 +425,8 @@ img { max-width: 100%; display: block; }
   margin-bottom: clamp(12px, 2vh, 22px);
   line-height: 1.55;
   text-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  /* zalomenie riadku z CMS (\n) zostane zachované */
+  white-space: pre-line;
   animation: fadeUp 0.8s 0.2s ease both;
 }
 .hero-ctas {
@@ -1069,6 +1071,29 @@ section { padding: 110px 0; position: relative; }
 @media (max-width: 768px) {
   .hero .hero-text,
   .hero h1 { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Hero na telefóne: nadpis dominuje, jedno hlavné tlačidlo na celú šírku,
+      druhé ako tichší odkaz; „Skrolujte" by sa prekrýval so štatistikami ── */
+@media (max-width: 600px) {
+  .hero h1 {
+    font-size: clamp(2.8rem, 12.4vw, 3.3rem);
+    line-height: 1;
+    letter-spacing: -0.04em;
+    margin-bottom: 14px;
+  }
+  .hero p.lead { font-size: 16px; margin-bottom: 22px; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 4px; }
+  .hero-ctas .btn { padding: 14px 22px; }
+  .hero-ctas .btn-outline-white {
+    background: transparent;
+    border-color: transparent;
+    color: rgba(255,255,255,0.88);
+    padding: 12px 22px;
+  }
+  .hero-ctas .btn-outline-white:hover { background: transparent; border-color: transparent; color: #fff; transform: none; }
+  .hero-stats { margin-top: 18px; }
+  .hero .scroll-cue { display: none; }
 }
 
 /* ── Odznak otvorené/zatvorené ───────────────────────────────── */
