@@ -1,17 +1,100 @@
 {
   "plans": [
-    {"name": "Jednorazový vstup", "price": 5.5, "description": "", "featured": false, "badge": ""},
-    {"name": "Študent / Senior", "price": 4.5, "description": "jednorazový vstup so zľavou", "featured": false, "badge": "Zľava"},
-    {"name": "5-vstupová permanentka", "price": 24, "description": "platnosť 30 dní", "featured": false, "badge": ""},
-    {"name": "10-vstupová permanentka", "price": 42, "description": "platnosť 60 dní", "featured": false, "badge": ""},
-    {"name": "10-vstupová študent", "price": 38, "description": "platnosť 60 dní", "featured": false, "badge": "Zľava"},
-    {"name": "Mesačná permanentka", "price": 41, "description": "neobmedzený vstup", "featured": true, "badge": "BESTSELLER"},
-    {"name": "Mesačná študentská permanentka", "price": 36, "description": "neobmedzený vstup", "featured": false, "badge": "Zľava"},
-    {"name": "Ročná permanentka", "price": 435, "description": "najvýhodnejšia ponuka", "featured": false, "badge": "Šetríte 57 €"},
-    {"name": "Vibračná plošina", "price": 1.7, "description": "10 minút", "featured": false, "badge": ""},
-    {"name": "Solárium", "price": 0.4, "description": "za minútu", "featured": false, "badge": ""},
-    {"name": "Sebaobrana", "price": 3, "description": "jednorazový vstup", "featured": false, "badge": ""},
-    {"name": "Sebaobrana", "price": 22, "description": "8-vstupová permanentka", "featured": false, "badge": "Výhodná"},
-    {"name": "Zapožičanie uteráka", "price": 1, "description": "", "featured": false, "badge": ""}
+    {
+      "name": "Jednorazový vstup",
+      "price": 5.5,
+      "description": "",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Študent / Senior",
+      "price": 4.5,
+      "description": "jednorazový vstup so zľavou",
+      "featured": false,
+      "badge": "Zľava"
+    },
+    {
+      "name": "5-vstupová permanentka",
+      "price": 24,
+      "description": "platnosť 30 dní",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "10-vstupová permanentka",
+      "price": 42,
+      "description": "platnosť 60 dní",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "10-vstupová študent",
+      "price": 38,
+      "description": "platnosť 60 dní",
+      "featured": false,
+      "badge": "Zľava"
+    },
+    {
+      "name": "Mesačná permanentka",
+      "price": 41,
+      "description": "neobmedzený vstup",
+      "featured": true,
+      "badge": "BESTSELLER"
+    },
+    {
+      "name": "Mesačná študentská permanentka",
+      "price": 36,
+      "description": "neobmedzený vstup",
+      "featured": false,
+      "badge": "Zľava"
+    },
+    {
+      "name": "Ročná permanentka",
+      "price": 435,
+      "description": "najvýhodnejšia ponuka",
+      "featured": false,
+      "badge": "Šetríte 57 €"
+    },
+    {
+      "featured": false,
+      "name": "Skupinové cvičenie 8 vstupov",
+      "price": 40
+    },
+    {
+      "name": "Vibračná plošina",
+      "price": 1.7,
+      "description": "10 minút",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Solárium",
+      "price": 0.4,
+      "description": "za minútu",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Sebaobrana",
+      "price": 3,
+      "description": "jednorazový vstup",
+      "featured": false,
+      "badge": ""
+    },
+    {
+      "name": "Sebaobrana",
+      "price": 22,
+      "description": "8-vstupová permanentka",
+      "featured": false,
+      "badge": "Výhodná"
+    },
+    {
+      "name": "Zapožičanie uteráka",
+      "price": 1,
+      "description": "",
+      "featured": false,
+      "badge": ""
+    }
   ]
 }
