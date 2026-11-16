@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: webaktual-sudo/freshfit-web
+  repo: webaktual-demo/frshft-wb
   branch: main
 
 media_folder: "images/gallery"
